@@ -22,13 +22,13 @@
 #include <vector>
 #include <map>
 #include <string>
-
+#include "catanTile.hpp"
 #include "Board.hpp"
 
 
 using namespace std;
 
-namespace ariel
+namespace CatanGame
 {
     class Player
     {
@@ -39,6 +39,7 @@ namespace ariel
         int citiesAvailable;
         int settlementsAvailable;
         int roadsAvailable;
+        bool myTurn;
 
     public:
         Player(string name);
@@ -46,9 +47,11 @@ namespace ariel
         void placeRoad(vector<string> places, vector<int> placesNum, Board &board);
         void rollDice();
         void endTurn();
-        void trade(Player player,string give, string take, int giveAmount, int takeAmount);
+        bool offerTrade(Player player,string give, string take, int giveAmount, int getAmount);
+        bool ansTrade(Player player,string give, string take, int giveAmount, int getAmount);
         string getName();
         map<string, int> getResources();
+
         int getPoints();
 
     };
