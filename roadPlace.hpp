@@ -1,39 +1,37 @@
 #include <string.h>
-
 #include <iostream>
 #include <set>
 #include <unordered_map>
 #include <array>
 #include "CatanPiece.hpp"
 #include "Player.hpp"
-#include "structurePlace.hpp"
-
 
 using namespace std;
 
 namespace Catan {
-class roadPlace {
-   private:
-    string owner;
-    array<structurePlace, 2> adjStructs;
-    array<roadPlace, 3> adjRoads;
+    class structurePlace; // Forward declaration of structurePlace
 
-   public:
-    roadPlace(string owner) {
-        this->owner = owner;
-    }
+    class roadPlace {
+    private:
+        string owner;
+        array<structurePlace*, 2> adjStructs; // Use pointers to structurePlace
+        array<roadPlace*, 3> adjRoads; // Use pointers to roadPlace
 
-    string getOwner() {
-        return owner;
-    }
+    public:
+        roadPlace(string owner) {
+            this->owner = owner;
+        }
 
-    void setAdjStructs(array<structurePlace, 2> adjStructs) {
-        this->adjStructs = adjStructs;
-    }
+        string getOwner() {
+            return owner;
+        }
 
-    void setAdjRoads(array<roadPlace, 3> adjRoads) {
-        this->adjRoads = adjRoads;
-    }
-};
+        void setAdjStructs(array<structurePlace*, 2> adjStructs) {
+            this->adjStructs = adjStructs;
+        }
 
-}  // namespace Catan
+        void setAdjRoads(array<roadPlace*, 3> adjRoads) {
+            this->adjRoads = adjRoads;
+        }
+    };
+}

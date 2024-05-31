@@ -15,8 +15,8 @@ namespace Catan {
         string owner;
         string structType;
         int structNumber;
-        array<structurePlace,3> adjStructs;
-        array<roadPlace,3> adjRoads;
+        array<structurePlace*,3> adjStructs; // Use pointers to structurePlace
+        array<roadPlace*,3> adjRoads; // Use pointers to roadPlace
 
         public:
         structurePlace(string owner, string structType, int structNumber){
@@ -37,15 +37,14 @@ namespace Catan {
             return structNumber;
         }
 
-        void setAdjStructs(array<structurePlace,3> adjStructs){
+        void setAdjStructs(array<structurePlace*,3> adjStructs){
             this->adjStructs = adjStructs;
         }
 
-        void setAdjRoads(array<roadPlace,9> adjRoads){
+        void setAdjRoads(array<roadPlace*,3> adjRoads){
             this->adjRoads = adjRoads;
         }
 
     };
 
 }
-
