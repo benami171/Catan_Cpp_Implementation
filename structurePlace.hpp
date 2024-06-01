@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <vector>
 
-#include "CatanPiece.hpp"
+#include "Catan_Piece.hpp"
 #include "Player.hpp"
 #include "roadPlace.hpp"
 #ifndef STRUCTUREPLACE_HPP

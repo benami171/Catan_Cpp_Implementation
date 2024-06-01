@@ -3,7 +3,7 @@
 #include <set>
 #include <unordered_map>
 #include <array>
-#include "CatanPiece.hpp"
+#include "Catan_Piece.hpp"
 #include "Player.hpp"
 #ifndef ROADPLACE_HPP
 #define ROADPLACE_HPP
