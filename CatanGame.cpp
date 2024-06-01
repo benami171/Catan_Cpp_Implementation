@@ -13,7 +13,7 @@ namespace Catan {
 CatanGame::CatanGame() {
     turnNumber = 1;
     resourceCardsLeft = {{"Ore", 19}, {"Wood", 19}, {"Brick", 19}, {"Wheat", 19}, {"Sheep", 19}};
-    players = {Player("player1"), Player("player2"), Player("player3")};
+    players = {Player("p1"), Player("p2"), Player("p3")};
 }
 
 void CatanGame::initializeBoard() {

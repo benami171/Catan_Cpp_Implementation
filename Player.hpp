@@ -3,6 +3,8 @@
 #include <string>
 #include <unordered_map>
 #include <set>
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
 
 using namespace std;
 
@@ -79,3 +81,5 @@ namespace Catan{
         
     };
 }
+
+#endif // PLAYER_HPP

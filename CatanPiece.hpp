@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
-
+#ifndef CATANPIECE_HPP
+#define CATANPIECE_HPP
 
 using namespace std;
 class CatanPiece {
@@ -20,3 +21,5 @@ CatanPiece::CatanPiece(const string& owner)
 string CatanPiece::getOwner() const {
     return owner;
 }
+
+#endif  // CATANPIECE_HPP

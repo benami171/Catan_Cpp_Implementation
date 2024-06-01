@@ -5,6 +5,8 @@
 #include <array>
 #include "CatanPiece.hpp"
 #include "Player.hpp"
+#ifndef ROADPLACE_HPP
+#define ROADPLACE_HPP
 
 using namespace std;
 
@@ -14,12 +16,15 @@ namespace Catan {
     class roadPlace {
     private:
         string owner;
-        array<structurePlace*, 2> adjStructs; // Use pointers to structurePlace
-        array<roadPlace*, 3> adjRoads; // Use pointers to roadPlace
+        int roadNumber;
+        array<structurePlace*, 2> adjStructs; // 
+        array<roadPlace*, 4> adjRoads; //
 
     public:
-        roadPlace(string owner) {
+        roadPlace() : owner(""), roadNumber(0) {} // Default constructor
+        roadPlace(string owner, int roadNumber) {
             this->owner = owner;
+            this->roadNumber = roadNumber;
         }
 
         string getOwner() {
@@ -30,8 +35,10 @@ namespace Catan {
             this->adjStructs = adjStructs;
         }
 
-        void setAdjRoads(array<roadPlace*, 3> adjRoads) {
+        void setAdjRoads(array<roadPlace*, 4> adjRoads) {
             this->adjRoads = adjRoads;
         }
     };
 }
+
+#endif  // ROADPLACE_HPP
