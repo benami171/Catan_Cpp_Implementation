@@ -15,7 +15,7 @@ void startGame() - each player by order of player1 then player2 then player3 wil
 #include <set>
 #include <string>
 #include <unordered_map>
-
+#include "Board.hpp"
 #include "Player.hpp"
 #ifndef CATANGAME_HPP
 #define CATANGAME_HPP
@@ -24,18 +24,23 @@ using namespace std;
 
 namespace Catan {
 
+class Player;
+
 class CatanGame {
-   public:
+   private:
     // fields //
+    Board board;
     int turnNumber;
     unordered_map<string, int> resourceCardsLeft;
     unordered_map<string, int> developmentCardsLeft;
     set<Player> players;
 
-    // methods //
+    public:
+
     CatanGame();
     void initializeBoard();
     void startGame();
+    void nextPlayer();
 };
 }  // namespace Catan
 
