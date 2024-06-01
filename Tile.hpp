@@ -23,11 +23,11 @@ class Tile {
    
    public:
     Tile(const string& resourceType, int activationNumber, array<structurePlace,6> structurePlaces, array<roadPlace,6> roadPlaces);
-    string getResourceType() const { return resourceType; }
-    int getActivationNumber() const { return activationNumber; }
-    array<structurePlace,6> getStructurePlaces() const { return structurePlaces; }
-    array<roadPlace,6> getRoadPlaces() const { return roadPlaces; }
-    array<Player,3> getAttachedPlayers() const { return attachedPlayers; }
+    string getResourceType() const;
+    int getActivationNumber() const;
+    array<structurePlace,6> getStructurePlaces() const;
+    array<roadPlace,6> getRoadPlaces() const;
+    array<Player,3> getAttachedPlayers() const;
 
 
 };
