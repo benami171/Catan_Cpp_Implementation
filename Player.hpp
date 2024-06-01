@@ -24,22 +24,10 @@ namespace Catan{
 
 
         public:
-        Player(string name){
-            this->name = name;
-            victoryPoints = 0;
-            roadsLeft = 15;
-            settlementsLeft = 5;
-            citiesLeft = 4;
-            resourceCards["brick"] = 0;
-            resourceCards["lumber"] = 0;
-            resourceCards["wool"] = 0;
-            resourceCards["grain"] = 0;
-            resourceCards["ore"] = 0;
-            developmentCards["victoryPoint"] = 0;
-            developmentCards["roadBuilding"] = 0;
-            developmentCards["yearOfPlenty"] = 0;
-            developmentCards["monopoly"] = 0;
-        }
+
+        Player();
+
+        Player(string name);
 
         string getName(){
             return name;

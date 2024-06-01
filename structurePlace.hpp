@@ -19,18 +19,18 @@ class structurePlace {
     string owner;
     string structType;
     int structNumber;
-    array<structurePlace*, 3> adjStructs;  //
-    array<roadPlace*, 9> adjRoads;         //
+    array<structurePlace*, 3> adjStructs;  
+    array<roadPlace*, 9> adjRoads;         
 
    public:
-    structurePlace() : owner(""), structType(""), structNumber(0) {}  // Default constructor
+   // Default constructor
+    structurePlace() : owner(""), structType(""), structNumber(0) {}  
 
-    structurePlace(string owner, string structType, int structNumber) {
-        this->owner = owner;
-        this->structType = structType;
-        this->structNumber = structNumber;
-    }
+    structurePlace(string owner, string structType, int structNumber);
 
+    // Deep copy constructor
+    structurePlace(const structurePlace& other);
+    
     string getOwner() {
         return owner;
     }
@@ -67,6 +67,8 @@ class structurePlace {
         }
         return false;
     }
+
+    structurePlace& operator=(const structurePlace& other) ;
 };
 
 }  // namespace Catan

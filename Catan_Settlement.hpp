@@ -19,6 +19,7 @@ namespace Catan {
         int structId;
         array<roadPlace*, 3> adjRoads;
         array<structurePlace*, 3> adjStructs;
+    
 
     public:
         Catan_Settlement(const string& owner, int structId)
