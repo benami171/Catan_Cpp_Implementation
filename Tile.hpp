@@ -1,11 +1,11 @@
-#include <string>
 #include <array>
-#include "Player.hpp"
-#include "structurePlace.hpp"
-#include "roadPlace.hpp"
+#include <string>
+
 #include "Catan_Piece.hpp"
 #include "Catan_Settlement.hpp"
-
+#include "Player.hpp"
+#include "roadPlace.hpp"
+#include "structurePlace.hpp"
 
 #ifndef TILE_HPP
 #define TILE_HPP
@@ -15,21 +15,21 @@ using namespace std;
 namespace Catan {
 class Tile {
    private:
-    array<structurePlace,6> structurePlaces;
-    array<roadPlace,6> roadPlaces;
+    array<structurePlace*, 6> structurePlaces;
+    array<roadPlace*, 6> roadPlaces;
     string resourceType;
     int activationNumber;
-    array<Player,3> attachedPlayers;
-   
+    array<Player*, 3> attachedPlayers;
+
    public:
-    Tile(const string& resourceType, int activationNumber, array<structurePlace,6> structurePlaces, array<roadPlace,6> roadPlaces);
+    Tile() : resourceType(""), activationNumber(0) {}  // Default constructor
+    Tile(const string& resourceType, int activationNumber, array<structurePlace*, 6> structurePlaces, array<roadPlace*, 6> roadPlaces);
     string getResourceType() const;
     int getActivationNumber() const;
-    array<structurePlace,6> getStructurePlaces() const;
-    array<roadPlace,6> getRoadPlaces() const;
-    array<Player,3> getAttachedPlayers() const;
-
-
+    array<structurePlace*, 6> getStructurePlaces() const;
+    array<roadPlace*, 6> getRoadPlaces() const;
+    array<Player*, 3> getAttachedPlayers() const;
+    Tile& operator=(const Tile& other);
 };
 
 }  // namespace Catan

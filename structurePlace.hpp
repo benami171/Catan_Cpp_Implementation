@@ -20,7 +20,7 @@ class structurePlace {
     string structType;
     int structNumber;
     array<structurePlace*, 3> adjStructs;  
-    array<roadPlace*, 9> adjRoads;         
+    array<roadPlace*, 3> adjRoads;         
 
    public:
    // Default constructor
@@ -47,7 +47,7 @@ class structurePlace {
         this->adjStructs = adjStructs;
     }
 
-    void setAdjRoads(array<roadPlace*, 9> adjRoads) {
+    void setAdjRoads(array<roadPlace*, 3> adjRoads) {
         this->adjRoads = adjRoads;
     }
 

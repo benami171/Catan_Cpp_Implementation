@@ -40,7 +40,7 @@ void structurePlace::setAdjStructs(array<structurePlace*, 3> adjStructs) {
     this->adjStructs = adjStructs;
 }
 
-void structurePlace::setAdjRoads(array<roadPlace*, 9> adjRoads) {
+void structurePlace::setAdjRoads(array<roadPlace*, 3> adjRoads) {
     this->adjRoads = adjRoads;
 }
 

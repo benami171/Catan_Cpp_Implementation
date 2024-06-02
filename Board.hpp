@@ -22,6 +22,7 @@ class Board {
    public:
     Board();
     void printBoard();
+    void initBoard();
 };
 }  // namespace Catan
 
