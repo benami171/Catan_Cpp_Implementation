@@ -18,8 +18,21 @@ string Tile::getResourceType() const {
     return resourceType;
 }
 
+void Tile::setResourceType(string resourceType) {
+    this->resourceType = resourceType;
+}
+
 int Tile::getActivationNumber() const {
     return activationNumber;
+}
+
+void Tile::setActivationNumber(int activationNumber) {
+    this->activationNumber = activationNumber;
+}
+
+void Tile::setResourceAndNumber(string resourceType, int activationNumber) {
+    this->resourceType = resourceType;
+    this->activationNumber = activationNumber;
 }
 
 array<structurePlace*, 6> Tile::getStructurePlaces() const {

@@ -40,11 +40,11 @@ void Board::initBoard() {
     };
 
     const int tileRoadIndices[19][6] = {
-                                            {0, 1, 7, 12, 11, 6}, {2, 3, 8, 14, 13, 7}, {4, 5, 9, 16, 15, 8},
-                        {10, 11, 19, 25, 24, 18}, {12, 13, 20, 27, 26, 19}, {14, 15, 21, 29, 28, 20}, {16, 17, 22, 31, 30, 21}, 
-        {23, 24, 34,40,39,33}, {25,26,35,42,41,34}, {27,28,36,44,43,35}, {29, 30, 37, 46, 45, 36,}, {52, 58, 64, 63, 69, 70},
-                        {55, 61, 67, 66, 72, 73}, {57, 63, 69, 75, 70, 64}, {62, 68, 74, 80, 75, 69}, {65, 71, 77, 83, 78, 72}, 
-                                            {66, 72, 78, 84, 79, 73}, {73, 79, 85, 91, 86, 80}, {74, 80, 86, 92, 87, 81}
+                                            {0, 1, 7, 12, 11, 6}, {2, 3, 8, 14, 13, 7}, {4, 5, 9, 16, 15, 8},    
+                        {10, 11, 19, 25, 24, 18}, {12, 13, 20, 27, 26, 19}, {14, 15, 21, 29, 28, 20}, {16, 17, 22, 31, 30, 21},    
+        {23, 24, 34, 40, 39, 33}, {25, 26, 35, 42, 41, 34}, {27, 28, 36, 44, 43, 35}, {29, 30, 37, 46, 45, 36}, {31, 32, 38, 48, 47, 37},     
+                        {40, 41, 50, 55, 54, 49}, {42, 43, 51, 57, 56, 50}, {44, 45, 52, 59, 58, 51}, {46, 47, 53, 61, 60, 52},           
+                                            {55, 56, 63, 67, 66, 62}, {57, 58, 64, 69, 68, 63}, {59, 60, 65, 71, 70, 64}       
     };
 
     for (int i = 0; i < 19; ++i) {
@@ -56,8 +56,22 @@ void Board::initBoard() {
             rPlaces[j] = &roadPlaces[tileRoadIndices[i][j]];
         }
 
-        tiles[i] = Tile("resourceType", i + 2, sPlaces, rPlaces);  // Example initialization
+        tiles[i] = Tile("", 0, sPlaces, rPlaces);  // Example initialization
     }
+
+    tiles[0].setResourceAndNumber("Mountains", 10);
+    tiles[1].setResourceAndNumber("Pasture", 2);
+    tiles[2].setResourceAndNumber("Forrest", 9);
+    tiles[3].setResourceAndNumber("Fields", 12);
+    tiles[4].setResourceAndNumber("Hills", 6);
+    tiles[5].setResourceAndNumber("Pasture", 4);
+    tiles[6].setResourceAndNumber("Mountains", 10);
+    tiles[7].setResourceAndNumber("Fields", 9);
+    tiles[8].setResourceAndNumber("Forrest", 11);
+    tiles[9].setResourceAndNumber("Desert", 0);
+    tiles[10].setResourceAndNumber("Forrest", 3);
+    tiles[11].setResourceAndNumber("Mountains", 8);
+    
 }
 } // namespace Catan
 

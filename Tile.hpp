@@ -25,7 +25,10 @@ class Tile {
     Tile() : resourceType(""), activationNumber(0) {}  // Default constructor
     Tile(const string& resourceType, int activationNumber, array<structurePlace*, 6> structurePlaces, array<roadPlace*, 6> roadPlaces);
     string getResourceType() const;
+    void setResourceType(string resourceType);
     int getActivationNumber() const;
+    void setActivationNumber(int activationNumber);
+    void setResourceAndNumber(string resourceType, int activationNumber);
     array<structurePlace*, 6> getStructurePlaces() const;
     array<roadPlace*, 6> getRoadPlaces() const;
     array<Player*, 3> getAttachedPlayers() const;
