@@ -26,8 +26,3 @@ void Board::printBoard() {
 }
 } // namespace Catan
 
-int main() {
-    Catan::Board board;
-    board.printBoard();
-    return 0;
-}
