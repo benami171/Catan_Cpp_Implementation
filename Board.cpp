@@ -65,13 +65,35 @@ void Board::initBoard() {
     tiles[3].setResourceAndNumber("Fields", 12);
     tiles[4].setResourceAndNumber("Hills", 6);
     tiles[5].setResourceAndNumber("Pasture", 4);
-    tiles[6].setResourceAndNumber("Mountains", 10);
+    tiles[6].setResourceAndNumber("Hills", 10);
     tiles[7].setResourceAndNumber("Fields", 9);
     tiles[8].setResourceAndNumber("Forrest", 11);
     tiles[9].setResourceAndNumber("Desert", 0);
     tiles[10].setResourceAndNumber("Forrest", 3);
     tiles[11].setResourceAndNumber("Mountains", 8);
-    
+    tiles[12].setResourceAndNumber("Forrest", 8);
+    tiles[13].setResourceAndNumber("Mountains", 3);
+    tiles[14].setResourceAndNumber("Fields", 4);
+    tiles[15].setResourceAndNumber("Pasture", 5);
+    tiles[16].setResourceAndNumber("Hills", 5);
+    tiles[17].setResourceAndNumber("Fields", 6);
+    tiles[18].setResourceAndNumber("Pasture", 11);
+
+  /*
+                    mountains -  pasture - forrest
+                        10          2         9  
+                fields  -  hills  -  pasture  -  hills 
+                  12         6          4          10
+        fields  -  forrest  -  desert  -  forrest  -  mountains
+            9        11          0           3            8
+                forrest  -  mountains  -  fields -  pasture
+                   8            3           4          5
+                    hills  -  fields  -  pasture     
+                      5         6          11
+  */            
+
+
+
 }
 } // namespace Catan
 
