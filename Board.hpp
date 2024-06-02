@@ -3,7 +3,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-
+#include "Tile.hpp"
 #include "roadPlace.hpp"
 #include "structurePlace.hpp"
 
@@ -17,6 +17,7 @@ class Board {
    private:
     array<structurePlace, 54> structurePlaces;
     array<roadPlace, 72> roadPlaces;
+    array<Tile, 19> tiles;
 
    public:
     Board();
