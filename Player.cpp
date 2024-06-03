@@ -1,12 +1,12 @@
 #include "Player.hpp"
-
+#include "Board.hpp"
 #include <array>
 #include <string>
 
 using namespace std;
 using namespace Catan;
 
-Player::Player() : name(""), victoryPoints(0), roadsLeft(15), settlementsLeft(5), citiesLeft(4) {
+Player::Player() : name(""), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) {
     resourceCards["brick"] = 0;
     resourceCards["lumber"] = 0;
     resourceCards["wool"] = 0;
@@ -21,9 +21,9 @@ Player::Player() : name(""), victoryPoints(0), roadsLeft(15), settlementsLeft(5)
 Player::Player(string name) {
     this->name = name;
     victoryPoints = 0;
-    roadsLeft = 15;
-    settlementsLeft = 5;
-    citiesLeft = 4;
+    roads_placed_counter = 0;
+    settlements_placed_counter = 0;
+    cities_placed_counter = 0;
     resourceCards["brick"] = 0;
     resourceCards["lumber"] = 0;
     resourceCards["wool"] = 0;
@@ -98,4 +98,8 @@ void Player::printPlayerInfo() {
     cout << "Victory Points: " << victoryPoints << endl;
     printDevelopmentCards();
     printResources();
+}
+
+void Player::placeRoad(int road_index) {
+    Board::roadPlaces[road_index].setOwner(name);
 }

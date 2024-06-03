@@ -96,6 +96,14 @@ void Board::initBoard() {
 
 }
 
+roadPlace* Board::getRoadPlace(int roadNumber) {
+    return &roadPlaces[roadNumber];
+}
+
+structurePlace* Board::getStructurePlace(int structNumber) {
+    return &structurePlaces[structNumber];
+}
+
 } // namespace Catan
 
 

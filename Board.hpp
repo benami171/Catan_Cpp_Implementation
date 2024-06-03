@@ -21,6 +21,8 @@ class Board {
 
    public:
     Board();
+    roadPlace* getRoadPlace(int roadNumber); // returns the ith roadPlace in the roadPlaces array
+    structurePlace* getStructurePlace(int structNumber); // returns the ith structurePlace in the structurePlaces array
     void printBoard();
     void initBoard();
 };

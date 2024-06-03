@@ -14,9 +14,10 @@ class Player {
    private:
     string name;
     int victoryPoints;
-    int roadsLeft;
-    int settlementsLeft;
-    int citiesLeft;
+    int roads_placed_counter;
+    int settlements_placed_counter;
+    int cities_placed_counter;
+
     unordered_map<string, int> resourceCards;
     unordered_map<string, int> developmentCards;
 
@@ -88,6 +89,9 @@ class Player {
         cout << "Victory Points: " << victoryPoints << endl;
         printDevelopmentCards();
         printResources();
+    }
+
+    void placeRoad(int road_index) {
     }
 };
 }  // namespace Catan
