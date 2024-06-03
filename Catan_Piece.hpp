@@ -12,7 +12,8 @@ class Catan_Piece {
     string owner;
 
    public:
-    Catan_Piece(const string& owner) : owner(owner) {};
+    Catan_Piece() : owner("") {}  // Default constructor
+    Catan_Piece(const string& owner) : owner(owner){};
     string getOwner() const { return owner; };
 };
 

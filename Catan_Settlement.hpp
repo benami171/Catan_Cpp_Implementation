@@ -23,8 +23,7 @@ namespace Catan {
     
 
     public:
-        Catan_Settlement(const string& owner, int structId)
-            : Catan_Piece(owner), structId(structId), resource_amount_granting(1) {};
+        Catan_Settlement(const string& owner, int structId): Catan_Piece(owner), structId(structId), resource_amount_granting(1) {};
         int getStructId() const { return structId; };
         void setAdjRoads(array<roadPlace*, 3> adjRoads) { this->adjRoads = adjRoads; };
         void setAdjStructs(array<structurePlace*, 3> adjStructs) { this->adjStructs = adjStructs; };
