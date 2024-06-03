@@ -113,7 +113,13 @@ void Board::initBoard() {
     structurePlaces[24].setAdjStructs({&structurePlaces[18], &structurePlaces[19], &structurePlaces[30]});
     structurePlaces[24].setAdjRoads({&roadPlaces[28], &roadPlaces[29], &roadPlaces[36]});
     structurePlaces[25].setAdjStructs({&structurePlaces[19], &structurePlaces[20], &structurePlaces[31]});
-    
+    structurePlaces[25].setAdjRoads({&roadPlaces[30], &roadPlaces[31], &roadPlaces[37]});
+    structurePlaces[26].setAdjStructs({&structurePlaces[20], &structurePlaces[32]});
+    structurePlaces[26].setAdjRoads({&roadPlaces[32], &roadPlaces[38]});
+    structurePlaces[27].setAdjStructs({&structurePlaces[21], &structurePlaces[33]});
+    structurePlaces[27].setAdjRoads({&roadPlaces[33], &roadPlaces[39]});
+    structurePlaces[28].setAdjStructs({&structurePlaces[22], &structurePlaces[34], &structurePlaces[33]});
+    structurePlaces[28].setAdjRoads({&roadPlaces[34], &roadPlaces[41], &roadPlaces[40]});
 
 
 
