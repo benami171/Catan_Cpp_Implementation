@@ -59,6 +59,20 @@ void Board::initBoard() {
         tiles[i] = Tile(landTypes[i], activationNumbers[i], sPlaces, rPlaces); 
     }
 
+
+    // defining the neihbors of each structure and road place
+
+    structurePlaces[0].setAdjStructs({&structurePlaces[2], &structurePlaces[3]});
+    structurePlaces[0].setAdjRoads({&roadPlaces[0], &roadPlaces[1]});
+    structurePlaces[3].setAdjStructs({&structurePlaces[0], &structurePlaces[7]});
+    structurePlaces[3].setAdjRoads({&roadPlaces[0], &roadPlaces[6]});
+    structurePlaces[4].setAdjStructs({&structurePlaces[0], &structurePlaces[1], &structurePlaces[8]});
+    structurePlaces[4].setAdjRoads({&roadPlaces[1], &roadPlaces[2], &roadPlaces[7]});
+
+
+
+
+
     // tiles[0].setResourceAndNumber("Mountains", 10);
     // tiles[1].setResourceAndNumber("Pasture", 2);
     // tiles[2].setResourceAndNumber("Forrest", 9);
