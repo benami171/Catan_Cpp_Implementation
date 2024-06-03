@@ -64,12 +64,27 @@ void Board::initBoard() {
 
     structurePlaces[0].setAdjStructs({&structurePlaces[2], &structurePlaces[3]});
     structurePlaces[0].setAdjRoads({&roadPlaces[0], &roadPlaces[1]});
+    structurePlaces[1].setAdjStructs({&structurePlaces[4], &structurePlaces[5]});
+    structurePlaces[1].setAdjRoads({&roadPlaces[2], &roadPlaces[3]});
+    structurePlaces[2].setAdjStructs({&structurePlaces[5], &structurePlaces[6]});
+    structurePlaces[2].setAdjRoads({&roadPlaces[4], &roadPlaces[5]});
     structurePlaces[3].setAdjStructs({&structurePlaces[0], &structurePlaces[7]});
     structurePlaces[3].setAdjRoads({&roadPlaces[0], &roadPlaces[6]});
     structurePlaces[4].setAdjStructs({&structurePlaces[0], &structurePlaces[1], &structurePlaces[8]});
     structurePlaces[4].setAdjRoads({&roadPlaces[1], &roadPlaces[2], &roadPlaces[7]});
-
-
+    structurePlaces[5].setAdjStructs({&structurePlaces[1], &structurePlaces[2], &structurePlaces[9]});
+    structurePlaces[5].setAdjRoads({&roadPlaces[3], &roadPlaces[4], &roadPlaces[8]});
+    structurePlaces[6].setAdjStructs({&structurePlaces[2], &structurePlaces[10]});
+    structurePlaces[6].setAdjRoads({&roadPlaces[5], &roadPlaces[9]});
+    structurePlaces[7].setAdjStructs({&structurePlaces[3], &structurePlaces[12], &structurePlaces[11]});
+    structurePlaces[7].setAdjRoads({&roadPlaces[6], &roadPlaces[11], &roadPlaces[10]});
+    structurePlaces[8].setAdjStructs({&structurePlaces[4], &structurePlaces[13], &structurePlaces[12]});
+    structurePlaces[8].setAdjRoads({&roadPlaces[7], &roadPlaces[13], &roadPlaces[12]});
+    structurePlaces[9].setAdjStructs({&structurePlaces[5], &structurePlaces[14], &structurePlaces[13]});
+    structurePlaces[9].setAdjRoads({&roadPlaces[8], &roadPlaces[15], &roadPlaces[14]});
+    structurePlaces[10].setAdjStructs({&structurePlaces[6], &structurePlaces[15]});
+    structurePlaces[10].setAdjRoads({&roadPlaces[9], &roadPlaces[17], &roadPlaces[16]});
+    
 
 
 
