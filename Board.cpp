@@ -147,7 +147,29 @@ void Board::initBoard() {
     structurePlaces[41].setAdjStructs({&structurePlaces[36], &structurePlaces[46], &structurePlaces[45]});
     structurePlaces[41].setAdjRoads({&roadPlaces[52], &roadPlaces[60], &roadPlaces[59]});
     structurePlaces[42].setAdjStructs({&structurePlaces[37], &structurePlaces[46]});
-    
+    structurePlaces[42].setAdjRoads({&roadPlaces[53], &roadPlaces[61]});
+    structurePlaces[43].setAdjStructs({&structurePlaces[38], &structurePlaces[39], &structurePlaces[47]});
+    structurePlaces[43].setAdjRoads({&roadPlaces[54], &roadPlaces[55], &roadPlaces[62]});
+    structurePlaces[44].setAdjStructs({&structurePlaces[39], &structurePlaces[40], &structurePlaces[48]});
+    structurePlaces[44].setAdjRoads({&roadPlaces[56], &roadPlaces[57], &roadPlaces[63]});
+    structurePlaces[45].setAdjStructs({&structurePlaces[40], &structurePlaces[41], &structurePlaces[49]});
+    structurePlaces[45].setAdjRoads({&roadPlaces[58], &roadPlaces[59], &roadPlaces[64]});
+    structurePlaces[46].setAdjStructs({&structurePlaces[41], &structurePlaces[42], &structurePlaces[50]});
+    structurePlaces[46].setAdjRoads({&roadPlaces[60], &roadPlaces[61], &roadPlaces[65]});
+    structurePlaces[47].setAdjStructs({&structurePlaces[43], &structurePlaces[51]});
+    structurePlaces[47].setAdjRoads({&roadPlaces[62], &roadPlaces[66]});
+    structurePlaces[48].setAdjStructs({&structurePlaces[44], &structurePlaces[52], &structurePlaces[51]});
+    structurePlaces[48].setAdjRoads({&roadPlaces[63], &roadPlaces[68], &roadPlaces[67]});
+    structurePlaces[49].setAdjStructs({&structurePlaces[45], &structurePlaces[53], &structurePlaces[52]});
+    structurePlaces[49].setAdjRoads({&roadPlaces[64], &roadPlaces[70], &roadPlaces[69]});
+    structurePlaces[50].setAdjStructs({&structurePlaces[46], &structurePlaces[53]});
+    structurePlaces[50].setAdjRoads({&roadPlaces[65], &roadPlaces[71]});
+    structurePlaces[51].setAdjStructs({&structurePlaces[47], &structurePlaces[48]});
+    structurePlaces[51].setAdjRoads({&roadPlaces[66], &roadPlaces[67]});
+    structurePlaces[52].setAdjStructs({&structurePlaces[48], &structurePlaces[49]});
+    structurePlaces[52].setAdjRoads({&roadPlaces[68], &roadPlaces[69]});
+    structurePlaces[53].setAdjStructs({&structurePlaces[49], &structurePlaces[50]});
+    structurePlaces[53].setAdjRoads({&roadPlaces[70], &roadPlaces[71]});
 
 
     // tiles[0].setResourceAndNumber("Mountains", 10);
