@@ -56,28 +56,28 @@ void Board::initBoard() {
             rPlaces[j] = &roadPlaces[tileRoadIndices[i][j]];
         }
 
-        tiles[i] = Tile("", 0, sPlaces, rPlaces);  // Example initialization
+        tiles[i] = Tile(landTypes[i], activationNumbers[i], sPlaces, rPlaces); 
     }
 
-    tiles[0].setResourceAndNumber("Mountains", 10);
-    tiles[1].setResourceAndNumber("Pasture", 2);
-    tiles[2].setResourceAndNumber("Forrest", 9);
-    tiles[3].setResourceAndNumber("Fields", 12);
-    tiles[4].setResourceAndNumber("Hills", 6);
-    tiles[5].setResourceAndNumber("Pasture", 4);
-    tiles[6].setResourceAndNumber("Hills", 10);
-    tiles[7].setResourceAndNumber("Fields", 9);
-    tiles[8].setResourceAndNumber("Forrest", 11);
-    tiles[9].setResourceAndNumber("Desert", 0);
-    tiles[10].setResourceAndNumber("Forrest", 3);
-    tiles[11].setResourceAndNumber("Mountains", 8);
-    tiles[12].setResourceAndNumber("Forrest", 8);
-    tiles[13].setResourceAndNumber("Mountains", 3);
-    tiles[14].setResourceAndNumber("Fields", 4);
-    tiles[15].setResourceAndNumber("Pasture", 5);
-    tiles[16].setResourceAndNumber("Hills", 5);
-    tiles[17].setResourceAndNumber("Fields", 6);
-    tiles[18].setResourceAndNumber("Pasture", 11);
+    // tiles[0].setResourceAndNumber("Mountains", 10);
+    // tiles[1].setResourceAndNumber("Pasture", 2);
+    // tiles[2].setResourceAndNumber("Forrest", 9);
+    // tiles[3].setResourceAndNumber("Fields", 12);
+    // tiles[4].setResourceAndNumber("Hills", 6);
+    // tiles[5].setResourceAndNumber("Pasture", 4);
+    // tiles[6].setResourceAndNumber("Hills", 10);
+    // tiles[7].setResourceAndNumber("Fields", 9);
+    // tiles[8].setResourceAndNumber("Forrest", 11);
+    // tiles[9].setResourceAndNumber("Desert", 0);
+    // tiles[10].setResourceAndNumber("Forrest", 3);
+    // tiles[11].setResourceAndNumber("Mountains", 8);
+    // tiles[12].setResourceAndNumber("Forrest", 8);
+    // tiles[13].setResourceAndNumber("Mountains", 3);
+    // tiles[14].setResourceAndNumber("Fields", 4);
+    // tiles[15].setResourceAndNumber("Pasture", 5);
+    // tiles[16].setResourceAndNumber("Hills", 5);
+    // tiles[17].setResourceAndNumber("Fields", 6);
+    // tiles[18].setResourceAndNumber("Pasture", 11);
 
   /*
                     mountains -  pasture - forrest

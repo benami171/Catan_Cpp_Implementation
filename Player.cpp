@@ -101,5 +101,6 @@ void Player::printPlayerInfo() {
 }
 
 void Player::placeRoad(int road_index) {
-    Board::roadPlaces[road_index].setOwner(name);
+    if (roads_placed_counter < 15 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1) {
+        
 }
