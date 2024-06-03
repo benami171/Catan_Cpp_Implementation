@@ -95,6 +95,7 @@ void Board::initBoard() {
 
 
 }
+
 } // namespace Catan
 
 
