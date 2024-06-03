@@ -128,7 +128,11 @@ void Board::initBoard() {
     structurePlaces[31].setAdjRoads({&roadPlaces[37], &roadPlaces[47], &roadPlaces[46]});
     structurePlaces[32].setAdjStructs({&structurePlaces[26], &structurePlaces[37]});
     structurePlaces[32].setAdjRoads({&roadPlaces[38], &roadPlaces[48]});
-
+    structurePlaces[33].setAdjStructs({&structurePlaces[27], &structurePlaces[28], &structurePlaces[38]});
+    structurePlaces[33].setAdjRoads({&roadPlaces[39], &roadPlaces[40], &roadPlaces[49]});
+    structurePlaces[34].setAdjStructs({&structurePlaces[28], &structurePlaces[29], &structurePlaces[39]});
+    structurePlaces[34].setAdjRoads({&roadPlaces[41], &roadPlaces[42], &roadPlaces[50]});
+    
 
 
     // tiles[0].setResourceAndNumber("Mountains", 10);
