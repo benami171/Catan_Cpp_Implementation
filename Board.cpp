@@ -171,6 +171,23 @@ void Board::initBoard() {
     structurePlaces[53].setAdjStructs({&structurePlaces[49], &structurePlaces[50]});
     structurePlaces[53].setAdjRoads({&roadPlaces[70], &roadPlaces[71]});
 
+    /* set adjacent neighbors for roadPlaces
+        \ /         top left is adjRoad 0, top right is adjRoad 1, bottom left is adjRoad 2, bottom right is adjRoad 3
+         |          
+        / \
+    */
+
+    /* adjacent structPlaces neighbors of road
+
+
+
+    */
+    roadPlaces[0].setAdjStructs({&structurePlaces[0], &structurePlaces[3]});
+    roadPlaces[0].setAdjRoads({&roadPlaces[1], &roadPlaces[6]});
+    roadPlaces[1].setAdjStructs({&structurePlaces[0], &structurePlaces[4]});
+    roadPlaces[1].setAdjRoads({&roadPlaces[0], &roadPlaces[2], &roadPlaces[7]});
+    //roadPlaces[2].setAdjStructs({&structurePlaces[4]
+    
 
     // tiles[0].setResourceAndNumber("Mountains", 10);
     // tiles[1].setResourceAndNumber("Pasture", 2);

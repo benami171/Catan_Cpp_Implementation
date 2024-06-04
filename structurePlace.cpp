@@ -9,12 +9,23 @@ using namespace std;
 using namespace Catan;
 
 // Default constructor
-structurePlace::structurePlace() : owner(""), structType(""), structNumber(0) {}
+structurePlace::structurePlace() : owner(""), structType(""), structNumber(0) {
+    for (auto& ptr : adjStructs) {
+        ptr = nullptr;
+    }
+    for (auto& ptr : adjRoads) {
+        ptr = nullptr;
+    }
+}
 
-structurePlace::structurePlace(string owner, string structType, int structNumber) {
-    this->owner = owner;
-    this->structType = structType;
-    this->structNumber = structNumber;
+structurePlace::structurePlace(string owner, string structType, int structNumber) 
+    : owner(owner), structType(structType), structNumber(structNumber) {
+    for (auto& ptr : adjStructs) {
+        ptr = nullptr;
+    }
+    for (auto& ptr : adjRoads) {
+        ptr = nullptr;
+    }
 }
 
 // Deep copy constructor
@@ -49,12 +60,12 @@ bool structurePlace::validSettlementPlacement(string newOwner) {
         return false;
     }
     for (int i = 0; i < adjStructs.size(); i++) {
-        if (adjStructs[i]->getOwner() != "") {
+        if (adjStructs[i] != nullptr && adjStructs[i]->getOwner() != "") {
             return false;
         }
     }
     for (int i = 0; i < adjRoads.size(); i++) {
-        if (adjRoads[i]->getOwner() == newOwner) {
+        if (adjRoads[i] != nullptr && adjRoads[i]->getOwner() == newOwner) {
             return true;
         }
     }
