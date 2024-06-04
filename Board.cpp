@@ -21,9 +21,34 @@ Board::Board() {
     }
 }
 
-void Board::printBoard() {
-    
-}
+// void Board::printBoard() {
+   
+//     // print first row
+//     cout << "            " << structurePlaces[0].get_settlement_string() << "      " << structurePlaces[1].get_settlement_string() << "       " << structurePlaces[2].get_settlement_string() << "\n"
+//          << "          " << roadPlaces[0].get_color_code() << "/   " << roadPlaces[1].get_color_code() << "\\  " << roadPlaces[2].get_color_code() << "/   " << roadPlaces[3].get_color_code() << "\\   " << roadPlaces[4].get_color_code() << "/   " << roadPlaces[5].get_color_code() << "\\\033[0m\n"
+//          << "         " << structurePlaces[3].get_settlement_string() << "     " << structurePlaces[4].get_settlement_string() << "       " << structurePlaces[5].get_settlement_string() << "      " << structurePlaces[6].get_settlement_string() << "\n"
+//          << "         " << roadPlaces[6].get_color_code() << "| " << structurePlaces[0].get_resources()[0].first.get_emoji() << roadPlaces[7].get_color_code() << "  |" << "  " << structurePlaces[1].get_resources()[0].first.get_emoji() << roadPlaces[8].get_color_code() << "   |  " << structurePlaces[2].get_resources()[0].first.get_emoji() << "  " << roadPlaces[9].get_color_code() << "|\033[0m\n"
+//          << "         " << structurePlaces[7].get_settlement_string() << " " << structurePlaces[0].get_resources()[0].second << "  " << structurePlaces[8].get_settlement_string() << "   " << structurePlaces[1].get_resources()[0].second << "   " << structurePlaces[9].get_settlement_string() << "   " << structurePlaces[2].get_resources()[0].second << "  " << structurePlaces[10].get_settlement_string() << "\n"
+//          << "       " << roadPlaces[10].get_color_code() << "/   " << roadPlaces[11].get_color_code() << "\\ " << roadPlaces[12].get_color_code() << "/   " << roadPlaces[13].get_color_code() << "\\   " << roadPlaces[14].get_color_code() << "/   " << roadPlaces[15].get_color_code() << "\\  " << roadPlaces[16].get_color_code() << "/   " << roadPlaces[17].get_color_code() << "\\\033[0m\n"
+//          << "      " << structurePlaces[11].get_settlement_string() << "     " << structurePlaces[12].get_settlement_string() << "      " << structurePlaces[13].get_settlement_string() << "      " << structurePlaces[14].get_settlement_string() << "      " << structurePlaces[15].get_settlement_string() << "\n"
+//          << "      " << roadPlaces[18].get_color_code() << "| " << structurePlaces[7].get_resources()[0].first.get_emoji() << roadPlaces[19].get_color_code() << "  |  " << structurePlaces[8].get_resources()[0].first.get_emoji() << roadPlaces[20].get_color_code() << "  |  " << structurePlaces[9].get_resources()[0].first.get_emoji() << roadPlaces[21].get_color_code() << "  |  " << structurePlaces[10].get_resources()[0].first.get_emoji() << "  " << roadPlaces[22].get_color_code() << "|\033[0m\n"
+//          << "      " << structurePlaces[16].get_settlement_string() << " " << structurePlaces[7].get_resources()[0].second << "  " << structurePlaces[17].get_settlement_string() << "   " << structurePlaces[8].get_resources()[0].second << "   " << structurePlaces[18].get_settlement_string() << "  " << structurePlaces[9].get_resources()[0].second << "  " << structurePlaces[19].get_settlement_string() << "  " << structurePlaces[10].get_resources()[0].second << "  " << structurePlaces[20].get_settlement_string() << "\n"
+//          << "    " << roadPlaces[23].get_color_code() << "/   " << roadPlaces[24].get_color_code() << "\\ " << roadPlaces[25].get_color_code() << "/   " << roadPlaces[26].get_color_code() << "\\   " << roadPlaces[27].get_color_code() << "/   " << roadPlaces[28].get_color_code() << "\\ " << roadPlaces[29].get_color_code() << "/   " << roadPlaces[30].get_color_code() << "\\  " << roadPlaces[31].get_color_code() << "/   " << roadPlaces[32].get_color_code() << "\\\033[0m\n"
+//          << "   " << structurePlaces[21].get_settlement_string() << "     " << structurePlaces[22].get_settlement_string() << "      " << structurePlaces[23].get_settlement_string() << "      " << structurePlaces[24].get_settlement_string() << "     " << structurePlaces[25].get_settlement_string() << "      " << structurePlaces[26].get_settlement_string() << "\n"
+//          << "   " << roadPlaces[33].get_color_code() << "| " << structurePlaces[16].get_resources()[0].first.get_emoji() << roadPlaces[34].get_color_code() << "  |  " << structurePlaces[17].get_resources()[0].first.get_emoji() << roadPlaces[35].get_color_code() << "  |  " << structurePlaces[18].get_resources()[0].first.get_emoji() << roadPlaces[36].get_color_code() << "   | " << structurePlaces[19].get_resources()[0].first.get_emoji() << roadPlaces[37].get_color_code() << "  | " << structurePlaces[20].get_resources()[0].first.get_emoji() << "   " << roadPlaces[38].get_color_code() << "|\033[0m\n"
+//          << "   " << structurePlaces[27].get_settlement_string() << "  " << structurePlaces[16].get_resources()[0].second << "  " << structurePlaces[28].get_settlement_string() << "  " << structurePlaces[17].get_resources()[0].second << "  " << structurePlaces[29].get_settlement_string() << "   " << structurePlaces[18].get_resources()[0].second << "  " << structurePlaces[30].get_settlement_string() << "  " << structurePlaces[19].get_resources()[0].second << "  " << structurePlaces[31].get_settlement_string() << "   " << structurePlaces[20].get_resources()[0].second << "  " << structurePlaces[32].get_settlement_string() << "\n"
+//          << "    " << roadPlaces[38].get_color_code() << "\\   " << roadPlaces[40].get_color_code() << "/ " << roadPlaces[41].get_color_code() << "\\    " << roadPlaces[42].get_color_code() << "/   " << roadPlaces[43].get_color_code() << "\\ " << roadPlaces[44].get_color_code() << "/   " << roadPlaces[45].get_color_code() << "\\ " << roadPlaces[46].get_color_code() << "/   " << roadPlaces[47].get_color_code() << "\\   " << roadPlaces[48].get_color_code() << "/\033[0m\n"
+//          << "      " << structurePlaces[33].get_settlement_string() << "     " << structurePlaces[34].get_settlement_string() << "      " << structurePlaces[35].get_settlement_string() << "      " << structurePlaces[36].get_settlement_string() << "      " << structurePlaces[37].get_settlement_string() << "\n"
+//          << "      " << roadPlaces[49].get_color_code() << "| " << structurePlaces[28].get_resources()[0].first.get_emoji() << roadPlaces[50].get_color_code() << "  |  " << structurePlaces[29].get_resources()[0].first.get_emoji() << roadPlaces[51].get_color_code() << "  |  " << structurePlaces[30].get_resources()[0].first.get_emoji() << roadPlaces[52].get_color_code() << "  |  " << structurePlaces[31].get_resources()[0].first.get_emoji() << roadPlaces[53].get_color_code() << "  |\033[0m\n"
+//          << "      " << structurePlaces[38].get_settlement_string() << "  " << structurePlaces[28].get_resources()[0].second << "  " << structurePlaces[39].get_settlement_string() << "   " << structurePlaces[29].get_resources()[0].second << "  " << structurePlaces[40].get_settlement_string() << "   " << structurePlaces[30].get_resources()[0].second << "  " << structurePlaces[41].get_settlement_string() << "   " << structurePlaces[31].get_resources()[0].second << "  " << structurePlaces[42].get_settlement_string() << "\n"
+//          << "       " << roadPlaces[54].get_color_code() << "\\   " << roadPlaces[55].get_color_code() << "/  " << roadPlaces[56].get_color_code() << "\\   " << roadPlaces[57].get_color_code() << "/  " << roadPlaces[58].get_color_code() << "\\   " << roadPlaces[59].get_color_code() << "/  " << roadPlaces[60].get_color_code() << "\\   " << roadPlaces[61].get_color_code() << "/\033[0m\n"
+//          << "         " << structurePlaces[43].get_settlement_string() << "      " << structurePlaces[44].get_settlement_string() << "      " << structurePlaces[45].get_settlement_string() << "      " << structurePlaces[46].get_settlement_string() << "\n"
+//          << "         " << roadPlaces[62].get_color_code() << "|  " << structurePlaces[39].get_resources()[0].first.get_emoji() << roadPlaces[63].get_color_code() << "  |  " << structurePlaces[40].get_resources()[0].first.get_emoji() << roadPlaces[64].get_color_code()<< "  |  " << structurePlaces[41].get_resources()[0].first.get_emoji() << roadPlaces[65].get_color_code() << "  |\033[0m\n"
+//          << "         " << structurePlaces[47].get_settlement_string() << "   " << structurePlaces[39].get_resources()[0].second << "  " << structurePlaces[48].get_settlement_string() << "   " << structurePlaces[40].get_resources()[0].second << "  " << structurePlaces[49].get_settlement_string() << "   " << structurePlaces[41].get_resources()[0].second << " " << structurePlaces[50].get_settlement_string() << "\n"
+//          << "           " << roadPlaces[66].get_color_code() << "\\   " << roadPlaces[67].get_color_code() << "/  " << roadPlaces[68].get_color_code() << "\\   " << roadPlaces[69].get_color_code() << "/  " << roadPlaces[70].get_color_code() << "\\   " << roadPlaces[71].get_color_code() << "/\033[0m\n"
+//          << "             " << structurePlaces[51].get_settlement_string() << "      " << structurePlaces[52].get_settlement_string() << "       " << structurePlaces[53].get_settlement_string() << "\n";
+
+// }
 
 void Board::initBoard() {
     // Initialize structurePlaces and roadPlaces using their default constructors
@@ -183,31 +208,31 @@ void Board::initBoard() {
 
     */
     roadPlaces[0].setAdjStructs({&structurePlaces[0], &structurePlaces[3]});
-    roadPlaces[0].setAdjRoads({&roadPlaces[1], &roadPlaces[6]});
+    roadPlaces[0].setAdjRoads({nullptr, &roadPlaces[1], nullptr, &roadPlaces[6]});
     roadPlaces[1].setAdjStructs({&structurePlaces[0], &structurePlaces[4]});
-    roadPlaces[1].setAdjRoads({&roadPlaces[0], &roadPlaces[2], &roadPlaces[7]});
-    //roadPlaces[2].setAdjStructs({&structurePlaces[4]
+    roadPlaces[1].setAdjRoads({&roadPlaces[0],nullptr, &roadPlaces[7], &roadPlaces[2]});
+    
     
 
-    // tiles[0].setResourceAndNumber("Mountains", 10);
-    // tiles[1].setResourceAndNumber("Pasture", 2);
-    // tiles[2].setResourceAndNumber("Forrest", 9);
-    // tiles[3].setResourceAndNumber("Fields", 12);
-    // tiles[4].setResourceAndNumber("Hills", 6);
-    // tiles[5].setResourceAndNumber("Pasture", 4);
-    // tiles[6].setResourceAndNumber("Hills", 10);
-    // tiles[7].setResourceAndNumber("Fields", 9);
-    // tiles[8].setResourceAndNumber("Forrest", 11);
-    // tiles[9].setResourceAndNumber("Desert", 0);
-    // tiles[10].setResourceAndNumber("Forrest", 3);
-    // tiles[11].setResourceAndNumber("Mountains", 8);
-    // tiles[12].setResourceAndNumber("Forrest", 8);
-    // tiles[13].setResourceAndNumber("Mountains", 3);
-    // tiles[14].setResourceAndNumber("Fields", 4);
-    // tiles[15].setResourceAndNumber("Pasture", 5);
-    // tiles[16].setResourceAndNumber("Hills", 5);
-    // tiles[17].setResourceAndNumber("Fields", 6);
-    // tiles[18].setResourceAndNumber("Pasture", 11);
+    tiles[0].setResourceAndNumber("Mountains", 10);
+    tiles[1].setResourceAndNumber("Pasture", 2);
+    tiles[2].setResourceAndNumber("Forrest", 9);
+    tiles[3].setResourceAndNumber("Fields", 12);
+    tiles[4].setResourceAndNumber("Hills", 6);
+    tiles[5].setResourceAndNumber("Pasture", 4);
+    tiles[6].setResourceAndNumber("Hills", 10);
+    tiles[7].setResourceAndNumber("Fields", 9);
+    tiles[8].setResourceAndNumber("Forrest", 11);
+    tiles[9].setResourceAndNumber("Desert", 0);
+    tiles[10].setResourceAndNumber("Forrest", 3);
+    tiles[11].setResourceAndNumber("Mountains", 8);
+    tiles[12].setResourceAndNumber("Forrest", 8);
+    tiles[13].setResourceAndNumber("Mountains", 3);
+    tiles[14].setResourceAndNumber("Fields", 4);
+    tiles[15].setResourceAndNumber("Pasture", 5);
+    tiles[16].setResourceAndNumber("Hills", 5);
+    tiles[17].setResourceAndNumber("Fields", 6);
+    tiles[18].setResourceAndNumber("Pasture", 11);
 
   /*
                     mountains -  pasture - forrest
