@@ -380,15 +380,7 @@ void Board::initBoard() {
 
 
 }
-    void initTiles(){
 
-    }
-    void initStructurePlaces(){
-
-    }
-    void initRoadPlaces(){
-        
-    }
 
 roadPlace* Board::getRoadPlace(int roadNumber) {
     return &roadPlaces[roadNumber];
