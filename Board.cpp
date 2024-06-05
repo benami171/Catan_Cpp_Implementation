@@ -196,17 +196,6 @@ void Board::initBoard() {
     structurePlaces[53].setAdjStructs({&structurePlaces[49], &structurePlaces[50]});
     structurePlaces[53].setAdjRoads({&roadPlaces[70], &roadPlaces[71]});
 
-    /* set adjacent neighbors for roadPlaces
-        \ /         top left is adjRoad 0, top right is adjRoad 1, bottom left is adjRoad 2, bottom right is adjRoad 3
-         |          
-        / \
-    */
-
-    /* adjacent structPlaces neighbors of road
-
-
-
-    */
     roadPlaces[0].setAdjStructs({&structurePlaces[0], &structurePlaces[3]});
     roadPlaces[0].setAdjRoads({nullptr, &roadPlaces[1], nullptr, &roadPlaces[6]});
     roadPlaces[1].setAdjStructs({&structurePlaces[0], &structurePlaces[4]});
@@ -218,7 +207,7 @@ void Board::initBoard() {
     roadPlaces[4].setAdjStructs({&structurePlaces[2], &structurePlaces[5]});
     roadPlaces[4].setAdjRoads({&roadPlaces[5],nullptr, &roadPlaces[3], &roadPlaces[8]});
     roadPlaces[5].setAdjStructs({&structurePlaces[2], &structurePlaces[6]});
-    roadPlaces[5].setAdjRoads({nullptr, &roadPlaces[4], nullptr, &roadPlaces[9]});
+    roadPlaces[5].setAdjRoads({nullptr,&roadPlaces[4], nullptr, &roadPlaces[9]});
     roadPlaces[6].setAdjStructs({&structurePlaces[3], &structurePlaces[7]});
     roadPlaces[6].setAdjRoads({&roadPlaces[0],nullptr, &roadPlaces[10], &roadPlaces[11]});
     roadPlaces[7].setAdjStructs({&structurePlaces[4], &structurePlaces[8]});
@@ -289,7 +278,69 @@ void Board::initBoard() {
     roadPlaces[39].setAdjRoads({&roadPlaces[33],nullptr, &roadPlaces[40], &roadPlaces[49]});
     roadPlaces[40].setAdjStructs({&structurePlaces[28], &structurePlaces[33]});
     roadPlaces[40].setAdjRoads({&roadPlaces[34],&roadPlaces[41], &roadPlaces[39], &roadPlaces[49]});
-    
+    roadPlaces[41].setAdjStructs({&structurePlaces[28], &structurePlaces[34]});
+    roadPlaces[41].setAdjRoads({&roadPlaces[34],&roadPlaces[40], &roadPlaces[50], &roadPlaces[42]});
+    roadPlaces[42].setAdjStructs({&structurePlaces[29], &structurePlaces[34]});
+    roadPlaces[42].setAdjRoads({&roadPlaces[35],&roadPlaces[43], &roadPlaces[41], &roadPlaces[50]});
+    roadPlaces[43].setAdjStructs({&structurePlaces[29], &structurePlaces[35]});
+    roadPlaces[43].setAdjRoads({&roadPlaces[35],&roadPlaces[42], &roadPlaces[51], &roadPlaces[44]});
+    roadPlaces[44].setAdjStructs({&structurePlaces[30], &structurePlaces[35]});
+    roadPlaces[44].setAdjRoads({&roadPlaces[36],&roadPlaces[45], &roadPlaces[43], &roadPlaces[51]});
+    roadPlaces[45].setAdjStructs({&structurePlaces[30], &structurePlaces[36]});
+    roadPlaces[45].setAdjRoads({&roadPlaces[36],&roadPlaces[44], &roadPlaces[52], &roadPlaces[46]});
+    roadPlaces[46].setAdjStructs({&structurePlaces[31], &structurePlaces[36]});
+    roadPlaces[46].setAdjRoads({&roadPlaces[37],&roadPlaces[47], &roadPlaces[45], &roadPlaces[52]});
+    roadPlaces[47].setAdjStructs({&structurePlaces[31], &structurePlaces[37]});
+    roadPlaces[47].setAdjRoads({&roadPlaces[37],&roadPlaces[46], &roadPlaces[48], &roadPlaces[53]});
+    roadPlaces[48].setAdjStructs({&structurePlaces[32], &structurePlaces[37]});
+    roadPlaces[48].setAdjRoads({&roadPlaces[38],nullptr, &roadPlaces[47], &roadPlaces[53]});
+    roadPlaces[49].setAdjStructs({&structurePlaces[33], &structurePlaces[38]});
+    roadPlaces[49].setAdjRoads({&roadPlaces[39],&roadPlaces[40], nullptr, &roadPlaces[54]});
+    roadPlaces[50].setAdjStructs({&structurePlaces[34], &structurePlaces[39]});
+    roadPlaces[50].setAdjRoads({&roadPlaces[41],&roadPlaces[42], &roadPlaces[55], &roadPlaces[56]});
+    roadPlaces[51].setAdjStructs({&structurePlaces[35], &structurePlaces[40]});
+    roadPlaces[51].setAdjRoads({&roadPlaces[43],&roadPlaces[44], &roadPlaces[57], &roadPlaces[58]});
+    roadPlaces[52].setAdjStructs({&structurePlaces[36], &structurePlaces[41]});
+    roadPlaces[52].setAdjRoads({&roadPlaces[45],&roadPlaces[46], &roadPlaces[59], &roadPlaces[60]});
+    roadPlaces[53].setAdjStructs({&structurePlaces[37], &structurePlaces[42]});
+    roadPlaces[53].setAdjRoads({&roadPlaces[47],&roadPlaces[48], &roadPlaces[61], nullptr});
+    roadPlaces[54].setAdjStructs({&structurePlaces[38], &structurePlaces[43]});
+    roadPlaces[54].setAdjRoads({&roadPlaces[49],nullptr, &roadPlaces[55], &roadPlaces[62]});
+    roadPlaces[55].setAdjStructs({&structurePlaces[39], &structurePlaces[43]});
+    roadPlaces[55].setAdjRoads({&roadPlaces[50],&roadPlaces[56], &roadPlaces[54], &roadPlaces[62]});
+    roadPlaces[56].setAdjStructs({&structurePlaces[39], &structurePlaces[44]});
+    roadPlaces[56].setAdjRoads({&roadPlaces[50],&roadPlaces[55], &roadPlaces[63], &roadPlaces[57]});
+    roadPlaces[57].setAdjStructs({&structurePlaces[40], &structurePlaces[44]});
+    roadPlaces[57].setAdjRoads({&roadPlaces[51],&roadPlaces[58], &roadPlaces[56], &roadPlaces[63]});
+    roadPlaces[58].setAdjStructs({&structurePlaces[40], &structurePlaces[45]});
+    roadPlaces[58].setAdjRoads({&roadPlaces[51],&roadPlaces[57], &roadPlaces[64], &roadPlaces[59]});
+    roadPlaces[59].setAdjStructs({&structurePlaces[41], &structurePlaces[45]});
+    roadPlaces[59].setAdjRoads({&roadPlaces[52],&roadPlaces[60], &roadPlaces[58], &roadPlaces[64]});
+    roadPlaces[60].setAdjStructs({&structurePlaces[41], &structurePlaces[46]});
+    roadPlaces[60].setAdjRoads({&roadPlaces[52],&roadPlaces[59], &roadPlaces[65], &roadPlaces[61]});
+    roadPlaces[61].setAdjStructs({&structurePlaces[42], &structurePlaces[46]});
+    roadPlaces[61].setAdjRoads({&roadPlaces[53],nullptr, &roadPlaces[60], &roadPlaces[65]});
+    roadPlaces[62].setAdjStructs({&structurePlaces[43], &structurePlaces[47]});
+    roadPlaces[62].setAdjRoads({&roadPlaces[54],&roadPlaces[55], nullptr, &roadPlaces[66]});
+    roadPlaces[63].setAdjStructs({&structurePlaces[44], &structurePlaces[48]});
+    roadPlaces[63].setAdjRoads({&roadPlaces[56],&roadPlaces[57], &roadPlaces[68], &roadPlaces[67]});
+    roadPlaces[64].setAdjStructs({&structurePlaces[45], &structurePlaces[49]});
+    roadPlaces[64].setAdjRoads({&roadPlaces[58],&roadPlaces[59], &roadPlaces[69], &roadPlaces[70]});
+    roadPlaces[65].setAdjStructs({&structurePlaces[46], &structurePlaces[50]});
+    roadPlaces[65].setAdjRoads({&roadPlaces[60],&roadPlaces[61], &roadPlaces[71], nullptr});
+    roadPlaces[66].setAdjStructs({&structurePlaces[47], &structurePlaces[51]});
+    roadPlaces[66].setAdjRoads({&roadPlaces[62],nullptr, nullptr, &roadPlaces[67]});
+    roadPlaces[67].setAdjStructs({&structurePlaces[48], &structurePlaces[51]});
+    roadPlaces[67].setAdjRoads({&roadPlaces[63],&roadPlaces[68], &roadPlaces[66], nullptr});
+    roadPlaces[68].setAdjStructs({&structurePlaces[48], &structurePlaces[52]});
+    roadPlaces[68].setAdjRoads({&roadPlaces[63],&roadPlaces[67], nullptr, &roadPlaces[69]});
+    roadPlaces[69].setAdjStructs({&structurePlaces[49], &structurePlaces[52]});
+    roadPlaces[69].setAdjRoads({&roadPlaces[64],&roadPlaces[70], &roadPlaces[68], nullptr});
+    roadPlaces[70].setAdjStructs({&structurePlaces[49], &structurePlaces[53]});
+    roadPlaces[70].setAdjRoads({&roadPlaces[64],&roadPlaces[69], nullptr, &roadPlaces[71]});
+    roadPlaces[71].setAdjStructs({&structurePlaces[50], &structurePlaces[53]});
+    roadPlaces[71].setAdjRoads({&roadPlaces[65],nullptr, &roadPlaces[70], nullptr});
+
     
     
 
