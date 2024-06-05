@@ -83,7 +83,7 @@ void Board::initBoard() {
 
         tiles[i] = Tile(landTypes[i], activationNumbers[i], sPlaces, rPlaces); 
     }
-
+    cout << "Tiles were initialized\n";
 
     // defining the neihbors of each structure and road place
 
@@ -380,6 +380,15 @@ void Board::initBoard() {
 
 
 }
+    void initTiles(){
+
+    }
+    void initStructurePlaces(){
+
+    }
+    void initRoadPlaces(){
+        
+    }
 
 roadPlace* Board::getRoadPlace(int roadNumber) {
     return &roadPlaces[roadNumber];

@@ -27,6 +27,9 @@ class Board {
     structurePlace* getStructurePlace(int structNumber); // returns the ith structurePlace in the structurePlaces array
     void printBoard();
     void initBoard();
+    void initTiles();
+    void initStructurePlaces();
+    void initRoadPlaces();
 };
 }  // namespace Catan
 
