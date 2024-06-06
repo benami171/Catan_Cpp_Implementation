@@ -5,7 +5,6 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-
 #include "roadPlace.hpp"
 #include "structurePlace.hpp"
 
@@ -13,12 +12,7 @@ using namespace std;
 
 namespace Catan {
 Board::Board() {
-    for (size_t i = 0; i < structurePlaces.size(); i++) {
-        structurePlaces[i] = structurePlace("", "", i);
-    }
-    for (size_t i = 0; i < roadPlaces.size(); i++) {
-        roadPlaces[i] = roadPlace("", i);
-    }
+    initBoard();
 }
 
 // void Board::printBoard() {
@@ -51,9 +45,13 @@ Board::Board() {
 // }
 
 void Board::initBoard() {
-    // Initialize structurePlaces and roadPlaces using their default constructors
-    structurePlaces.fill(structurePlace());
-    roadPlaces.fill(roadPlace());
+    // Initialize structurePlaces and roadPlaces
+    for (size_t i = 0; i < structurePlaces.size(); i++) {
+        structurePlaces[i] = structurePlace("", "", i);
+    }
+    for (size_t i = 0; i < roadPlaces.size(); i++) {
+        roadPlaces[i] = roadPlace("", i);
+    }
 
     // Define the structure and road place indices for each tile
     const int tileStructureIndices[19][6] = {
@@ -77,10 +75,13 @@ void Board::initBoard() {
         array<roadPlace*, 6> rPlaces;
 
         for (int j = 0; j < 6; ++j) {
-            sPlaces[j] = &structurePlaces[tileStructureIndices[i][j]];
+            // assigning the right structurePlaces and roadPlaces pointers array for each tile.
+            sPlaces[j] = &structurePlaces[tileStructureIndices[i][j]]; 
             rPlaces[j] = &roadPlaces[tileRoadIndices[i][j]];
         }
 
+        // the arrays sPlaces and rPlaces are passed to the Tile constructor by value
+        // and thats ok because these are pointers and the pointers are copied, not the objects they point to.
         tiles[i] = Tile(landTypes[i], activationNumbers[i], sPlaces, rPlaces); 
     }
     cout << "Tiles were initialized\n";
