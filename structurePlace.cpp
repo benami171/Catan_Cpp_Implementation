@@ -82,3 +82,7 @@ structurePlace& structurePlace::operator=(const structurePlace& other) {
     }
     return *this;
 }
+
+string structurePlace::getIdentifierString() {
+    return identifierString;
+}

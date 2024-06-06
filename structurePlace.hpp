@@ -17,6 +17,7 @@ namespace Catan {
 class structurePlace {
    private:
     string owner;
+    string identifierString; // N FOR NONE, S FOR SETTLEMENT, C FOR CITY
     string structType;
     int structNumber;
     array<structurePlace*, 3> adjStructs;  
@@ -32,44 +33,14 @@ class structurePlace {
     // Deep copy constructor
     structurePlace(const structurePlace& other);
     
-    string getOwner() {
-        return owner;
-    }
-
-    string getStructType() {
-        return structType;
-    }
-
-    int getStructNumber() {
-        return structNumber;
-    }
-
-    void setAdjStructs(array<structurePlace*, 3> adjStructs) {
-        this->adjStructs = adjStructs;
-    }
-
-    void setAdjRoads(array<roadPlace*, 3> adjRoads) {
-        this->adjRoads = adjRoads;
-    }
-
-    bool validSettlementPlacement(string newOwner) {
-        if (this->owner != "") {
-            return false;
-        }
-        for (int i = 0; i < adjStructs.size(); i++) {
-            if (adjStructs[i]->getOwner() != "") {
-                return false;
-            }
-        }
-        for (int i = 0; i < adjRoads.size(); i++) {
-            if (adjRoads[i]->getOwner() == newOwner) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    string getOwner();
+    string getStructType();
+    int getStructNumber();
+    void setAdjStructs(array<structurePlace*, 3> adjStructs);
+    void setAdjRoads(array<roadPlace*, 3> adjRoads);
+    bool validSettlementPlacement(string newOwner);
     structurePlace& operator=(const structurePlace& other) ;
+    string getIdentifierString();
 };
 
 }  // namespace Catan
