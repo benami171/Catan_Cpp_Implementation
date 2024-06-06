@@ -8,19 +8,10 @@
 using namespace std;
 using namespace Catan;
 
-// Default constructor
-structurePlace::structurePlace() : owner(""), structType(""), structNumber(0) {
-    for (auto& ptr : adjStructs) {
-        ptr = nullptr;
-    }
-    for (auto& ptr : adjRoads) {
-        ptr = nullptr;
-    }
-}
 
-structurePlace::structurePlace(string owner, string structType, int structNumber) 
+structurePlace::structurePlace(string owner="", string structType="N", int structNumber=0) 
     : owner(owner), structType(structType), structNumber(structNumber) {
-    for (auto& ptr : adjStructs) {
+    for (auto& ptr : adjStructs) { // Initialize all pointers to nullptr
         ptr = nullptr;
     }
     for (auto& ptr : adjRoads) {
