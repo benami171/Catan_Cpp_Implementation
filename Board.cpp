@@ -80,6 +80,10 @@ void Board::initBoard() {
             rPlaces[j] = &roadPlaces[tileRoadIndices[i][j]];
         }
 
+        // hard coding the land types and activation number for each tile.
+        vector<string> landTypes = {"Mountains", "Pasture", "Forrest", "Fields", "Hills", "Pasture", "Hills", "Fields", "Forrest", "Desert", "Forrest", "Mountains", "Forrest", "Mountains", "Fields", "Pasture", "Hills", "Fields", "Pasture"};
+        vector<int> activationNumbers = {10, 2, 9, 12, 6, 4, 10, 9, 11, 0, 3, 8, 8, 3, 4, 5, 5, 6, 11};
+
         // the arrays sPlaces and rPlaces are passed to the Tile constructor by value
         // and thats ok because these are pointers and the pointers are copied, not the objects they point to.
         tiles[i] = Tile(landTypes[i], activationNumbers[i], sPlaces, rPlaces); 
