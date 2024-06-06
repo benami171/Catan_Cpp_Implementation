@@ -48,12 +48,40 @@ void Board::initBoard() {
     // Initialize structurePlaces and roadPlaces
     initStructurePlaces();
     initRoadPlaces();
-    // for (size_t i = 0; i < structurePlaces.size(); i++) {
-    //     structurePlaces[i] = structurePlace("", "", i);
-    // }
-    // for (size_t i = 0; i < roadPlaces.size(); i++) {
-    //     roadPlaces[i] = roadPlace("", i);
-    // }
+    initTiles();
+    setupAdjacencies();
+ 
+    /*
+                    mountains -  pasture - forrest
+                        10          2         9  
+                fields  -  hills  -  pasture  -  hills 
+                  12         6          4          10
+        fields  -  forrest  -  desert  -  forrest  -  mountains
+            9        11          0           3            8
+                forrest  -  mountains  -  fields -  pasture
+                   8            3           4          5
+                    hills  -  fields  -  pasture     
+                      5         6          11
+    */     
+
+    // defining the neihbors of each structure and road place
+}
+
+void Board::initStructurePlaces(){
+        // Initialize structurePlaces and roadPlaces
+    for (size_t i = 0; i < structurePlaces.size(); i++) {
+        structurePlaces[i] = structurePlace("", "", i);
+    }
+
+}
+
+void Board::initRoadPlaces(){
+        for (size_t i = 0; i < roadPlaces.size(); i++) {
+        roadPlaces[i] = roadPlace("", i);
+    }
+}
+
+void Board::initTiles(){
 
     // Define the structure and road place indices for each tile
     const int tileStructureIndices[19][6] = {
@@ -91,21 +119,9 @@ void Board::initBoard() {
         tiles[i] = Tile(landTypes[i], activationNumbers[i], sPlaces, rPlaces); 
     }
     cout << "Tiles were initialized\n";
+}
 
-    /*
-                    mountains -  pasture - forrest
-                        10          2         9  
-                fields  -  hills  -  pasture  -  hills 
-                  12         6          4          10
-        fields  -  forrest  -  desert  -  forrest  -  mountains
-            9        11          0           3            8
-                forrest  -  mountains  -  fields -  pasture
-                   8            3           4          5
-                    hills  -  fields  -  pasture     
-                      5         6          11
-    */     
-
-    // defining the neihbors of each structure and road place
+void Board::setupAdjacencies(){
     structurePlaces[0].setAdjStructs({&structurePlaces[2], &structurePlaces[3]});
     structurePlaces[0].setAdjRoads({&roadPlaces[0], &roadPlaces[1]});
     structurePlaces[1].setAdjStructs({&structurePlaces[4], &structurePlaces[5]});
@@ -359,24 +375,6 @@ void Board::initBoard() {
     roadPlaces[70].setAdjRoads({&roadPlaces[64],&roadPlaces[69], nullptr, &roadPlaces[71]});
     roadPlaces[71].setAdjStructs({&structurePlaces[50], &structurePlaces[53]});
     roadPlaces[71].setAdjRoads({&roadPlaces[65],nullptr, &roadPlaces[70], nullptr});       
-
-}
-
-void Board::initStructurePlaces(){
-        // Initialize structurePlaces and roadPlaces
-    for (size_t i = 0; i < structurePlaces.size(); i++) {
-        structurePlaces[i] = structurePlace("", "", i);
-    }
-
-}
-
-void Board::initRoadPlaces(){
-        for (size_t i = 0; i < roadPlaces.size(); i++) {
-        roadPlaces[i] = roadPlace("", i);
-    }
-}
-
-void Board::initTiles(){
 
 }
 
