@@ -46,12 +46,14 @@ Board::Board() {
 
 void Board::initBoard() {
     // Initialize structurePlaces and roadPlaces
-    for (size_t i = 0; i < structurePlaces.size(); i++) {
-        structurePlaces[i] = structurePlace("", "", i);
-    }
-    for (size_t i = 0; i < roadPlaces.size(); i++) {
-        roadPlaces[i] = roadPlace("", i);
-    }
+    initStructurePlaces();
+    initRoadPlaces();
+    // for (size_t i = 0; i < structurePlaces.size(); i++) {
+    //     structurePlaces[i] = structurePlace("", "", i);
+    // }
+    // for (size_t i = 0; i < roadPlaces.size(); i++) {
+    //     roadPlaces[i] = roadPlace("", i);
+    // }
 
     // Define the structure and road place indices for each tile
     const int tileStructureIndices[19][6] = {
@@ -90,8 +92,20 @@ void Board::initBoard() {
     }
     cout << "Tiles were initialized\n";
 
-    // defining the neihbors of each structure and road place
+    /*
+                    mountains -  pasture - forrest
+                        10          2         9  
+                fields  -  hills  -  pasture  -  hills 
+                  12         6          4          10
+        fields  -  forrest  -  desert  -  forrest  -  mountains
+            9        11          0           3            8
+                forrest  -  mountains  -  fields -  pasture
+                   8            3           4          5
+                    hills  -  fields  -  pasture     
+                      5         6          11
+    */     
 
+    // defining the neihbors of each structure and road place
     structurePlaces[0].setAdjStructs({&structurePlaces[2], &structurePlaces[3]});
     structurePlaces[0].setAdjRoads({&roadPlaces[0], &roadPlaces[1]});
     structurePlaces[1].setAdjStructs({&structurePlaces[4], &structurePlaces[5]});
@@ -344,48 +358,27 @@ void Board::initBoard() {
     roadPlaces[70].setAdjStructs({&structurePlaces[49], &structurePlaces[53]});
     roadPlaces[70].setAdjRoads({&roadPlaces[64],&roadPlaces[69], nullptr, &roadPlaces[71]});
     roadPlaces[71].setAdjStructs({&structurePlaces[50], &structurePlaces[53]});
-    roadPlaces[71].setAdjRoads({&roadPlaces[65],nullptr, &roadPlaces[70], nullptr});
-
-    
-    
-
-    tiles[0].setResourceAndNumber("Mountains", 10);
-    tiles[1].setResourceAndNumber("Pasture", 2);
-    tiles[2].setResourceAndNumber("Forrest", 9);
-    tiles[3].setResourceAndNumber("Fields", 12);
-    tiles[4].setResourceAndNumber("Hills", 6);
-    tiles[5].setResourceAndNumber("Pasture", 4);
-    tiles[6].setResourceAndNumber("Hills", 10);
-    tiles[7].setResourceAndNumber("Fields", 9);
-    tiles[8].setResourceAndNumber("Forrest", 11);
-    tiles[9].setResourceAndNumber("Desert", 0);
-    tiles[10].setResourceAndNumber("Forrest", 3);
-    tiles[11].setResourceAndNumber("Mountains", 8);
-    tiles[12].setResourceAndNumber("Forrest", 8);
-    tiles[13].setResourceAndNumber("Mountains", 3);
-    tiles[14].setResourceAndNumber("Fields", 4);
-    tiles[15].setResourceAndNumber("Pasture", 5);
-    tiles[16].setResourceAndNumber("Hills", 5);
-    tiles[17].setResourceAndNumber("Fields", 6);
-    tiles[18].setResourceAndNumber("Pasture", 11);
-
-  /*
-                    mountains -  pasture - forrest
-                        10          2         9  
-                fields  -  hills  -  pasture  -  hills 
-                  12         6          4          10
-        fields  -  forrest  -  desert  -  forrest  -  mountains
-            9        11          0           3            8
-                forrest  -  mountains  -  fields -  pasture
-                   8            3           4          5
-                    hills  -  fields  -  pasture     
-                      5         6          11
-  */            
-
-
+    roadPlaces[71].setAdjRoads({&roadPlaces[65],nullptr, &roadPlaces[70], nullptr});       
 
 }
 
+void Board::initStructurePlaces(){
+        // Initialize structurePlaces and roadPlaces
+    for (size_t i = 0; i < structurePlaces.size(); i++) {
+        structurePlaces[i] = structurePlace("", "", i);
+    }
+
+}
+
+void Board::initRoadPlaces(){
+        for (size_t i = 0; i < roadPlaces.size(); i++) {
+        roadPlaces[i] = roadPlace("", i);
+    }
+}
+
+void Board::initTiles(){
+
+}
 
 roadPlace* Board::getRoadPlace(int roadNumber) {
     return &roadPlaces[roadNumber];
