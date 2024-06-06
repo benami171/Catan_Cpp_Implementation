@@ -75,11 +75,29 @@ structurePlace& structurePlace::operator=(const structurePlace& other) {
 }
 
 string structurePlace::getIdentifierString() {
+    if(owner == "") {
+        return "N";
+    }
+
+    string playerColor = owner.
+
     if (structType == "SETTLEMENT") {
         return "S";
     } else if (structType == "CITY") {
         return "C";
     } else {
         return "N";
+    }
+}
+
+string structurePlace::getColor() {
+    if (owner == "Player1") {
+        return "\033[1;31m"; // Red
+    } else if (owner == "Player2") {
+        return "\033[1;34m"; // Blue
+    } else if (owner == "Player3") {
+        return "\033[1;32m"; // Green
+    } else {
+        return "\033[0m"; 
     }
 }

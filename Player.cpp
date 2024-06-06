@@ -102,5 +102,17 @@ void Player::printPlayerInfo() {
 
 void Player::placeRoad(int road_index) {
     if (roads_placed_counter < 15 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1) {
-        
+    }
+}
+
+string Player::getPlayerColor(){
+    if (name == "Player 1") {
+        return "\033[1;31m"; // Red
+    } else if (name == "Player 2") {
+        return "\033[1;34m"; // Blue
+    } else if (name == "Player 3") {
+        return "\033[1;32m"; // Green
+    } else {
+        return "\033[1;37m"; // White
+    }
 }

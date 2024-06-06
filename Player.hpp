@@ -13,6 +13,7 @@ namespace Catan {
 class Player {
    private:
     string name;
+    string playerColor;
     int victoryPoints;
     int roads_placed_counter;
     int settlements_placed_counter;
@@ -25,6 +26,10 @@ class Player {
     Player();
 
     Player(string name);
+
+    string getPlayerColor() {
+        return playerColor;
+    }
 
     string getName() {
         return name;

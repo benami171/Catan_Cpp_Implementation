@@ -25,6 +25,7 @@ class Board {
     void initStructurePlaces();
     void initRoadPlaces();
     void setupAdjacencies();
+    
 
 
    public:

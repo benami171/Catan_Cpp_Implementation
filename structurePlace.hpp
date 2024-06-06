@@ -16,6 +16,7 @@ using namespace std;
 namespace Catan {
 class structurePlace {
    private:
+    Player* owner;
     string owner;
     string identifierString; // N FOR NONE, S FOR SETTLEMENT, C FOR CITY
     string structType;
@@ -25,19 +26,20 @@ class structurePlace {
     vector<string> attachedResources;      
 
    public:
-    structurePlace(string owner="", string structType ="" , int structNumber=0);
+    structurePlace(Player* owner=nullptr, string structType ="" , int structNumber=0);
 
     // Deep copy constructor
     structurePlace(const structurePlace& other);
     
-    string getOwner();
+    string getOwnerString();
     string getStructType();
     int getStructNumber();
     void setAdjStructs(array<structurePlace*, 3> adjStructs);
     void setAdjRoads(array<roadPlace*, 3> adjRoads);
-    bool validSettlementPlacement(string newOwner);
+    bool validSettlementPlacement(Player* newOwner);
     structurePlace& operator=(const structurePlace& other) ;
     string getIdentifierString();
+    string getColor();
 };
 
 }  // namespace Catan
