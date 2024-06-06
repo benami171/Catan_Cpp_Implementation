@@ -25,10 +25,7 @@ class structurePlace {
     vector<string> attachedResources;      
 
    public:
-   // Default constructor
-    structurePlace() : owner(""), structType(""), structNumber(0) {}  
-
-    structurePlace(string owner, string structType, int structNumber=0);
+    structurePlace(string owner="", string structType ="" , int structNumber=0);
 
     // Deep copy constructor
     structurePlace(const structurePlace& other);
