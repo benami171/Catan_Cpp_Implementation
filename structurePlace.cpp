@@ -84,5 +84,11 @@ structurePlace& structurePlace::operator=(const structurePlace& other) {
 }
 
 string structurePlace::getIdentifierString() {
-    return identifierString;
+    if (structType == "SETTLEMENT") {
+        return "S";
+    } else if (structType == "CITY") {
+        return "C";
+    } else {
+        return "N";
+    }
 }
