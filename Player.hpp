@@ -27,77 +27,39 @@ class Player {
 
     Player(string name);
 
-    string getPlayerColor() {
-        return playerColor;
-    }
+    string getPlayerColor() ;
 
-    string getName() {
-        return name;
-    }
+    string getName();
 
-    int getVictoryPoints() {
-        return victoryPoints;
-    }
+    int getVictoryPoints();
 
-    void addVictoryPoints(int points) {
-        victoryPoints += points;
-    }
+    void addVictoryPoints(int points);
 
-    void removeVictoryPoints(int points) {
-        victoryPoints -= points;
-    }
+    void removeVictoryPoints(int points);
 
     // the resources are brick, lumber, wool, grain, ore
-    void addResourceCard(string resource, int amount) {
-        resourceCards[resource] += amount;
-    }
+    void addResourceCard(string resource, int amount);
 
-    void removeResourceCard(string resource, int amount) {
-        resourceCards[resource] -= amount;
-    }
+    void removeResourceCard(string resource, int amount);
 
     // the development cards are victoryPoint, roadBuilding, yearOfPlenty, monopoly
     // wasnt asked to implement the knight card.
-    void addDevelopmentCard(string developmentCard, int amount) {
-        developmentCards[developmentCard] += amount;
-    }
+    void addDevelopmentCard(string developmentCard, int amount);
 
-    void removeDevelopmentCard(string developmentCard, int amount) {
-        developmentCards[developmentCard] -= amount;
-    }
+    void removeDevelopmentCard(string developmentCard, int amount);
 
-    int getResourceCardAmount(string resource) {
-        return resourceCards[resource];
-    }
+    int getResourceCardAmount(string resource);
 
-    int getDevelopmentCardAmount(string developmentCard) {
-        return developmentCards[developmentCard];
-    }
+    int getDevelopmentCardAmount(string developmentCard);
 
     // iterator goes through the resource cards and prints the amount of each resource
-    void printResources() {
-        cout << "Resource Cards: " << endl;
-        for (auto it = resourceCards.begin(); it != resourceCards.end(); it++) {
-            cout << it->first << ": " << it->second << endl;
-        }
-    }
+    void printResources();
 
-    void printDevelopmentCards() {
-        cout << "Development Cards: " << endl;
-        for (auto it = developmentCards.begin(); it != developmentCards.end(); it++) {
-            cout << it->first << ": " << it->second << endl;
-        }
-    }
+    void printDevelopmentCards();
 
-    void printPlayerInfo() {
-        cout << "Player: " << name << endl;
-        cout << "Victory Points: " << victoryPoints << endl;
-        printDevelopmentCards();
-        printResources();
-    }
+    void printPlayerInfo();
 
-    void placeRoad(int road_index) {
-    }
+    void placeRoad(int road_index);
 };
 }  // namespace Catan
 

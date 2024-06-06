@@ -20,7 +20,6 @@ class Board {
     array<Tile, 19> tiles;
     array<string,19> landTypes;
     array<int,19> activationNumbers;
-    void initBoard();
     void initTiles();
     void initStructurePlaces();
     void initRoadPlaces();
@@ -32,7 +31,7 @@ class Board {
     Board();
     roadPlace* getRoadPlace(int roadNumber); // returns the ith roadPlace in the roadPlaces array
     structurePlace* getStructurePlace(int structNumber); // returns the ith structurePlace in the structurePlaces array
-    void printBoard();
+    // void printBoard();
 
 };
 }  // namespace Catan

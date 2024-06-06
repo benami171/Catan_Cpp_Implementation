@@ -17,7 +17,6 @@ namespace Catan {
 class structurePlace {
    private:
     Player* owner;
-    string owner;
     string identifierString; // N FOR NONE, S FOR SETTLEMENT, C FOR CITY
     string structType;
     int structNumber;

@@ -14,14 +14,16 @@ namespace Catan {
     class structurePlace; // Forward declaration of structurePlace, used to avoid circular dependencies.
     class roadPlace {
     private:
-        string owner;
+        Player* owner;
         int roadNumber;
         array<structurePlace*, 2> adjStructs; 
         array<roadPlace*, 4> adjRoads;
 
     public:
-        roadPlace(string owner, int roadNumber);
-        string getOwner(); // Method to get owner
+        roadPlace(); // Default constructor
+        roadPlace(Player* owner, int roadNumber);
+        Player* getOwner(); // Method to get owner
+        string getOwnerString(); // Method to get owner
         void setAdjStructs(array<structurePlace*, 2> adjStructs); // Method to set adjacent structures
         void setAdjRoads(array<roadPlace*, 4> adjRoads); // Method to set adjacent roads
     };

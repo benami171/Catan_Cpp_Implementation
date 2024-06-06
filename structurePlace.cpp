@@ -1,15 +1,20 @@
 #include "structurePlace.hpp"
-
 #include <array>
 #include <iostream>
 #include <string>
 #include <vector>
+#include <set>
+#include <unordered_map>
+#include "Catan_Piece.hpp"
+#include "Player.hpp"
+#include "roadPlace.hpp"
 
 using namespace std;
 using namespace Catan;
 
+class Player;
 
-structurePlace::structurePlace(string owner="", string structType="N", int structNumber=0) 
+structurePlace::structurePlace(Player* owner=nullptr, string structType="N", int structNumber=0) 
     : owner(owner), structType(structType), structNumber(structNumber) {
     for (auto& ptr : adjStructs) { // Initialize all pointers to nullptr
         ptr = nullptr;
@@ -26,8 +31,8 @@ structurePlace::structurePlace(const structurePlace& other)
     adjRoads = other.adjRoads;
 }
 
-string structurePlace::getOwner() {
-    return owner;
+string structurePlace::getOwnerString() {
+    return owner->getName();
 }
 
 string structurePlace::getStructType() {
@@ -46,17 +51,17 @@ void structurePlace::setAdjRoads(array<roadPlace*, 3> adjRoads) {
     this->adjRoads = adjRoads;
 }
 
-bool structurePlace::validSettlementPlacement(string newOwner) {
-    if (this->owner != "") {
+bool structurePlace::validSettlementPlacement(Player* newOwner) {
+    if (this->owner != nullptr) {
         return false;
     }
     for (int i = 0; i < adjStructs.size(); i++) {
-        if (adjStructs[i] != nullptr && adjStructs[i]->getOwner() != "") {
+        if (adjStructs[i] != nullptr && adjStructs[i]->getOwnerString() != "") {
             return false;
         }
     }
     for (int i = 0; i < adjRoads.size(); i++) {
-        if (adjRoads[i] != nullptr && adjRoads[i]->getOwner() == newOwner) {
+        if (adjRoads[i] != nullptr && adjRoads[i]->getOwnerString() == newOwner->getName()) {
             return true;
         }
     }
@@ -75,29 +80,14 @@ structurePlace& structurePlace::operator=(const structurePlace& other) {
 }
 
 string structurePlace::getIdentifierString() {
-    if(owner == "") {
+    if(owner->getName() == "") {
         return "N";
     }
 
-    string playerColor = owner.
-
+    string playerColor = owner->getPlayerColor();
     if (structType == "SETTLEMENT") {
-        return "S";
-    } else if (structType == "CITY") {
-        return "C";
+        return playerColor + "S\033[0m" + "\033[0m";
     } else {
-        return "N";
-    }
-}
-
-string structurePlace::getColor() {
-    if (owner == "Player1") {
-        return "\033[1;31m"; // Red
-    } else if (owner == "Player2") {
-        return "\033[1;34m"; // Blue
-    } else if (owner == "Player3") {
-        return "\033[1;32m"; // Green
-    } else {
-        return "\033[0m"; 
+        return playerColor + "C\033[0m" + "\033[0m";
     }
 }
