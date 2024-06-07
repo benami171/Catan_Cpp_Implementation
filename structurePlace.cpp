@@ -1,4 +1,5 @@
 #include "structurePlace.hpp"
+#include "Tile.hpp"
 
 using namespace std;
 using namespace Catan;
@@ -11,6 +12,9 @@ structurePlace::structurePlace(Player* owner=nullptr, string structType="N", int
         ptr = nullptr;
     }
     for (auto& ptr : adjRoads) {
+        ptr = nullptr;
+    }
+    for (auto& ptr : adjTiles) {
         ptr = nullptr;
     }
     attachedResources = {};
@@ -62,6 +66,11 @@ bool structurePlace::placedSettlement(Player* newOwner) {
         if (adjRoads[i] != nullptr && adjRoads[i]->getOwnerString() == newOwner->getName()) {
             this->owner = newOwner;
             this->structType = "SETTLEMENT";
+            for ( int j = 0 ; j < 3 ; j++) {
+                if (adjTiles.at(j) != nullptr) {
+                    adjTiles.at(j)->addAttachedPlayer(newOwner);
+                }
+            }
             return true;
         }
     }

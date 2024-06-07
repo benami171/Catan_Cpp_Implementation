@@ -52,7 +52,7 @@ array<roadPlace*, 6> Tile::getRoadPlaces() const {
     return roadPlaces;
 }
 
-array<Player*, 3> Tile::getAttachedPlayers() const {
+vector<Player*> Tile::getAttachedPlayers() const {
     return attachedPlayers;
 }
 
@@ -68,4 +68,8 @@ Tile& Tile::operator=(const Tile& other) {
     attachedPlayers = other.attachedPlayers;
 
     return *this;
+}
+
+void Tile::addAttachedPlayer(Player* player) {
+    this->attachedPlayers.push_back(player);
 }

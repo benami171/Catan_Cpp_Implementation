@@ -19,7 +19,7 @@ class Tile {
     array<roadPlace*, 6> roadPlaces;
     string resourceType;
     int activationNumber;
-    array<Player*, 3> attachedPlayers;
+    vector<Player*> attachedPlayers;
 
    public:
     Tile() : resourceType(""), activationNumber(0) {}  // Default constructor
@@ -31,7 +31,8 @@ class Tile {
     void setResourceAndNumber(string resourceType, int activationNumber);
     array<structurePlace*, 6> getStructurePlaces() const;
     array<roadPlace*, 6> getRoadPlaces() const;
-    array<Player*, 3> getAttachedPlayers() const;
+    vector<Player*> getAttachedPlayers() const;
+    void addAttachedPlayer(Player* player);
     Tile& operator=(const Tile& other);
 };
 
