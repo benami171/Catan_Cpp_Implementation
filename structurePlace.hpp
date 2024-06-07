@@ -1,10 +1,9 @@
 #include <string.h>
-
 #include <iostream>
+#include <array>
 #include <set>
 #include <unordered_map>
 #include <vector>
-
 #include "Catan_Piece.hpp"
 #include "Player.hpp"
 #include "roadPlace.hpp"

@@ -1,13 +1,4 @@
 #include "structurePlace.hpp"
-#include <array>
-#include <iostream>
-#include <string>
-#include <vector>
-#include <set>
-#include <unordered_map>
-#include "Catan_Piece.hpp"
-#include "Player.hpp"
-#include "roadPlace.hpp"
 
 using namespace std;
 using namespace Catan;

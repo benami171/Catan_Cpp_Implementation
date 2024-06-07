@@ -1,14 +1,5 @@
 #include "roadPlace.hpp"
 
-#include <string.h>
-
-#include <array>
-#include <iostream>
-#include <set>
-#include <unordered_map>
-
-#include "Catan_Piece.hpp"
-#include "Player.hpp"
 
 using namespace std;
 using namespace Catan;

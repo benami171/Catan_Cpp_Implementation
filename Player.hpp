@@ -1,6 +1,8 @@
 
 #include <iostream>
+#include "Board.hpp"
 #include <set>
+#include <array>
 #include <string>
 #include <unordered_map>
 #ifndef PLAYER_HPP
