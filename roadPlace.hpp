@@ -23,6 +23,7 @@ namespace Catan {
         roadPlace(); // Default constructor
         roadPlace(Player* owner, int roadNumber);
         Player* getOwner(); // Method to get owner
+        void setOwner(Player* newOwner); // Method to set owner
         string getOwnerString(); // Method to get owner
         void setAdjStructs(array<structurePlace*, 2> adjStructs); // Method to set adjacent structures
         void setAdjRoads(array<roadPlace*, 4> adjRoads); // Method to set adjacent roads

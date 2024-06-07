@@ -116,3 +116,15 @@ string Player::getPlayerColor(){
         return "\033[1;37m"; // White
     }
 }
+
+void Player::placeRoad(int road_index, Board* board) {
+    if (roads_placed_counter < 15 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1) {
+        roadPlace* road = board->getRoadPlace(road_index);
+        if (road->getOwnerString() == "") {
+            road->setOwner(this);
+            roads_placed_counter++;
+            this->removeResourceCard("brick", 1);
+            this->removeResourceCard("lumber", 1);
+        }
+    }
+}

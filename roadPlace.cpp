@@ -43,3 +43,7 @@ Player* roadPlace::getOwner() {
     return owner;
 }
 
+void roadPlace::setOwner(Player* newOwner) {
+    owner = newOwner;
+}
+

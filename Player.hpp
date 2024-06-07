@@ -59,8 +59,13 @@ class Player {
 
     void printPlayerInfo();
 
-    void placeRoad(int road_index);
+    void placeRoad(int roadPlace_index,Board* board);
+
+    void placeSettlement(int structPlace_index);
+
+    void placeCity(int structPlace_index);
 };
+
 }  // namespace Catan
 
 #endif  // PLAYER_HPP
