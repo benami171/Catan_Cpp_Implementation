@@ -7,12 +7,14 @@
 #include "Catan_Piece.hpp"
 #include "Player.hpp"
 #include "roadPlace.hpp"
+
 #ifndef STRUCTUREPLACE_HPP
 #define STRUCTUREPLACE_HPP
 
 using namespace std;
 
 namespace Catan {
+class Tile;
 class structurePlace {
    private:
     Player* owner;
@@ -20,8 +22,9 @@ class structurePlace {
     string structType;
     int structNumber;
     array<structurePlace*, 3> adjStructs;  
-    array<roadPlace*, 3> adjRoads;  
-    vector<string> attachedResources;      
+    array<roadPlace*, 3> adjRoads;
+    vector<Tile*> adjTiles;  
+    set<string> attachedResources;      
 
    public:
     structurePlace(Player* owner=nullptr, string structType ="" , int structNumber=0);
@@ -31,11 +34,13 @@ class structurePlace {
     
     string getOwnerString();
     string getStructType();
+    void addResource(string resource);
     int getStructNumber();
+    void addAdjTile(Tile* tile);
     void setAdjStructs(array<structurePlace*, 3> adjStructs);
     void setAdjRoads(array<roadPlace*, 3> adjRoads);
-    void placed_City(Player* newOwner);
-    bool placed_Settlement(Player* newOwner);
+    void placedCity(Player* newOwner);
+    bool placedSettlement(Player* newOwner);
     structurePlace& operator=(const structurePlace& other) ;
     string getIdentifierString();
     string getColor();

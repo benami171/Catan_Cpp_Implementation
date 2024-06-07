@@ -13,6 +13,7 @@ structurePlace::structurePlace(Player* owner=nullptr, string structType="N", int
     for (auto& ptr : adjRoads) {
         ptr = nullptr;
     }
+    attachedResources = {};
 }
 
 // Deep copy constructor
@@ -43,17 +44,24 @@ void structurePlace::setAdjRoads(array<roadPlace*, 3> adjRoads) {
     this->adjRoads = adjRoads;
 }
 
-bool structurePlace::placed_Settlement(Player* newOwner) {
+bool structurePlace::placedSettlement(Player* newOwner) {
+    // place already taken.
     if (this->owner != nullptr) {
         return false;
     }
+
     for (int i = 0; i < adjStructs.size(); i++) {
         if (adjStructs[i] != nullptr && adjStructs[i]->getOwnerString() != "") {
             return false;
         }
     }
+
+    // the adjecent settLments are not owned by anyone.
+    // check if at least one of the adjacent roads is owned by the player.
     for (int i = 0; i < adjRoads.size(); i++) {
         if (adjRoads[i] != nullptr && adjRoads[i]->getOwnerString() == newOwner->getName()) {
+            this->owner = newOwner;
+            this->structType = "SETTLEMENT";
             return true;
         }
     }
@@ -82,4 +90,12 @@ string structurePlace::getIdentifierString() {
     } else {
         return playerColor + "C\033[0m" + "\033[0m";
     }
+}
+
+void structurePlace::addResource(string resource) {
+    attachedResources.insert(resource);
+}
+
+void structurePlace::addAdjTile(Tile* tile) {
+    adjTiles.push_back(tile);
 }

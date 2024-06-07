@@ -118,7 +118,22 @@ void Player::placeRoad(int road_index,Board& board) {
 }
 
 void Player::placeSettlement(int structurePlace_index,Board& board){
-
+if (settlements_placed_counter < 5 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1 && this->getResourceCardAmount("wool") >= 1 && this->getResourceCardAmount("grain") >= 1) {
+        structurePlace* settlement = board.getStructurePlace(structurePlace_index);
+        if (settlement->placedSettlement(this)) {
+            settlements_placed_counter++;
+            this->removeResourceCard("brick", 1);
+            this->removeResourceCard("lumber", 1);
+            this->removeResourceCard("wool", 1);
+            this->removeResourceCard("grain", 1);
+            owned_settlements_indices.push_back(structurePlace_index);
+            cout << "Player " << name << " placed a settlement at index " << structurePlace_index << endl;
+        } else {
+            cout << "Invalid settlement placement" << endl;
+        }
+    } else {
+        cout << "Player " << name << " does not have enough resources to place a settlement" << endl;
+    }
     
 }
 

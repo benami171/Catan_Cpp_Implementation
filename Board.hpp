@@ -20,12 +20,10 @@ class Board {
     array<Tile, 19> tiles;
     array<string,19> landTypes;
     array<int,19> activationNumbers;
-    void initTiles();
     void initStructurePlaces();
     void initRoadPlaces();
     void setupAdjacencies();
-    
-
+    void initTiles();
 
    public:
     Board();
