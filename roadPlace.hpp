@@ -3,7 +3,7 @@
 #include <set>
 #include <unordered_map>
 #include <array>
-#include "Catan_Piece.hpp"
+
 #include "Player.hpp"
 
 #ifndef ROADPLACE_HPP
@@ -25,9 +25,10 @@ namespace Catan {
         roadPlace(Player* owner, int roadNumber);
         Player* getOwner(); // Method to get owner
         void setOwner(Player* newOwner); // Method to set owner
-        string getOwnerString(); // Method to get owner
+        string getOwnerString(); // gets the name of the Player who owns the road (using Player* owner)
         void setAdjStructs(array<structurePlace*, 2> adjStructs); // Method to set adjacent structures
         void setAdjRoads(array<roadPlace*, 4> adjRoads); // Method to set adjacent roads
+        bool placedRoad(Player* newOwner); // checks the validity of the road placement, if valid, sets the owner of the road to newOwner
     };
 
 }

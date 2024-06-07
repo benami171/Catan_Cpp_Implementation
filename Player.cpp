@@ -1,5 +1,6 @@
 #include "Player.hpp"
-
+#include "roadPlace.hpp"
+#include "Board.hpp"
 
 using namespace std;
 using namespace Catan;
@@ -99,9 +100,26 @@ void Player::printPlayerInfo() {
     printResources();
 }
 
-void Player::placeRoad(int road_index) {
+void Player::placeRoad(int road_index,Board& board) {
     if (roads_placed_counter < 15 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1) {
-    }
+        roadPlace* road = board.getRoadPlace(road_index);
+        if (road->placedRoad(this)) {
+            roads_placed_counter++;
+            this->removeResourceCard("brick", 1);
+            this->removeResourceCard("lumber", 1);
+            owned_roads_indices.push_back(road_index);
+            cout << "Player " << name << " placed a road at index " << road_index << endl;
+        } else {
+            cout << "Invalid road placement" << endl;
+        }
+    } else {
+        cout << "Player " << name << " does not have enough resources to place a road" << endl;
+    } 
+}
+
+void Player::placeSettlement(int structurePlace_index,Board& board){
+
+    
 }
 
 string Player::getPlayerColor(){

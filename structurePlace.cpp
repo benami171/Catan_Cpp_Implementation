@@ -26,6 +26,7 @@ string structurePlace::getOwnerString() {
     return owner->getName();
 }
 
+
 string structurePlace::getStructType() {
     return structType;
 }
@@ -42,7 +43,7 @@ void structurePlace::setAdjRoads(array<roadPlace*, 3> adjRoads) {
     this->adjRoads = adjRoads;
 }
 
-bool structurePlace::validSettlementPlacement(Player* newOwner) {
+bool structurePlace::placed_Settlement(Player* newOwner) {
     if (this->owner != nullptr) {
         return false;
     }

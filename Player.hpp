@@ -1,6 +1,5 @@
 
 #include <iostream>
-#include "Board.hpp"
 #include <set>
 #include <array>
 #include <string>
@@ -12,6 +11,7 @@ using namespace std;
 
 namespace Catan {
 
+class Board;
 class Player {
    private:
     string name;
@@ -21,6 +21,9 @@ class Player {
     int settlements_placed_counter;
     int cities_placed_counter;
 
+    vector<int> owned_roads_indices;
+    vector<int> owned_settlements_indices;
+    vector<int> owned_cities_indices;
     unordered_map<string, int> resourceCards;
     unordered_map<string, int> developmentCards;
 
@@ -61,11 +64,11 @@ class Player {
 
     void printPlayerInfo();
 
-    void placeRoad(int roadPlace_index,Board* board);
+    void placeRoad(int roadPlace_index,Board& board);
 
-    void placeSettlement(int structPlace_index);
+    void placeSettlement(int structPlace_index,Board& board);
 
-    void placeCity(int structPlace_index);
+    void placeCity(int structPlace_index,Board& board);
 };
 
 }  // namespace Catan
