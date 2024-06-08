@@ -77,6 +77,18 @@ bool structurePlace::placedSettlement(Player* newOwner) {
     return false;
 }
 
+bool structurePlace::placedCity(Player* newOwner) {
+    if (this->owner == nullptr || this->owner->getName() != newOwner->getName()) {
+        return false;
+    }
+
+    if (this->structType == "SETTLEMENT") {
+        this->structType = "CITY";
+        return true;
+    }
+    return false;
+}
+
 structurePlace& structurePlace::operator=(const structurePlace& other) {
     if (this != &other) {
         owner = other.owner;
@@ -107,4 +119,8 @@ void structurePlace::addResource(string resource) {
 
 void structurePlace::addAdjTile(Tile* tile) {
     adjTiles.push_back(tile);
+}
+
+const vector<Tile*>& structurePlace::getAdjTiles() const {
+    return adjTiles;
 }

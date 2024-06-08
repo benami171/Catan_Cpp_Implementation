@@ -1,4 +1,4 @@
-
+#include <cstdlib>  // for rand() and srand()
 #include <iostream>
 #include <set>
 #include <array>
@@ -20,10 +20,16 @@ class Player {
     int roads_placed_counter;
     int settlements_placed_counter;
     int cities_placed_counter;
-
     vector<int> owned_roads_indices;
     vector<int> owned_settlements_indices;
     vector<int> owned_cities_indices;
+
+  //  unordered_map<int,string> activationNumbers_resources; 
+
+    // key is the activation number, value is the index of the structure in the board's structure vector.
+    // the same for cities.
+  //  unordered_map<int,int> sIndices_ActivationNumbers; 
+  //  unordered_map<int,int> cIndices_ActivationNumbers;
     unordered_map<string, int> resourceCards;
     unordered_map<string, int> developmentCards;
 
@@ -69,6 +75,10 @@ class Player {
     void placeSettlement(int structPlace_index,Board& board);
 
     void placeCity(int structPlace_index,Board& board);
+
+    int rollDice();
+
+    void getResouces(int diceRoll,Board& board);
 };
 
 }  // namespace Catan

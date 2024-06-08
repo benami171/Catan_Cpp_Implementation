@@ -102,7 +102,7 @@ void Player::printPlayerInfo() {
 
 void Player::placeRoad(int road_index,Board& board) {
     if (roads_placed_counter < 15 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1) {
-        roadPlace* road = board.getRoadPlace(road_index);
+        roadPlace* road = board.getRoadAt(road_index);
         if (road->placedRoad(this)) {
             roads_placed_counter++;
             this->removeResourceCard("brick", 1);
@@ -119,14 +119,18 @@ void Player::placeRoad(int road_index,Board& board) {
 
 void Player::placeSettlement(int structurePlace_index,Board& board){
 if (settlements_placed_counter < 5 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1 && this->getResourceCardAmount("wool") >= 1 && this->getResourceCardAmount("grain") >= 1) {
-        structurePlace* settlement = board.getStructurePlace(structurePlace_index);
+        structurePlace* settlement = board.getStructureAt(structurePlace_index);
+        vector<Tile*> adjTiles = settlement->getAdjTiles();
         if (settlement->placedSettlement(this)) {
             settlements_placed_counter++;
             this->removeResourceCard("brick", 1);
             this->removeResourceCard("lumber", 1);
             this->removeResourceCard("wool", 1);
             this->removeResourceCard("grain", 1);
-            owned_settlements_indices.push_back(structurePlace_index);
+            for (int i = 0 ; i < adjTiles.size() ; i ++){
+                adjTiles[i]->addAttachedPlayer(this);
+            }
+   
             cout << "Player " << name << " placed a settlement at index " << structurePlace_index << endl;
         } else {
             cout << "Invalid settlement placement" << endl;
@@ -135,6 +139,24 @@ if (settlements_placed_counter < 5 && this->getResourceCardAmount("brick") >= 1 
         cout << "Player " << name << " does not have enough resources to place a settlement" << endl;
     }
     
+}
+
+void Player::placeCity(int structurePlace_index,Board& board){
+    if (cities_placed_counter < 4 && this->getResourceCardAmount("grain") >= 2 && this->getResourceCardAmount("ore") >= 3) {
+        structurePlace* city = board.getStructureAt(structurePlace_index);
+        if (city->placedCity(this)) {
+            cities_placed_counter++;
+            settlements_placed_counter--;
+            this->removeResourceCard("grain", 2);
+            this->removeResourceCard("ore", 3);
+            owned_cities_indices.push_back(structurePlace_index);
+            cout << "Player " << name << " placed a city at index " << structurePlace_index << endl;
+        } else {
+            cout << "Invalid city placement" << endl;
+        }
+    } else {
+        cout << "Player " << name << " does not have enough resources to place a city" << endl;
+    }
 }
 
 string Player::getPlayerColor(){
@@ -149,15 +171,30 @@ string Player::getPlayerColor(){
     }
 }
 
-// void Player::placeRoad(int road_index, Board* board) {
-//     if (roads_placed_counter < 15 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1) {
-//         roadPlace* road = board->getRoadPlace(road_index);
-        
-//         // if (road->getOwnerString() == "") {
-//         //     road->setOwner(this);
-//         //     roads_placed_counter++;
-//         //     this->removeResourceCard("brick", 1);
-//         //     this->removeResourceCard("lumber", 1);
-//         // }
-//     }
-// }
+int Player::rollDice() {
+    return rand() % 6 + 1 + rand() % 6 + 1;
+}
+
+void Player::getResouces(int diceRoll, Board& board) {
+    const array<Tile, 19>& tiles = board.getTiles();
+    for (int i = 0; i < tiles.size(); i++) {
+        if (tiles[i].getActivationNumber() == diceRoll) {
+            const array<structurePlace*, 6>& structurePlaces = tiles[i].getStructurePlaces();
+            for (int j = 0; j < 6; j++) {
+                if (structurePlaces[j]->getOwnerString() == name) {
+                    string resourceType = tiles[i].getResourceType();
+                    if (resourceType != "Desert") {
+                        string structureType = structurePlaces[j]->getStructType();
+                        if (structureType == "SETTLEMENT") {
+                            addResourceCard(resourceType, 1);
+                            cout << "Player " << name << " received a " << resourceType << " card" << endl;
+                        } else if (structureType == "CITY") {
+                            addResourceCard(resourceType, 2);
+                            cout << "Player " << name << " received two " << resourceType << " cards" << endl;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

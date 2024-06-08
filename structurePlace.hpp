@@ -37,9 +37,10 @@ class structurePlace {
     void addResource(string resource);
     int getStructNumber();
     void addAdjTile(Tile* tile);
+    const vector<Tile*>& getAdjTiles() const;
     void setAdjStructs(array<structurePlace*, 3> adjStructs);
     void setAdjRoads(array<roadPlace*, 3> adjRoads);
-    void placedCity(Player* newOwner);
+    bool placedCity(Player* newOwner);
     bool placedSettlement(Player* newOwner);
     structurePlace& operator=(const structurePlace& other) ;
     string getIdentifierString();

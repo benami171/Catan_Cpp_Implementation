@@ -27,9 +27,12 @@ class Board {
 
    public:
     Board();
-    roadPlace* getRoadPlace(int roadNumber); // returns the ith roadPlace in the roadPlaces array
-    structurePlace* getStructurePlace(int structNumber); // returns the ith structurePlace in the structurePlaces array
-    // void printBoard();
+    roadPlace* getRoadAt(int roadNumber); // returns the ith roadPlace in the roadPlaces array
+    structurePlace* getStructureAt(int structNumber); // returns the ith structurePlace in the structurePlaces array
+    Tile* getTileAt(int tileNumber); // returns the ith tile in the tiles array
+    const array<structurePlace, 54>& getStructurePlaces() const;
+    const array<roadPlace, 72>& getRoadPlaces() const;
+    const array<Tile, 19>& getTiles() const; 
 
 };
 }  // namespace Catan

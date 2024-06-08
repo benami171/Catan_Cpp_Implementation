@@ -347,13 +347,31 @@ void Board::setupAdjacencies(){
 
 }
 
-roadPlace* Board::getRoadPlace(int roadNumber) {
+roadPlace* Board::getRoadAt(int roadNumber) {
     return &roadPlaces[roadNumber];
 }
 
-structurePlace* Board::getStructurePlace(int structNumber) {
+structurePlace* Board::getStructureAt(int structNumber) {
     return &structurePlaces[structNumber];
 }
+
+Tile* Board::getTileAt(int tileNumber) {
+    return &tiles[tileNumber];
+}
+
+const array<structurePlace, 54>& Board::getStructurePlaces() const {
+    return structurePlaces;
+}
+
+const array<roadPlace, 72>& Board::getRoadPlaces() const {
+    return roadPlaces;
+}
+
+const array<Tile, 19>& Board::getTiles() const {
+    return tiles;
+}
+
+
 
 } // namespace Catan
 

@@ -73,3 +73,11 @@ Tile& Tile::operator=(const Tile& other) {
 void Tile::addAttachedPlayer(Player* player) {
     this->attachedPlayers.push_back(player);
 }
+
+roadPlace* Tile::getRoadPlace(int roadNumber) {
+    return roadPlaces[roadNumber];
+}
+
+structurePlace* Tile::getStructurePlace(int structNumber) {
+    return structurePlaces[structNumber];
+}

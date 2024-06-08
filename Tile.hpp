@@ -31,6 +31,8 @@ class Tile {
     void setResourceAndNumber(string resourceType, int activationNumber);
     array<structurePlace*, 6> getStructurePlaces() const;
     array<roadPlace*, 6> getRoadPlaces() const;
+    roadPlace* getRoadPlace(int roadNumber);
+    structurePlace* getStructurePlace(int structNumber);
     vector<Player*> getAttachedPlayers() const;
     void addAttachedPlayer(Player* player);
     Tile& operator=(const Tile& other);
