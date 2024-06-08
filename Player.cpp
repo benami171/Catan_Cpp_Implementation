@@ -103,7 +103,11 @@ void Player::printPlayerInfo() {
 }
 
 void Player::placeRoad(int road_index, Board& board) {
-
+    if(initialRoadNumber < 3){
+        placeInitialRoad(road_index, board);
+        return;
+    }
+    
     if (roads_placed_counter < 15 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1) {
         roadPlace* road = board.getRoadAt(road_index);
         if (road->placedRoad(this)) {
@@ -124,6 +128,7 @@ void Player::placeInitialRoad(int road_index, Board& board) {
     roadPlace* road = board.getRoadAt(road_index);
     if (road->placedRoad(this)) {
         roads_placed_counter++;
+        initialRoadNumber++;
         owned_roads_indices.push_back(road_index);
         cout << "Player " << name << " placed a road at index " << road_index << endl;
     } else {
