@@ -118,6 +118,17 @@ void Player::placeRoad(int road_index,Board& board) {
     } 
 }
 
+void Player::placeInitialRoad(int road_index,Board& board){
+    roadPlace* road = board.getRoadAt(road_index);
+    if (road->placedRoad(this)) {
+        roads_placed_counter++;
+        owned_roads_indices.push_back(road_index);
+        cout << "Player " << name << " placed a road at index " << road_index << endl;
+    } else {
+        cout << "Invalid road placement" << endl;
+    }
+}
+
 void Player::placeSettlement(int structurePlace_index,Board& board){
 if (settlements_placed_counter < 5 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1 && this->getResourceCardAmount("wool") >= 1 && this->getResourceCardAmount("grain") >= 1) {
         structurePlace* settlement = board.getStructureAt(structurePlace_index);
@@ -141,6 +152,21 @@ if (settlements_placed_counter < 5 && this->getResourceCardAmount("brick") >= 1 
         cout << "Player " << name << " does not have enough resources to place a settlement" << endl;
     }
     
+}
+
+void Player::placeInitialSettlement(int structurePlace_index,Board& board){
+    structurePlace* settlement = board.getStructureAt(structurePlace_index);
+    vector<Tile*> adjTiles = settlement->getAdjTiles();
+    if (settlement->placedSettlement(this)) {
+        settlements_placed_counter++;
+        this->addVictoryPoints(1);
+        for (int i = 0 ; i < adjTiles.size() ; i ++){
+            adjTiles[i]->addAttachedPlayer(this);
+        }
+        cout << "Player " << name << " placed a settlement at index " << structurePlace_index << endl;
+    } else {
+        cout << "Invalid settlement placement" << endl;
+    }
 }
 
 void Player::placeCity(int structurePlace_index,Board& board){
@@ -201,3 +227,4 @@ void Player::getResouces(int diceRoll, Board& board) {
         }
     }
 }
+
