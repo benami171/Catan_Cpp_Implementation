@@ -6,7 +6,7 @@ using namespace std;
 using namespace Catan;
 
 
-Player::Player() : name(""), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) {
+Player::Player() : name(""), victoryPoints(0),initialMoveNumber(1), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) {
     resourceCards["brick"] = 0;
     resourceCards["lumber"] = 0;
     resourceCards["wool"] = 0;
@@ -24,6 +24,7 @@ Player::Player(string name) {
     roads_placed_counter = 0;
     settlements_placed_counter = 0;
     cities_placed_counter = 0;
+    initialMoveNumber = 1;
     resourceCards["brick"] = 0;
     resourceCards["lumber"] = 0;
     resourceCards["wool"] = 0;
@@ -123,6 +124,7 @@ if (settlements_placed_counter < 5 && this->getResourceCardAmount("brick") >= 1 
         vector<Tile*> adjTiles = settlement->getAdjTiles();
         if (settlement->placedSettlement(this)) {
             settlements_placed_counter++;
+            this->addVictoryPoints(1);
             this->removeResourceCard("brick", 1);
             this->removeResourceCard("lumber", 1);
             this->removeResourceCard("wool", 1);
@@ -147,6 +149,7 @@ void Player::placeCity(int structurePlace_index,Board& board){
         if (city->placedCity(this)) {
             cities_placed_counter++;
             settlements_placed_counter--;
+            this->addVictoryPoints(1);
             this->removeResourceCard("grain", 2);
             this->removeResourceCard("ore", 3);
             owned_cities_indices.push_back(structurePlace_index);

@@ -16,6 +16,7 @@ class Player {
    private:
     string name;
     string playerColor;
+    int initialMoveNumber;
     int victoryPoints;
     int roads_placed_counter;
     int settlements_placed_counter;
@@ -24,12 +25,6 @@ class Player {
     vector<int> owned_settlements_indices;
     vector<int> owned_cities_indices;
 
-  //  unordered_map<int,string> activationNumbers_resources; 
-
-    // key is the activation number, value is the index of the structure in the board's structure vector.
-    // the same for cities.
-  //  unordered_map<int,int> sIndices_ActivationNumbers; 
-  //  unordered_map<int,int> cIndices_ActivationNumbers;
     unordered_map<string, int> resourceCards;
     unordered_map<string, int> developmentCards;
 
@@ -72,7 +67,11 @@ class Player {
 
     void placeRoad(int roadPlace_index,Board& board);
 
+    void placeInitialRoad(int roadPlace_index,Board& board);
+
     void placeSettlement(int structPlace_index,Board& board);
+
+    void placeInitialSettlement(int structPlace_index,Board& board);
 
     void placeCity(int structPlace_index,Board& board);
 
