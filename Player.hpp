@@ -11,6 +11,7 @@ using namespace std;
 
 namespace Catan {
 
+class Tile;
 class Board;
 class Player {
    private:

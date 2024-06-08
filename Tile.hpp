@@ -1,8 +1,6 @@
 #include <array>
 #include <string>
 
-#include "Catan_Piece.hpp"
-#include "Catan_Settlement.hpp"
 #include "Player.hpp"
 #include "roadPlace.hpp"
 #include "structurePlace.hpp"
