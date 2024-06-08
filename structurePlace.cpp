@@ -95,9 +95,9 @@ string structurePlace::getIdentifierString() {
 
     string playerColor = owner->getPlayerColor();
     if (structType == "SETTLEMENT") {
-        return playerColor + "S\033[0m" + "\033[0m";
+        return playerColor + "S\033[0m"; // after the color code, the color is reset back to default
     } else {
-        return playerColor + "C\033[0m" + "\033[0m";
+        return playerColor + "C\033[0m";
     }
 }
 
