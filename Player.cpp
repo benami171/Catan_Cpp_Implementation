@@ -6,7 +6,7 @@
 using namespace std;
 using namespace Catan;
 
-Player::Player() : name(""), victoryPoints(0), initialMoveNumber(1), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) {
+Player::Player() : name(""), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) , initialSettlementNumber(1), initialRoadNumber(1) {
     resourceCards["brick"] = 0;
     resourceCards["lumber"] = 0;
     resourceCards["wool"] = 0;
@@ -24,7 +24,8 @@ Player::Player(string name) {
     roads_placed_counter = 0;
     settlements_placed_counter = 0;
     cities_placed_counter = 0;
-    initialMoveNumber = 1;
+    initialSettlementNumber = 1;
+    initialRoadNumber = 1;
     resourceCards["brick"] = 0;
     resourceCards["lumber"] = 0;
     resourceCards["wool"] = 0;
@@ -102,6 +103,7 @@ void Player::printPlayerInfo() {
 }
 
 void Player::placeRoad(int road_index, Board& board) {
+
     if (roads_placed_counter < 15 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1) {
         roadPlace* road = board.getRoadAt(road_index);
         if (road->placedRoad(this)) {
@@ -130,6 +132,10 @@ void Player::placeInitialRoad(int road_index, Board& board) {
 }
 
 void Player::placeSettlement(int structurePlace_index, Board& board) {
+    if ( initialSettlementNumber < 3) {
+        placeInitialSettlement(structurePlace_index, board);
+        return;
+    }
     if (settlements_placed_counter < 5 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1 && this->getResourceCardAmount("wool") >= 1 && this->getResourceCardAmount("grain") >= 1) {
         structurePlace* settlement = board.getStructureAt(structurePlace_index);
         vector<Tile*> adjTiles = settlement->getAdjTiles();
@@ -156,17 +162,17 @@ void Player::placeSettlement(int structurePlace_index, Board& board) {
 void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
     structurePlace* settlement = board.getStructureAt(structurePlace_index);
     vector<Tile*> adjTiles = settlement->getAdjTiles();
-    if (initialMoveNumber < 3) {
+    if (initialSettlementNumber < 3) {
         if (settlement->placedSettlement(this)) {
             settlements_placed_counter++;
             this->addVictoryPoints(1);
             for (int i = 0; i < adjTiles.size(); i++) {
                 adjTiles[i]->addAttachedPlayer(this);
-                if (initialMoveNumber == 2) {
+                if (initialSettlementNumber == 2) {
                 this->getInitResourcesFromTile(adjTiles[i]);
                 }
             }
-            initialMoveNumber++;
+            initialSettlementNumber++;
             cout << "Player " << name << " placed a settlement at index " << structurePlace_index << endl;
         } else {
             cout << "Invalid settlement placement" << endl;

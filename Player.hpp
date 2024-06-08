@@ -16,7 +16,8 @@ class Player {
    private:
     string name;
     string playerColor;
-    int initialMoveNumber;
+    int initialSettlementNumber;
+    int initialRoadNumber;
     int victoryPoints;
     int roads_placed_counter;
     int settlements_placed_counter;
