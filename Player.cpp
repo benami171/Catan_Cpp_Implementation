@@ -173,7 +173,6 @@ void Player::placeSettlement(int structurePlace_index, Board& board) {
 }
 
 void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
-    
     cout << "INSIDE INITIAL SETTLEMENT PLACEMENT" << endl;
     cout << "   structurePlace_index: " << structurePlace_index << endl;
     structurePlace* settlement = board.getStructureAt(structurePlace_index);

@@ -82,13 +82,14 @@ void Board::initTiles(){
             sPlaces[j] = &structurePlaces[tileStructureIndices[i][j]]; 
             structurePlaces[tileStructureIndices[i][j]].addResource(landTypes[i]);
             structurePlaces[tileStructureIndices[i][j]].addAdjTile(&tiles[i]);
+            cout << " StructPlace's index: " << tileStructureIndices[i][j] << " adjecent Tile added is Tile number: " << i << endl;
             rPlaces[j] = &roadPlaces[tileRoadIndices[i][j]];
         }
 
 
         // the arrays sPlaces and rPlaces are passed to the Tile constructor by value
         // and thats ok because these are pointers and the pointers are copied, not the objects they point to.
-        tiles[i] = Tile(landTypes[i], activationNumbers[i], sPlaces, rPlaces); 
+        tiles[i] = Tile(landTypes[i],i, activationNumbers[i], sPlaces, rPlaces); 
     }
 }
 

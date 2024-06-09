@@ -17,11 +17,12 @@ class Tile {
     array<roadPlace*, 6> roadPlaces;
     string resourceType;
     int activationNumber;
+    int tileNumber;
     vector<Player*> attachedPlayers;
 
    public:
-    Tile() : resourceType(""), activationNumber(0) {}  // Default constructor
-    Tile(const string& resourceType, int activationNumber, array<structurePlace*, 6> structurePlaces, array<roadPlace*, 6> roadPlaces);
+    Tile() : resourceType(""), activationNumber(0),tileNumber(0) {}  // Default constructor
+    Tile(const string& resourceType,int tileNumber, int activationNumber, array<structurePlace*, 6> structurePlaces, array<roadPlace*, 6> roadPlaces);
     string getResourceType() const;
     void setResourceType(string resourceType);
     int getActivationNumber() const;
@@ -34,6 +35,7 @@ class Tile {
     vector<Player*> getAttachedPlayers() const;
     void addAttachedPlayer(Player* player);
     Tile& operator=(const Tile& other);
+    int getTileNumber() const;
 };
 
 }  // namespace Catan

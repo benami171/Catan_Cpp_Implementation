@@ -109,11 +109,11 @@ bool structurePlace::placedInitialSettlement(Player* newOwner){
     // the adjecent settLments are not owned by anyone.
     // check if at least one of the adjacent roads is owned by the player.
     for (size_t i = 0; i < adjRoads.size(); i++) {
-        cout << "adjRoads[i] Owner: " << adjRoads[i]->getOwnerString() << endl; // FOR DEBUGGING
             this->owner = newOwner;
             this->structType = "SETTLEMENT";
             for ( int j = 0 ; j < 3 ; j++) {
                 if (adjTiles.at(j) != nullptr) {
+                    cout << "Adding attached player to tile" << endl;
                     adjTiles.at(j)->addAttachedPlayer(newOwner);
                 }
             }
