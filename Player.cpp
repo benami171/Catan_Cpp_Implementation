@@ -183,7 +183,7 @@ void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
     }
     vector<Tile*> adjTiles = settlement->getAdjTiles();
     if (initialSettlementNumber < 3) {
-        if (settlement->placedSettlement(this)) {
+        if (settlement->placedInitialSettlement(this)) {
             cout << "1" << endl;
             settlements_placed_counter++;
             this->addVictoryPoints(1);
