@@ -1,5 +1,5 @@
 # Compiler
-CXX = g++
+CXX = clang++
 
 # Compiler flags
 CXXFLAGS = -Wall -g

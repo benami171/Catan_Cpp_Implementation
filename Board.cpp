@@ -35,19 +35,22 @@ Board::Board() {
 
 void Board::initStructurePlaces(){
         // Initialize structurePlaces and roadPlaces
+    cout << "Initializing structure places..." << endl;
     for (size_t i = 0; i < structurePlaces.size(); i++) {
-        structurePlaces[i] = structurePlace(nullptr, "", i);
+        structurePlaces[i] = structurePlace(nullptr, "initial", i);
     }
+    cout << "structurePlaces size: " << structurePlaces.size() << endl;
 }
 
 void Board::initRoadPlaces(){
+    cout << "Initializing road places..." << endl;
         for (size_t i = 0; i < roadPlaces.size(); i++) {
         roadPlaces[i] = roadPlace(nullptr, i);
     }
 }
 
 void Board::initTiles(){
-
+    cout << "Initializing tiles..." << endl;
     // Define the structure and road place indices for each tile
     const int tileStructureIndices[19][6] = {
                                             {0, 4, 8, 12, 7, 3}, {1, 5, 9, 13, 8, 4}, {2, 6, 10, 14, 9, 5},                 
@@ -87,10 +90,10 @@ void Board::initTiles(){
         // and thats ok because these are pointers and the pointers are copied, not the objects they point to.
         tiles[i] = Tile(landTypes[i], activationNumbers[i], sPlaces, rPlaces); 
     }
-    cout << "Tiles were initialized\n";
 }
 
 void Board::setupAdjacencies(){
+    cout << "Setting up adjacencies..." << endl;
     structurePlaces[0].setAdjStructs({&structurePlaces[2], &structurePlaces[3]});
     structurePlaces[0].setAdjRoads({&roadPlaces[0], &roadPlaces[1]});
     structurePlaces[1].setAdjStructs({&structurePlaces[4], &structurePlaces[5]});
@@ -352,6 +355,11 @@ roadPlace* Board::getRoadAt(int roadNumber) {
 }
 
 structurePlace* Board::getStructureAt(int structNumber) {
+    cout << "Getting structurePlace at index " << structNumber << endl;
+    if (structNumber < 0 || structNumber >= structurePlaces.size()) {
+        cout << "Invalid structurePlace_index" << endl;
+        return nullptr;
+    }
     return &structurePlaces[structNumber];
 }
 

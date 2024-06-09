@@ -21,8 +21,7 @@ namespace Catan {
         array<roadPlace*, 4> adjRoads;
 
     public:
-        roadPlace(); // Default constructor
-        roadPlace(Player* owner, int roadNumber);
+        roadPlace(Player* owner = nullptr, int roadNumber=0);
         Player* getOwner(); // Method to get owner
         void setOwner(Player* newOwner); // Method to set owner
         string getOwnerString(); // gets the name of the Player who owns the road (using Player* owner)

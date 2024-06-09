@@ -19,10 +19,5 @@ int main() {
     player1.placeRoad(5,board);
     cout << "Road placed" << endl;
 
-
-
-    
-    
-
     return 0;
 }

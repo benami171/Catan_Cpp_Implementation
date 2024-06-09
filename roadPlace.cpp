@@ -5,19 +5,16 @@
 using namespace std;
 using namespace Catan;
 
-roadPlace::roadPlace() {
-    this->owner = nullptr;
-    this->roadNumber = 0;
-}
 
-roadPlace::roadPlace(Player* owner = nullptr, int roadNumber = 0) {
-    this->owner = owner;
-    this->roadNumber = roadNumber;
-}
+roadPlace::roadPlace(Player* owner, int roadNumber) : owner(owner), roadNumber(roadNumber){}
 
 // Method to get owner
 string roadPlace::getOwnerString() {
-    return owner->getName();
+    if (owner == nullptr) {
+        return "No owner";
+    } else {
+        return owner->getName();
+    }
 }
 
 // Method to set adjacent structures

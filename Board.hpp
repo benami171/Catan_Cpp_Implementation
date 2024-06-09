@@ -19,7 +19,6 @@ class Board {
     array<roadPlace, 72> roadPlaces;
     array<Tile, 19> tiles;
     array<string,19> landTypes;
-    array<int,19> activationNumbers;
     void initStructurePlaces();
     void initRoadPlaces();
     void setupAdjacencies();

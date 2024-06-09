@@ -137,7 +137,9 @@ void Player::placeInitialRoad(int road_index, Board& board) {
 }
 
 void Player::placeSettlement(int structurePlace_index, Board& board) {
+    
     if (initialSettlementNumber < 3) {
+        cout << "Player " << name << " GOING TO INITIAL SETTLEMENT PLACEMENT" << endl;
         placeInitialSettlement(structurePlace_index, board);
         return;
     }
@@ -171,6 +173,9 @@ void Player::placeSettlement(int structurePlace_index, Board& board) {
 }
 
 void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
+    
+    cout << "INSIDE INITIAL SETTLEMENT PLACEMENT" << endl;
+    cout << "structurePlace_index: " << structurePlace_index << endl;
     structurePlace* settlement = board.getStructureAt(structurePlace_index);
     if (settlement == nullptr) {
         cout << "Invalid structurePlace_index" << endl;
@@ -179,13 +184,19 @@ void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
     vector<Tile*> adjTiles = settlement->getAdjTiles();
     if (initialSettlementNumber < 3) {
         if (settlement->placedSettlement(this)) {
+            cout << "1" << endl;
             settlements_placed_counter++;
             this->addVictoryPoints(1);
+            cout << "2" << endl;
             for (int i = 0; i < 3; i++) {
                 if (adjTiles[i] != nullptr) {
+                    cout << "3" << endl;
                     adjTiles[i]->addAttachedPlayer(this);
+                    cout << "4" << endl;
                     if (initialSettlementNumber == 2) {
+                        cout << "5" << endl;
                         this->getInitResourcesFromTile(adjTiles[i]);
+                        cout << "6" << endl;
                     }
                 }
             }
@@ -194,8 +205,9 @@ void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
         } else {
             cout << "Invalid settlement placement" << endl;
         }
+    } else {
+        cout << "Player " << name << " has already placed 2 settlements" << endl;
     }
-    cout << "Player " << name << " has already placed 2 settlements" << endl;
 }
 
 void Player::placeCity(int structurePlace_index, Board& board) {
