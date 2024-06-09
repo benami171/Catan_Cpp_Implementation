@@ -95,7 +95,7 @@ void Board::initTiles(){
 
 void Board::setupAdjacencies(){
     cout << "Setting up adjacencies..." << endl;
-    structurePlaces[0].setAdjStructs({&structurePlaces[2], &structurePlaces[3]});
+    structurePlaces[0].setAdjStructs({&structurePlaces[2], &structurePlaces[3],nullptr});
     structurePlaces[0].setAdjRoads({&roadPlaces[0], &roadPlaces[1]});
     structurePlaces[1].setAdjStructs({&structurePlaces[4], &structurePlaces[5]});
     structurePlaces[1].setAdjRoads({&roadPlaces[2], &roadPlaces[3]});

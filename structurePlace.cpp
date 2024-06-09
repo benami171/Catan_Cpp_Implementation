@@ -14,8 +14,8 @@ structurePlace::structurePlace()
 
 structurePlace::structurePlace(Player* owner, string structType, int structNumber) 
     : owner(owner), structType(structType), structNumber(structNumber), adjStructs{nullptr, nullptr, nullptr}, adjRoads{nullptr, nullptr, nullptr}, adjTiles(3, nullptr) {
-cout << "structurePlace created: " << structNumber << ", structType: " << this->structType << ", adjStructs and adjRoads initialized to nullptr." << endl;
-cout << "structurePlace created: " << structNumber << ", adjTiles size: " << adjTiles.size() << endl;
+// cout << "structurePlace created: " << structNumber << ", structType: " << this->structType << ", adjStructs and adjRoads initialized to nullptr." << endl;
+// cout << "structurePlace created: " << structNumber << ", adjTiles size: " << adjTiles.size() << endl;
 }
 
 // Deep copy constructor
