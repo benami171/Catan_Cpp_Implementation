@@ -41,6 +41,7 @@ class structurePlace {
     void setAdjRoads(array<roadPlace*, 3> adjRoads);
     bool placedCity(Player* newOwner);
     bool placedSettlement(Player* newOwner);
+    bool placedInitialSettlement(Player* newOwner);
     structurePlace& operator=(const structurePlace& other) ;
     string getIdentifierString();
     string getColor();

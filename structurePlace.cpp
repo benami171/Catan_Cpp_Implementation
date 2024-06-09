@@ -57,11 +57,14 @@ bool structurePlace::placedSettlement(Player* newOwner) {
         return false;
     }
     if (this->owner != nullptr) {
+        cout << "Owner is not null" << endl;
         return false;
     }
 
     for (size_t i = 0; i < adjStructs.size(); i++) {
-        if (adjStructs[i] != nullptr && adjStructs[i]->getOwnerString() != "") {
+        if (adjStructs[i] != nullptr && adjStructs[i]->getOwnerString() != "No owner") {
+            cout << "Adjacent structure is not null and has an owner" << endl;
+            cout << "Owner of adjacent structure: " << adjStructs[i]->getOwnerString() << endl;
             return false;
         }
     }
@@ -69,6 +72,7 @@ bool structurePlace::placedSettlement(Player* newOwner) {
     // the adjecent settLments are not owned by anyone.
     // check if at least one of the adjacent roads is owned by the player.
     for (size_t i = 0; i < adjRoads.size(); i++) {
+        cout << "adjRoads[i] Owner: " << adjRoads[i]->getOwnerString() << endl; // FOR DEBUGGING
         if (adjRoads[i] != nullptr && adjRoads[i]->getOwnerString() == newOwner->getName()) {
             this->owner = newOwner;
             this->structType = "SETTLEMENT";
@@ -81,6 +85,43 @@ bool structurePlace::placedSettlement(Player* newOwner) {
         }
     }
     return false;
+}
+
+bool structurePlace::placedInitialSettlement(Player* newOwner){
+// place already taken.
+    if (newOwner == nullptr) {
+        cout << "New owner is null" << endl;
+        return false;
+    }
+    if (this->owner != nullptr) {
+        cout << "Owner is not null" << endl;
+        return false;
+    }
+
+    for (size_t i = 0; i < adjStructs.size(); i++) {
+        if (adjStructs[i] != nullptr && adjStructs[i]->getOwnerString() != "No owner") {
+            cout << "Adjacent structure is not null and has an owner" << endl;
+            cout << "Owner of adjacent structure: " << adjStructs[i]->getOwnerString() << endl;
+            return false;
+        }
+    }
+
+    // the adjecent settLments are not owned by anyone.
+    // check if at least one of the adjacent roads is owned by the player.
+    for (size_t i = 0; i < adjRoads.size(); i++) {
+        cout << "adjRoads[i] Owner: " << adjRoads[i]->getOwnerString() << endl; // FOR DEBUGGING
+            this->owner = newOwner;
+            this->structType = "SETTLEMENT";
+            for ( int j = 0 ; j < 3 ; j++) {
+                if (adjTiles.at(j) != nullptr) {
+                    adjTiles.at(j)->addAttachedPlayer(newOwner);
+                }
+            }
+            return true;
+
+    }
+    return false;
+
 }
 
 bool structurePlace::placedCity(Player* newOwner) {
