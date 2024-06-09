@@ -6,18 +6,8 @@ using namespace Catan;
 
 class Player;
 
-structurePlace::structurePlace(Player* owner=nullptr, string structType="N", int structNumber=0) 
-    : owner(owner), structType(structType), structNumber(structNumber) {
-    for (auto& ptr : adjStructs) { // Initialize all pointers to nullptr
-        ptr = nullptr;
-    }
-    for (auto& ptr : adjRoads) {
-        ptr = nullptr;
-    }
-    for (auto& ptr : adjTiles) {
-        ptr = nullptr;
-    }
-    attachedResources = {};
+structurePlace::structurePlace(Player* owner, string structType, int structNumber) 
+    : owner(owner), structType(structType), structNumber(structNumber), adjStructs{nullptr, nullptr, nullptr}, adjRoads{nullptr, nullptr, nullptr}, adjTiles(3, nullptr) {
 }
 
 // Deep copy constructor
@@ -54,7 +44,7 @@ bool structurePlace::placedSettlement(Player* newOwner) {
         return false;
     }
 
-    for (int i = 0; i < adjStructs.size(); i++) {
+    for (size_t i = 0; i < adjStructs.size(); i++) {
         if (adjStructs[i] != nullptr && adjStructs[i]->getOwnerString() != "") {
             return false;
         }
@@ -62,7 +52,7 @@ bool structurePlace::placedSettlement(Player* newOwner) {
 
     // the adjecent settLments are not owned by anyone.
     // check if at least one of the adjacent roads is owned by the player.
-    for (int i = 0; i < adjRoads.size(); i++) {
+    for (size_t i = 0; i < adjRoads.size(); i++) {
         if (adjRoads[i] != nullptr && adjRoads[i]->getOwnerString() == newOwner->getName()) {
             this->owner = newOwner;
             this->structType = "SETTLEMENT";

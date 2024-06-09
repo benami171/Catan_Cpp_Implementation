@@ -26,8 +26,7 @@ class structurePlace {
     set<string> attachedResources;      
 
    public:
-    structurePlace(Player* owner=nullptr, string structType ="" , int structNumber=0);
-
+    structurePlace(Player* owner=nullptr, string structType="N", int structNumber=0);
     // Deep copy constructor
     structurePlace(const structurePlace& other);
     

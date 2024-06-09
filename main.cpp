@@ -15,7 +15,9 @@ int main() {
     Player player3("Player 3");
     cout << "Players created" << endl;
     player1.placeSettlement(2,board);
+    cout << "Settlement placed" << endl;
     player1.placeRoad(5,board);
+    cout << "Road placed" << endl;
 
 
 
