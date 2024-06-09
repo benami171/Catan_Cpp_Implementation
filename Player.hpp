@@ -1,6 +1,7 @@
 #include <cstdlib>  // for rand() and srand()
 #include <iostream>
 #include <set>
+#include <vector>
 #include <array>
 #include <string>
 #include <unordered_map>

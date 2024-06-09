@@ -12,7 +12,7 @@ void startGame() - each player by order of player1 then player2 then player3 wil
 
  */
 
-#include <set>
+#include <vector>
 #include <string>
 #include <unordered_map>
 #include "Board.hpp"
@@ -33,7 +33,7 @@ class CatanGame {
     int turnNumber;
     unordered_map<string, int> resourceCardsLeft;
     unordered_map<string, int> developmentCardsLeft;
-    set<Player> players;
+    vector<Player> players;
 
     public:
 

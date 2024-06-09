@@ -6,7 +6,7 @@
 using namespace std;
 using namespace Catan;
 
-Player::Player() : name(""), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) , initialSettlementNumber(1), initialRoadNumber(1) {
+Player::Player() : name(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) {
     resourceCards["brick"] = 0;
     resourceCards["lumber"] = 0;
     resourceCards["wool"] = 0;
@@ -18,7 +18,7 @@ Player::Player() : name(""), victoryPoints(0), roads_placed_counter(0), settleme
     developmentCards["monopoly"] = 0;
 }
 
-Player::Player(string name) {
+Player::Player(string name) : name(name), playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0){
     this->name = name;
     victoryPoints = 0;
     roads_placed_counter = 0;
@@ -151,7 +151,7 @@ void Player::placeSettlement(int structurePlace_index, Board& board) {
             this->removeResourceCard("lumber", 1);
             this->removeResourceCard("wool", 1);
             this->removeResourceCard("grain", 1);
-            for (int i = 0; i < adjTiles.size(); i++) {
+            for (int i = 0; i < 3; i++) {
                 adjTiles[i]->addAttachedPlayer(this);
             }
 
@@ -171,7 +171,7 @@ void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
         if (settlement->placedSettlement(this)) {
             settlements_placed_counter++;
             this->addVictoryPoints(1);
-            for (int i = 0; i < adjTiles.size(); i++) {
+            for (int i = 0; i < 3; i++) {
                 adjTiles[i]->addAttachedPlayer(this);
                 if (initialSettlementNumber == 2) {
                 this->getInitResourcesFromTile(adjTiles[i]);
@@ -223,7 +223,7 @@ int Player::rollDice() {
 
 void Player::getResouces(int diceRoll, Board& board) {
     const array<Tile, 19>& tiles = board.getTiles();
-    for (int i = 0; i < tiles.size(); i++) {
+    for (int i = 0; i < 19; i++) {
         if (tiles[i].getActivationNumber() == diceRoll) {
             const array<structurePlace*, 6>& structurePlaces = tiles[i].getStructurePlaces();
             for (int j = 0; j < 6; j++) {
