@@ -16,9 +16,6 @@ Board::Board() : structurePlaces(54), roadPlaces(72), tiles(19) {
 
     initStructurePlaces();
     initRoadPlaces();
-    //     // and thats ok because these are pointers and the pointers are copied, not the objects they point to.
-    //     tiles[i] = Tile(landTypes[i], i, activationNumbers[i], sPlaces, rPlaces);
-    // }
     initTiles();
     setupAdjacencies();
     
