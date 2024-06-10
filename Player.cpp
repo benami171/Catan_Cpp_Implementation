@@ -289,3 +289,16 @@ void Player::getInitResourcesFromTile(Tile* tile) {
         cout << "Player " << name << " received a lumber card" << endl;
     }
 }
+
+void Player::getInitResources(Board& board) {
+    for (size_t i = 0 ; i < owned_settlements_indices.size() ; i++) {
+        structurePlace* settlement = board.getStructureAt(owned_settlements_indices[i]);
+        vector<Tile*> adjTiles = settlement->getAdjTiles();
+        for (int j = 0; j < 3; j++) {
+            if (adjTiles[j] != nullptr) {
+                getInitResourcesFromTile(adjTiles[j]);
+            }
+        }
+    }
+}
+

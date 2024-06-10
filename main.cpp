@@ -27,6 +27,9 @@ int main() {
     cout << " structurePlace 2 adjecent Tiles are: " << tile1->getTileNumber() << endl;
     player1.placeSettlement(2,board);
     player1.placeRoad(5,board);
-
+    player1.placeSettlement(12,board);
+    player1.placeRoad(12,board);
+    player1.getInitResources(board);
+    player1.printResources();
     return 0;
 }

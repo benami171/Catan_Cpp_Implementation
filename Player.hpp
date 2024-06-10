@@ -83,6 +83,7 @@ class Player {
     void getResouces(int diceRoll,Board& board);
 
     void getInitResourcesFromTile(Tile* tile);
+    void getInitResources(Board& board);
 };
 
 }  // namespace Catan
