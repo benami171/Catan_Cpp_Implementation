@@ -85,6 +85,11 @@ void Board::initTiles() {
     }
 }
 
+
+/*
+this method sets up the adjacent structurePlaces, roadPlaces and tiles for each structurePlace
+and adjacent structurePlaces and roadPlaces for each roadPlace.
+*/
 void Board::setupAdjacencies() {
     cout << "Setting up adjacencies..." << endl;
     structurePlaces[0].setAdjStructs({&structurePlaces[2], &structurePlaces[3], nullptr});
