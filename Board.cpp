@@ -13,19 +13,8 @@ using namespace std;
 
 namespace Catan {
 Board::Board() : structurePlaces(54), roadPlaces(72), tiles(19) {
-    // cout << "Initializing structure places..." << endl;
-    // for (size_t i = 0; i < structurePlaces.size(); i++) {
-    //     cout << "i: " << i << endl;
-    //     structurePlaces[i] = structurePlace(nullptr, "initial", i);
-    // }
-    // cout << "structurePlaces size: " << structurePlaces.size() << endl;
-    // cout << "Structure places initialized" << endl;
-    initStructurePlaces();
 
-    // cout << "Initializing road places..." << endl;
-    // for (size_t i = 0; i < roadPlaces.size(); i++) {
-    //     roadPlaces[i] = roadPlace(nullptr, i);
-    // }
+    initStructurePlaces();
     initRoadPlaces();
 
 
