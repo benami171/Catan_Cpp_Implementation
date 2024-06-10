@@ -18,7 +18,6 @@ Board::Board() : structurePlaces(54), roadPlaces(72), tiles(19) {
     initRoadPlaces();
     initTiles();
     setupAdjacencies();
-    
 }
 
 /*                       THE BOARD
