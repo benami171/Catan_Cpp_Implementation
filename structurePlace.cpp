@@ -7,15 +7,13 @@ using namespace Catan;
 class Player;
 
 structurePlace::structurePlace() 
-    : owner(nullptr), structType(""), structNumber(0), adjStructs{nullptr, nullptr, nullptr}, adjRoads{nullptr, nullptr, nullptr}, adjTiles(3, nullptr) {
+    : owner(nullptr), structType(""), structNumber(0), adjStructs{nullptr, nullptr, nullptr}, adjRoads{nullptr, nullptr, nullptr}, adjTiles() {
     cout << "Default structurePlace created: " << structNumber << ", structType: " << this->structType << ", adjStructs and adjRoads initialized to nullptr." << endl;
     cout << "Default structurePlace created: " << structNumber << ", adjTiles size: " << adjTiles.size() << endl;
 }
 
 structurePlace::structurePlace(Player* owner, string structType, int structNumber) 
-    : owner(owner), structType(structType), structNumber(structNumber), adjStructs{nullptr, nullptr, nullptr}, adjRoads{nullptr, nullptr, nullptr}, adjTiles(3, nullptr) {
-// cout << "structurePlace created: " << structNumber << ", structType: " << this->structType << ", adjStructs and adjRoads initialized to nullptr." << endl;
-// cout << "structurePlace created: " << structNumber << ", adjTiles size: " << adjTiles.size() << endl;
+    : owner(owner), structType(structType), structNumber(structNumber), adjStructs{nullptr, nullptr, nullptr}, adjRoads{nullptr, nullptr, nullptr}, adjTiles() {
 }
 
 // // Deep copy constructor
@@ -111,7 +109,7 @@ bool structurePlace::placedInitialSettlement(Player* newOwner){
     for (size_t i = 0; i < adjRoads.size(); i++) {
             this->owner = newOwner;
             this->structType = "SETTLEMENT";
-            for ( int j = 0 ; j < 3 ; j++) {
+            for ( size_t j = 0 ; j < adjTiles.size() ; j++) {
                 if (adjTiles.at(j) != nullptr) {
                     cout << "Adding attached player to tile" << endl;
                     adjTiles.at(j)->addAttachedPlayer(newOwner);
