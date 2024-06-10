@@ -29,7 +29,7 @@ class structurePlace {
     structurePlace();
     structurePlace(Player* owner,string structType, int structNumber);
     // Deep copy constructor
-    structurePlace(const structurePlace& other);
+    // structurePlace(const structurePlace& other);
     
     string getOwnerString();
     string getStructType();
@@ -42,7 +42,7 @@ class structurePlace {
     bool placedCity(Player* newOwner);
     bool placedSettlement(Player* newOwner);
     bool placedInitialSettlement(Player* newOwner);
-    structurePlace& operator=(const structurePlace& other) ;
+    // structurePlace& operator=(const structurePlace& other) ;
     string getIdentifierString();
     string getColor();
 };

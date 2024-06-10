@@ -245,10 +245,10 @@ int Player::rollDice() {
 }
 
 void Player::getResouces(int diceRoll, Board& board) {
-    const array<Tile, 19>& tiles = board.getTiles();
+    const vector<Tile>& tiles = board.getTiles();
     for (int i = 0; i < 19; i++) {
         if (tiles[i].getActivationNumber() == diceRoll) {
-            const array<structurePlace*, 6>& structurePlaces = tiles[i].getStructurePlaces();
+            const vector<structurePlace*>& structurePlaces = tiles[i].getStructurePlaces();
             for (int j = 0; j < 6; j++) {
                 if (structurePlaces[j]->getOwnerString() == name) {
                     string resourceType = tiles[i].getResourceType();

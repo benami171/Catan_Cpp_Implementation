@@ -18,12 +18,12 @@ structurePlace::structurePlace(Player* owner, string structType, int structNumbe
 // cout << "structurePlace created: " << structNumber << ", adjTiles size: " << adjTiles.size() << endl;
 }
 
-// Deep copy constructor
-structurePlace::structurePlace(const structurePlace& other)
-    : owner(other.owner), structType(other.structType), structNumber(other.structNumber) {
-    adjStructs = other.adjStructs;
-    adjRoads = other.adjRoads;
-}
+// // Deep copy constructor
+// structurePlace::structurePlace(const structurePlace& other)
+//     : owner(other.owner), structType(other.structType), structNumber(other.structNumber) {
+//     adjStructs = other.adjStructs;
+//     adjRoads = other.adjRoads;
+// }
 
 string structurePlace::getOwnerString() {
     if (owner == nullptr) {
@@ -136,16 +136,16 @@ bool structurePlace::placedCity(Player* newOwner) {
     return false;
 }
 
-structurePlace& structurePlace::operator=(const structurePlace& other) {
-    if (this != &other) {
-        owner = other.owner;
-        structType = other.structType;
-        structNumber = other.structNumber;
-        adjStructs = other.adjStructs;
-        adjRoads = other.adjRoads;
-    }
-    return *this;
-}
+// structurePlace& structurePlace::operator=(const structurePlace& other) {
+//     if (this != &other) {
+//         owner = other.owner;
+//         structType = other.structType;
+//         structNumber = other.structNumber;
+//         adjStructs = other.adjStructs;
+//         adjRoads = other.adjRoads;
+//     }
+//     return *this;
+// }
 
 string structurePlace::getIdentifierString() {
     if(owner->getName() == "") {

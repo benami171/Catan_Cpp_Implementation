@@ -15,8 +15,8 @@ enum class ResourceType {
     DESERT
 };
 
-Tile::Tile(const string& resourceType,int tileNumber, int activationNumber, array<structurePlace*, 6> structurePlaces, array<roadPlace*, 6> roadPlaces)
-    : resourceType(resourceType), activationNumber(activationNumber) {
+Tile::Tile(const string& resourceType,int tileNumber, int activationNumber, vector<structurePlace*> structurePlaces, vector<roadPlace*> roadPlaces)
+    : resourceType(resourceType), activationNumber(activationNumber) ,structurePlaces(6), roadPlaces(6){
     for (int i = 0; i < 6; i++) {
         this->structurePlaces[i] = structurePlaces[i];
         this->roadPlaces[i] = roadPlaces[i];
@@ -44,11 +44,11 @@ void Tile::setResourceAndNumber(string resourceType, int activationNumber) {
     this->activationNumber = activationNumber;
 }
 
-array<structurePlace*, 6> Tile::getStructurePlaces() const {
+vector<structurePlace*> Tile::getStructurePlaces() const {
     return structurePlaces;
 }
 
-array<roadPlace*, 6> Tile::getRoadPlaces() const {
+vector<roadPlace*> Tile::getRoadPlaces() const {
     return roadPlaces;
 }
 

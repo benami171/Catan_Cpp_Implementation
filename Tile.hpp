@@ -13,8 +13,8 @@ using namespace std;
 namespace Catan {
 class Tile {
    private:
-    array<structurePlace*, 6> structurePlaces;
-    array<roadPlace*, 6> roadPlaces;
+    vector<structurePlace*> structurePlaces;
+    vector<roadPlace*> roadPlaces;
     string resourceType;
     int activationNumber;
     int tileNumber;
@@ -22,14 +22,14 @@ class Tile {
 
    public:
     Tile() : resourceType(""), activationNumber(0),tileNumber(0) {}  // Default constructor
-    Tile(const string& resourceType,int tileNumber, int activationNumber, array<structurePlace*, 6> structurePlaces, array<roadPlace*, 6> roadPlaces);
+    Tile(const string& resourceType,int tileNumber, int activationNumber, vector<structurePlace*> structurePlaces, vector<roadPlace*> roadPlaces);
     string getResourceType() const;
     void setResourceType(string resourceType);
     int getActivationNumber() const;
     void setActivationNumber(int activationNumber);
     void setResourceAndNumber(string resourceType, int activationNumber);
-    array<structurePlace*, 6> getStructurePlaces() const;
-    array<roadPlace*, 6> getRoadPlaces() const;
+    vector<structurePlace*> getStructurePlaces() const;
+    vector<roadPlace*> getRoadPlaces() const;
     roadPlace* getRoadPlace(int roadNumber);
     structurePlace* getStructurePlace(int structNumber);
     vector<Player*> getAttachedPlayers() const;

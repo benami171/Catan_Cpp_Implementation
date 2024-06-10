@@ -16,10 +16,10 @@ namespace Catan {
 class Board {
    private:
    
-    array<structurePlace, 54> structurePlaces;
-    array<roadPlace, 72> roadPlaces;
-    array<Tile, 19> tiles;
-    array<string,19> landTypes;
+    vector<structurePlace> structurePlaces;
+    vector<roadPlace> roadPlaces;
+    vector<Tile> tiles;
+    vector<string> landTypes;
     void initStructurePlaces();
     void initRoadPlaces();
     void setupAdjacencies();
@@ -30,9 +30,9 @@ class Board {
     roadPlace* getRoadAt(int roadNumber); // returns the ith roadPlace in the roadPlaces array
     structurePlace* getStructureAt(int structNumber); // returns the ith structurePlace in the structurePlaces array
     Tile* getTileAt(int tileNumber); // returns the ith tile in the tiles array
-    const array<structurePlace, 54>& getStructurePlaces() const;
-    const array<roadPlace, 72>& getRoadPlaces() const;
-    const array<Tile, 19>& getTiles() const; 
+    const vector<structurePlace>& getStructurePlaces() const;
+    const vector<roadPlace>& getRoadPlaces() const;
+    const vector<Tile>& getTiles() const; 
 
 };
 }  // namespace Catan
