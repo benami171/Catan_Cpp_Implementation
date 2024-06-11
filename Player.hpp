@@ -14,6 +14,7 @@ namespace Catan {
 
 class Tile;
 class Board;
+class CatanGame;
 class Player {
    private:
     string name;
