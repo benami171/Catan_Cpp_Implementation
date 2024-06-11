@@ -3,21 +3,12 @@
 using namespace std;
 using namespace Catan;
 
-developmentCard::developmentCard() {
-    cardsCategory = "";
-}
+developmentCard::developmentCard() : cardCategory("") {}
 
-developmentCard::developmentCard(string category) {
-    cardsCategory = category;
-}
+developmentCard::developmentCard(const string& category) : cardCategory(category) {}
 
-developmentCard::~developmentCard() {
-}
+developmentCard::~developmentCard() {}
 
-string developmentCard::getCardCategory() {
-    return this->cardsCategory;
-}
-
-void developmentCard::useCard() {
-    cout << "Developement card " << this->cardsCategory << " used" << endl;
+string developmentCard::getCardCategory() const {
+    return cardCategory;
 }

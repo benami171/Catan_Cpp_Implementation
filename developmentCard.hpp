@@ -2,20 +2,20 @@
 
 #include <iostream>
 #include <string>
-#include <unordered_map>
-#include <vector>
-
 using namespace std;
-
 namespace Catan {
+
 class developmentCard {
-   public:
-    string cardsCategory;
+public:
     developmentCard();
-    developmentCard(string category);
-    ~developmentCard();
-    string getCardCategory();
-    virtual void useCard();
+    developmentCard(const string& category);
+    virtual ~developmentCard();
+    
+    string getCardCategory() const;
+    virtual void useCard() const = 0; // Pure virtual function to make developmentCard abstract
+
+protected:
+    string cardCategory;
 };
 
-}  // namespace Catan
+}
