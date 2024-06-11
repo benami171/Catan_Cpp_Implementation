@@ -183,19 +183,13 @@ void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
     vector<Tile*> adjTiles = settlement->getAdjTiles();
     if (initialSettlementNumber < 3) {
         if (settlement->placedInitialSettlement(this)) {
-            cout << "1" << endl;
             settlements_placed_counter++;
             this->addVictoryPoints(1);
-            cout << "2" << endl;
             for (size_t i = 0; i < adjTiles.size(); i++) {
                 if (adjTiles[i] != nullptr) {
-                    cout << "3" << endl;
                     adjTiles[i]->addAttachedPlayer(this);
-                    cout << "4" << endl;
                     if (initialSettlementNumber == 2) {
-                        cout << "5" << endl;
                         this->getInitResourcesFromTile(adjTiles[i]);
-                        cout << "6" << endl;
                     }
                 }
             }

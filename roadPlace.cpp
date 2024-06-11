@@ -6,6 +6,8 @@ using namespace std;
 using namespace Catan;
 
 
+roadPlace::roadPlace() : owner(nullptr), roadNumber(0) {}
+
 roadPlace::roadPlace(Player* owner, int roadNumber) : owner(owner), roadNumber(roadNumber){}
 
 // Method to get owner
