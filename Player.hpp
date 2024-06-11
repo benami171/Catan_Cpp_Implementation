@@ -44,7 +44,7 @@ class Player {
 
     void removeVictoryPoints(int points);
 
-    // the resources are brick, lumber, wool, grain, ore
+    // the resources are brick, lumber, wool, wheat, ore
     void addResourceCard(string resource, int amount);
 
     void removeResourceCard(string resource, int amount);

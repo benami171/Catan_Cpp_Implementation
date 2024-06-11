@@ -14,7 +14,6 @@ using namespace std;
 namespace Catan {
 
 Board::Board() : structurePlaces(54), roadPlaces(72), tiles(19) {
-
     initStructurePlaces();
     initRoadPlaces();
     initTiles();
@@ -40,7 +39,6 @@ void Board::initStructurePlaces() {
     for (size_t i = 0; i < structurePlaces.size(); i++) {
         structurePlaces[i] = structurePlace(nullptr, "initial", i);
     }
-    cout << "structurePlaces size: " << structurePlaces.size() << endl;
 }
 
 void Board::initRoadPlaces() {
@@ -72,7 +70,7 @@ void Board::initTiles() {
             // also adding the right resource to the structurePlaces.
             sPlaces[j] = &structurePlaces[tileStructureIndices[i][j]];
             structurePlaces[tileStructureIndices[i][j]].addResource(landTypes[i]);
-            cout << " StructPlace's index: " << tileStructureIndices[i][j] << " adjecent Tile added is Tile number: " << i << endl;
+            // cout << " StructPlace's index: " << tileStructureIndices[i][j] << " adjecent Tile added is Tile number: " << i << endl;
             rPlaces[j] = &roadPlaces[tileRoadIndices[i][j]];
         }
 
@@ -463,7 +461,6 @@ roadPlace* Board::getRoadAt(int roadNumber) {
 }
 
 structurePlace* Board::getStructureAt(int structNumber) {
-    cout << "Getting structurePlace at index " << structNumber << endl;
     if (structNumber < 0 || structNumber >= structurePlaces.size()) {
         cout << "Invalid structurePlace_index" << endl;
         return nullptr;

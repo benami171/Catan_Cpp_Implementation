@@ -10,7 +10,7 @@ Player::Player() : name(""), initialSettlementNumber(1), initialRoadNumber(1), v
     resourceCards["brick"] = 0;
     resourceCards["lumber"] = 0;
     resourceCards["wool"] = 0;
-    resourceCards["grain"] = 0;
+    resourceCards["wheat"] = 0;
     resourceCards["ore"] = 0;
     developmentCards["victoryPoint"] = 0;
     developmentCards["roadBuilding"] = 0;
@@ -29,7 +29,7 @@ Player::Player(string name) : name(name), playerColor(""), initialSettlementNumb
     resourceCards["brick"] = 0;
     resourceCards["lumber"] = 0;
     resourceCards["wool"] = 0;
-    resourceCards["grain"] = 0;
+    resourceCards["wheat"] = 0;
     resourceCards["ore"] = 0;
     developmentCards["victoryPoint"] = 0;
     developmentCards["roadBuilding"] = 0;
@@ -53,7 +53,7 @@ void Player::removeVictoryPoints(int points) {
     victoryPoints -= points;
 }
 
-// the resources are brick, lumber, wool, grain, ore
+// the resources are brick, lumber, wool, wheat, ore
 void Player::addResourceCard(string resource, int amount) {
     resourceCards[resource] += amount;
 }
@@ -118,7 +118,7 @@ void Player::placeRoad(int road_index, Board& board) {
             this->removeResourceCard("brick", 1);
             this->removeResourceCard("lumber", 1);
             owned_roads_indices.push_back(road_index);
-            cout << "Player " << name << " placed a road at index " << road_index << endl;
+            cout << name << " Placed a road at index " << road_index << endl;
         } else {
             cout << "Invalid road placement" << endl;
         }
@@ -144,7 +144,7 @@ void Player::placeSettlement(int structurePlace_index, Board& board) {
         placeInitialSettlement(structurePlace_index, board);
         return;
     }
-    if (settlements_placed_counter < 5 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1 && this->getResourceCardAmount("wool") >= 1 && this->getResourceCardAmount("grain") >= 1) {
+    if (settlements_placed_counter < 5 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1 && this->getResourceCardAmount("wool") >= 1 && this->getResourceCardAmount("wheat") >= 1) {
         structurePlace* settlement = board.getStructureAt(structurePlace_index);
         if (settlement == nullptr) {
             cout << "Invalid structurePlace_index" << endl;
@@ -157,14 +157,14 @@ void Player::placeSettlement(int structurePlace_index, Board& board) {
             this->removeResourceCard("brick", 1);
             this->removeResourceCard("lumber", 1);
             this->removeResourceCard("wool", 1);
-            this->removeResourceCard("grain", 1);
+            this->removeResourceCard("wheat", 1);
             for (int i = 0; i < 3; i++) {
                 if (adjTiles[i] != nullptr) {
                     adjTiles[i]->addAttachedPlayer(this);
                 }
             }
 
-            cout << "Player " << name << " placed a settlement at index " << structurePlace_index << endl;
+            cout << name << " Placed a settlement at index " << structurePlace_index << endl;
         } else {
             cout << "Invalid settlement placement" << endl;
         }
@@ -174,12 +174,9 @@ void Player::placeSettlement(int structurePlace_index, Board& board) {
 }
 
 void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
-    cout << "INSIDE INITIAL SETTLEMENT PLACEMENT" << endl;
-    cout << "   structurePlace_index: " << structurePlace_index << endl;
     structurePlace* settlement = board.getStructureAt(structurePlace_index);
     if (settlement == nullptr) {
-        cout << "   Invalid structurePlace_index" << endl;
-        return;
+        throw invalid_argument("Invalid structure index");
     }
     vector<Tile*> adjTiles = settlement->getAdjTiles();
     if (initialSettlementNumber < 3) {
@@ -205,13 +202,13 @@ void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
 }
 
 void Player::placeCity(int structurePlace_index, Board& board) {
-    if (cities_placed_counter < 4 && this->getResourceCardAmount("grain") >= 2 && this->getResourceCardAmount("ore") >= 3) {
+    if (cities_placed_counter < 4 && this->getResourceCardAmount("wheat") >= 2 && this->getResourceCardAmount("ore") >= 3) {
         structurePlace* city = board.getStructureAt(structurePlace_index);
         if (city->placedCity(this)) {
             cities_placed_counter++;
             settlements_placed_counter--;
             this->addVictoryPoints(1);
-            this->removeResourceCard("grain", 2);
+            this->removeResourceCard("wheat", 2);
             this->removeResourceCard("ore", 3);
             owned_cities_indices.push_back(structurePlace_index);
             cout << "Player " << name << " placed a city at index " << structurePlace_index << endl;
@@ -269,19 +266,19 @@ void Player::getInitResourcesFromTile(Tile* tile) {
     }
     if (tile->getResourceType() == "Mountains") {
         addResourceCard("ore", 1);
-        cout << "Player " << name << " received an ore card" << endl;
+        cout << name << " received an ore card" << endl;
     } else if (tile->getResourceType() == "Hills") {
         addResourceCard("brick", 1);
-        cout << "Player " << name << " received a brick card" << endl;
+        cout <<  name << " received a brick card" << endl;
     } else if (tile->getResourceType() == "Fields") {
-        addResourceCard("grain", 1);
-        cout << "Player " << name << " received a grain card" << endl;
+        addResourceCard("wheat", 1);
+        cout << name << " received a wheat card" << endl;
     } else if (tile->getResourceType() == "Pasture") {
         addResourceCard("wool", 1);
-        cout << "Player " << name << " received a wool card" << endl;
+        cout << name << " received a wool card" << endl;
     } else if (tile->getResourceType() == "Forest") {
         addResourceCard("lumber", 1);
-        cout << "Player " << name << " received a lumber card" << endl;
+        cout << name << " received a lumber card" << endl;
     }
 }
 
