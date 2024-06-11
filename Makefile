@@ -2,7 +2,7 @@
 CXX = clang++
 
 # Compiler flags
-CXXFLAGS = -Wall -g
+CXXFLAGS = -Wall -ggdb -fsanitize=address
 
 # List of source files
 SRCS = $(wildcard *.cpp)
@@ -27,6 +27,10 @@ $(EXEC): $(OBJS)
 # Clean up object files and executable
 clean:
 	rm -f $(OBJS) $(EXEC)
+
+#valgrind check
+valgrind: $(EXEC)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(EXEC)
 
 # Phony targets
 .PHONY: all clean

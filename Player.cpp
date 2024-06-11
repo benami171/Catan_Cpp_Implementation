@@ -187,7 +187,7 @@ void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
             settlements_placed_counter++;
             this->addVictoryPoints(1);
             cout << "2" << endl;
-            for (int i = 0; i < 3; i++) {
+            for (size_t i = 0; i < adjTiles.size(); i++) {
                 if (adjTiles[i] != nullptr) {
                     cout << "3" << endl;
                     adjTiles[i]->addAttachedPlayer(this);
