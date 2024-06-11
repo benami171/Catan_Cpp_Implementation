@@ -6,7 +6,7 @@
 using namespace std;
 using namespace Catan;
 
-Player::Player() : name(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) {
+Player::Player() : name(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0),myTurn(false) {
     resourceCards["brick"] = 0;
     resourceCards["lumber"] = 0;
     resourceCards["wool"] = 0;
@@ -18,7 +18,7 @@ Player::Player() : name(""), initialSettlementNumber(1), initialRoadNumber(1), v
     developmentCards["monopoly"] = 0;
 }
 
-Player::Player(string name) : name(name), playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) {
+Player::Player(string name) : name(name), playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0),myTurn(false) {
     this->name = name;
     victoryPoints = 0;
     roads_placed_counter = 0;
@@ -313,3 +313,5 @@ int Player::getInitialSettlementsCounter() {
 int Player::getInitialRoadsCounter() {
     return this->initialRoadNumber;
 }
+
+

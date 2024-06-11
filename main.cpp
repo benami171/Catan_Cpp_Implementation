@@ -30,6 +30,8 @@ int main() {
     Player player3("P3");
 
 
+
+
     cout << "Players created" << endl;
     player1.placeSettlement(2,board);
     player1.placeRoad(5,board);

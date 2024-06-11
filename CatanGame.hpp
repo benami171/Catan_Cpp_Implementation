@@ -28,7 +28,6 @@ class Player;
 
 class CatanGame {
    private:
-    // fields //
     Board board;
     int turnNumber;
     unordered_map<string, int> resourceCardsLeft;

@@ -18,6 +18,7 @@ class Player {
    private:
     string name;
     string playerColor;
+    bool myTurn;
     int initialSettlementNumber;
     int initialRoadNumber;
     int victoryPoints;
@@ -95,6 +96,7 @@ class Player {
     void getInitResourcesFromTile(Tile* tile);
 
     void getInitResources(Board& board);
+
 };
 
 }  // namespace Catan
