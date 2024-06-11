@@ -80,3 +80,7 @@ bool roadPlace::placedRoad(Player* newOwner) {
     }
     return false;
 }
+
+int roadPlace::getRoadNumber() {
+    return roadNumber;
+}

@@ -40,8 +40,6 @@ class Player {
 
     string getName();
 
-    int getVictoryPoints();
-
     void addVictoryPoints(int points);
 
     void removeVictoryPoints(int points);
@@ -60,6 +58,18 @@ class Player {
     int getResourceCardAmount(string resource);
 
     int getDevelopmentCardAmount(string developmentCard);
+
+    int getVictoryPoints();
+
+    int getSettlementsPlacedCounter();
+
+    int getCitiesPlacedCounter();
+
+    int getRoadsPlacedCounter();
+
+    int getInitialSettlementsCounter();
+
+    int getInitialRoadsCounter();
 
     // iterator goes through the resource cards and prints the amount of each resource
     void printResources();
@@ -83,6 +93,7 @@ class Player {
     void getResouces(int diceRoll,Board& board);
 
     void getInitResourcesFromTile(Tile* tile);
+
     void getInitResources(Board& board);
 };
 

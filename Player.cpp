@@ -82,24 +82,25 @@ int Player::getDevelopmentCardAmount(string developmentCard) {
 
 // iterator goes through the resource cards and prints the amount of each resource
 void Player::printResources() {
-    cout << "Resource Cards: " << endl;
+    cout << "--Resource Cards: " << endl;
     for (auto it = resourceCards.begin(); it != resourceCards.end(); it++) {
         cout << it->first << ": " << it->second << endl;
     }
 }
 
 void Player::printDevelopmentCards() {
-    cout << "Development Cards: " << endl;
+    cout << "--Development Cards: " << endl;
     for (auto it = developmentCards.begin(); it != developmentCards.end(); it++) {
         cout << it->first << ": " << it->second << endl;
     }
 }
 
 void Player::printPlayerInfo() {
-    cout << "Player: " << name << endl;
+    cout << "Name: " << name << endl;
     cout << "Victory Points: " << victoryPoints << endl;
+    cout << "Roads placed counter: " << roads_placed_counter << "\n";
     cout << "Settlements placed counter: " << settlements_placed_counter << endl;
-    cout << "Initial Settlement counter: " << initialSettlementNumber << endl;
+    cout << "Cities placed counter: " << cities_placed_counter << endl;
     printDevelopmentCards();
     printResources();
 }
@@ -139,9 +140,7 @@ void Player::placeInitialRoad(int road_index, Board& board) {
 }
 
 void Player::placeSettlement(int structurePlace_index, Board& board) {
-    
     if (initialSettlementNumber < 3) {
-        cout << "Player " << name << " GOING TO INITIAL SETTLEMENT PLACEMENT" << endl;
         placeInitialSettlement(structurePlace_index, board);
         return;
     }
@@ -287,7 +286,7 @@ void Player::getInitResourcesFromTile(Tile* tile) {
 }
 
 void Player::getInitResources(Board& board) {
-    for (size_t i = 0 ; i < owned_settlements_indices.size() ; i++) {
+    for (size_t i = 0; i < owned_settlements_indices.size(); i++) {
         structurePlace* settlement = board.getStructureAt(owned_settlements_indices[i]);
         vector<Tile*> adjTiles = settlement->getAdjTiles();
         for (int j = 0; j < 3; j++) {
@@ -298,3 +297,22 @@ void Player::getInitResources(Board& board) {
     }
 }
 
+int Player::getSettlementsPlacedCounter() {
+    return this->settlements_placed_counter;
+}
+
+int Player::getCitiesPlacedCounter() {
+    return this->cities_placed_counter;
+}
+
+int Player::getRoadsPlacedCounter() {
+    return this->roads_placed_counter;
+}
+
+int Player::getInitialSettlementsCounter() {
+    return this->initialSettlementNumber;
+}
+
+int Player::getInitialRoadsCounter() {
+    return this->initialRoadNumber;
+}

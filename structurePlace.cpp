@@ -8,8 +8,6 @@ class Player;
 
 structurePlace::structurePlace() 
     : owner(nullptr), structType(""), structNumber(0), adjStructs{nullptr, nullptr, nullptr}, adjRoads{nullptr, nullptr, nullptr}, adjTiles() {
-    cout << "Default structurePlace created: " << structNumber << ", structType: " << this->structType << ", adjStructs and adjRoads initialized to nullptr." << endl;
-    cout << "Default structurePlace created: " << structNumber << ", adjTiles size: " << adjTiles.size() << endl;
 }
 
 structurePlace::structurePlace(Player* owner, string structType, int structNumber) 
@@ -98,8 +96,7 @@ bool structurePlace::placedInitialSettlement(Player* newOwner){
 
     for (size_t i = 0; i < adjStructs.size(); i++) {
         if (adjStructs[i] != nullptr && adjStructs[i]->getOwnerString() != "No owner") {
-            cout << "Adjacent structure is not null and has an owner" << endl;
-            cout << "Owner of adjacent structure: " << adjStructs[i]->getOwnerString() << endl;
+            cout << "Could not place initial settlement, adjacent structure has an owner" << endl;
             return false;
         }
     }
@@ -111,7 +108,6 @@ bool structurePlace::placedInitialSettlement(Player* newOwner){
             this->structType = "SETTLEMENT";
             for ( size_t j = 0 ; j < adjTiles.size() ; j++) {
                 if (adjTiles.at(j) != nullptr) {
-                    cout << "Adding attached player to tile" << endl;
                     adjTiles.at(j)->addAttachedPlayer(newOwner);
                 }
             }
