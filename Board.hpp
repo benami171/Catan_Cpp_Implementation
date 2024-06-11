@@ -13,6 +13,8 @@
 using namespace std;
 
 namespace Catan {
+
+
 class Board {
    private:
    

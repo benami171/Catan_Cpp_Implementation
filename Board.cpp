@@ -12,6 +12,7 @@
 using namespace std;
 
 namespace Catan {
+
 Board::Board() : structurePlaces(54), roadPlaces(72), tiles(19) {
 
     initStructurePlaces();

@@ -32,7 +32,7 @@ class Player {
     unordered_map<string, int> developmentCards;
 
    public:
-    Player();
+   Player();
 
     Player(string name);
 

@@ -98,6 +98,8 @@ void Player::printDevelopmentCards() {
 void Player::printPlayerInfo() {
     cout << "Player: " << name << endl;
     cout << "Victory Points: " << victoryPoints << endl;
+    cout << "Settlements placed counter: " << settlements_placed_counter << endl;
+    cout << "Initial Settlement counter: " << initialSettlementNumber << endl;
     printDevelopmentCards();
     printResources();
 }

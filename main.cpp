@@ -25,9 +25,9 @@ int main() {
 */
 
     cout << "Board created" << endl;
-    Player player1("Player 1");
-    Player player2("Player 2");
-    Player player3("Player 3");
+    Player player1("P1");
+    Player player2("P2");
+    Player player3("P3");
 
 
     cout << "Players created" << endl;
@@ -43,6 +43,8 @@ int main() {
     player1.placeSettlement(12,board);
     player1.placeRoad(12,board);
     player1.getInitResources(board);
-    player1.printResources();
+    player1.printPlayerInfo();
+
+
     return 0;
 }
