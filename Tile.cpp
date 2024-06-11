@@ -16,7 +16,7 @@ enum class ResourceType {
 };
 
 Tile::Tile(const string& resourceType,int tileNumber, int activationNumber, vector<structurePlace*> structurePlaces, vector<roadPlace*> roadPlaces)
-    : resourceType(resourceType), activationNumber(activationNumber) ,structurePlaces(6), roadPlaces(6){
+    : structurePlaces(6), roadPlaces(6),resourceType(resourceType), activationNumber(activationNumber) {
     for (int i = 0; i < 6; i++) {
         this->structurePlaces[i] = structurePlaces[i];
         this->roadPlaces[i] = roadPlaces[i];
