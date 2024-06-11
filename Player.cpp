@@ -314,4 +314,3 @@ int Player::getInitialRoadsCounter() {
     return this->initialRoadNumber;
 }
 
-
