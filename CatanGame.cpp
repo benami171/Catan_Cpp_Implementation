@@ -25,6 +25,10 @@ void CatanGame::initializeBoard() {
     board = Board();
 }
 
+Board& CatanGame::getBoard() {
+    return board;
+}
+
 
 void CatanGame::startGame() {
     // You can add code to handle the game start, initial placement, etc.

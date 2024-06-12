@@ -40,6 +40,7 @@ class CatanGame {
     public:
     CatanGame(Player& player1, Player& player2, Player& player3);
 
+    Board& getBoard();
     bool buyDevelopmentCard(string card, Player& player);
     void startGame();
     void startTurn(string playerName);
