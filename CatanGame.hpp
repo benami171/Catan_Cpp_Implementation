@@ -30,8 +30,6 @@ class CatanGame {
    private:
     int turnCounter;
     string currentPlayerTurn;
-    unordered_map<string, int> resourceCardsLeft;
-    unordered_map<string, int> developmentCardsLeft;
     vector<Player*> players;
     Board board;
 
@@ -40,6 +38,8 @@ class CatanGame {
     public:
     CatanGame(Player& player1, Player& player2, Player& player3);
 
+    unordered_map<string, int> resourceCardsLeft;
+    unordered_map<string, int> developmentCardsLeft;
     Board& getBoard();
     bool buyDevelopmentCard(string card, Player& player);
     void startGame();

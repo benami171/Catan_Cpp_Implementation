@@ -116,6 +116,8 @@ class Player {
 
     bool useDevelopmentCard(string card,CatanGame& game);
 
+    bool trade(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, Player& otherPlayer);
+    bool tradeWithBank(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, CatanGame& game);
 };
 
 }  // namespace Catan

@@ -7,7 +7,7 @@
 using namespace std;
 using namespace Catan;
 
-Player::Player() : name(""), myTurn(false),initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) {
+Player::Player() : name(""), myTurn(false), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) {
     resourceCards["brick"] = 0;
     resourceCards["lumber"] = 0;
     resourceCards["wool"] = 0;
@@ -20,7 +20,7 @@ Player::Player() : name(""), myTurn(false),initialSettlementNumber(1), initialRo
     developmentCards["monopoly"] = 0;
 }
 
-Player::Player(string name) : name(name), myTurn(false),playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) {
+Player::Player(string name) : name(name), myTurn(false), playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) {
     this->name = name;
     victoryPoints = 0;
     roads_placed_counter = 0;
@@ -78,6 +78,76 @@ void Player::addDevelopmentCard(string developmentCard, int amount) {
     }
 }
 
+bool Player::trade(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, Player& otherPlayer) {
+    // Check if current player has enough resources to give
+    for (auto& resource : giveResources) {
+        // goes over each resource in the giveResources map and checks if the player has enough of that resource
+        // in his own resourceCards map.
+        if (resourceCards[resource.first] < resource.second) {
+            return false;
+        }
+    }
+
+    // Check if other player has enough resources to give
+    for (auto& resource : receiveResources) {
+        if (otherPlayer.resourceCards[resource.first] < resource.second) {
+            return false;
+        }
+    }
+
+    // Subtract resources to give and add resources to receive for current player
+    for (auto& resource : giveResources) {
+        resourceCards[resource.first] -= resource.second;
+    }
+    for (auto& resource : receiveResources) {
+        resourceCards[resource.first] += resource.second;
+    }
+
+    // Subtract resources to give and add resources to receive for other player
+    for (auto& resource : receiveResources) {
+        otherPlayer.resourceCards[resource.first] -= resource.second;
+    }
+    for (auto& resource : giveResources) {
+        otherPlayer.resourceCards[resource.first] += resource.second;
+    }
+
+    return true;
+}
+
+bool Player::tradeWithBank(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, CatanGame& game) {
+    // Calculate total resources to give and receive
+    int totalGive = 0;
+    for (auto& resource : giveResources) {
+        totalGive += resource.second;
+    }
+
+    int totalReceive = 0;
+    for (auto& resource : receiveResources) {
+        totalReceive += resource.second;
+    }
+
+    // Check trading ratio
+    if (totalGive != 4 * totalReceive) {
+        return false;
+    }
+
+    // Check if current player has enough resources to give
+    for (auto& resource : giveResources) {
+        if (resourceCards[resource.first] < resource.second) {
+            return false;
+        }
+    }
+
+    // Subtract resources to give and add resources to receive for current player
+    for (auto& resource : giveResources) {
+        resourceCards[resource.first] -= resource.second;
+    }
+    for (auto& resource : receiveResources) {
+        resourceCards[resource.first] += resource.second;
+    }
+
+    return true;
+}
 
 void Player::removeDevelopmentCard(string developmentCard, int amount) {
     developmentCards[developmentCard] -= amount;
@@ -325,26 +395,26 @@ int Player::getInitialRoadsCounter() {
     return this->initialRoadNumber;
 }
 
-bool Player::buyDevelopmentCard(string card, CatanGame& game,int turnBoughtIn) {
+bool Player::buyDevelopmentCard(string card, CatanGame& game, int turnBoughtIn) {
     if (game.buyDevelopmentCard(card, *this)) {
         if (card == "victoryPoint") {
-            victoryPointCard newCard(card,turnBoughtIn);
+            victoryPointCard newCard(card, turnBoughtIn);
             victoryPointCards.push_back(newCard);
             addDevelopmentCard("vicotryPoint", 1);
         } else if (card == "roadBuilding") {
-            roadBuildingCard newCard(card,turnBoughtIn);
+            roadBuildingCard newCard(card, turnBoughtIn);
             roadBuildingCards.push_back(newCard);
             addDevelopmentCard("roadBuilding", 1);
         } else if (card == "yearOfPlenty") {
-            yearOfPlentyCard newCard(card,turnBoughtIn);
+            yearOfPlentyCard newCard(card, turnBoughtIn);
             yearOfPlentyCards.push_back(newCard);
             addDevelopmentCard("yearOfPlenty", 1);
         } else if (card == "knight") {
-            knightCard newCard(card,turnBoughtIn);
+            knightCard newCard(card, turnBoughtIn);
             knightCards.push_back(newCard);
             addDevelopmentCard("knight", 1);
         } else if (card == "monopoly") {
-            monopolyCard newCard(card,turnBoughtIn);
+            monopolyCard newCard(card, turnBoughtIn);
             monopolyCards.push_back(newCard);
             addDevelopmentCard("monopoly", 1);
         }
