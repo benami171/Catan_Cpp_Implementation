@@ -10,12 +10,14 @@ using namespace std;
 
 namespace Catan {
 
+class developmentCard;
 
-CatanGame::CatanGame() {
-    turnNumber = 0;
+CatanGame::CatanGame(Player& player1, Player& player2, Player& player3) {
+    turnCounter = 0;
     resourceCardsLeft = {{"Ore", 19}, {"Wood", 19}, {"Brick", 19}, {"Wheat", 19}, {"Sheep", 19}};
     developmentCardsLeft = {{"Knight", 14}, {"Victory Point", 5}, {"Road Building", 2}, {"Year of Plenty", 2}, {"Monopoly", 2}};
-    players = {Player("p1"), Player("p2"), Player("p3")};
+    players = {&player1, &player2, &player3};
+    currentPlayerTurn = "p1";
     initializeBoard();
 }
 
@@ -29,9 +31,27 @@ void CatanGame::startGame() {
     cout << "Game started" << endl;
 }
 
-void CatanGame::nextPlayer() {
-    turnNumber = (turnNumber + 1) % 3;
+void CatanGame::startTurn(string playerName) {
+    turnCounter++;
+    currentPlayerTurn = playerName;
+    if (playerName == "p1"){
+        players[0]->setTurn(true);
+    }
+    cout << "It is now " << playerName << "'s turn." << endl;
+    return;
 }
+
+void CatanGame::endTurn() {
+    if (currentPlayerTurn == "p1") {
+        startTurn("p2");
+    } else if (currentPlayerTurn == "p2") {
+        startTurn("p3");
+    } else {
+        startTurn("p1");
+    }
+}
+
+
 
 bool CatanGame::buyDevelopmentCard(string card, Player& player) {
     // check if player has enough resources to buy a development card

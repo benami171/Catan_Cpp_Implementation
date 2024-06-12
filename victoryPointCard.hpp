@@ -2,6 +2,7 @@
 
 #include "developmentCard.hpp"
 
+using namespace std;
 namespace Catan {
 
 class victoryPointCard : public developmentCard {

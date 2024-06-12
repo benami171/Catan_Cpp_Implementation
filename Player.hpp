@@ -92,6 +92,10 @@ class Player {
 
     int rollDice();
 
+    void setTurn(bool turn);
+
+    bool isMyTurn();
+
     void getResouces(int diceRoll,Board& board);
 
     void getInitResourcesFromTile(Tile* tile);
@@ -99,6 +103,8 @@ class Player {
     void getInitResources(Board& board);
 
     bool buyDevelopmentCard(string card,CatanGame& game);
+
+    bool useDevelopmentCard(string card,CatanGame& game);
 
 };
 

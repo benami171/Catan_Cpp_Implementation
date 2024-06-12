@@ -29,19 +29,22 @@ class Player;
 class CatanGame {
    private:
     int turnNumber;
+    int turnCounter;
+    string currentPlayerTurn;
     unordered_map<string, int> resourceCardsLeft;
     unordered_map<string, int> developmentCardsLeft;
-    vector<Player> players;
+    vector<Player*> players;
     Board board;
 
     void initializeBoard();
 
     public:
-    CatanGame();
+    CatanGame(Player& player1, Player& player2, Player& player3);
 
     bool buyDevelopmentCard(string card, Player& player);
     void startGame();
-    void nextPlayer();
+    void startTurn(string playerName);
+    void endTurn();
 };
 }  // namespace Catan
 

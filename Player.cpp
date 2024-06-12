@@ -1,12 +1,13 @@
 #include "Player.hpp"
 
 #include "Board.hpp"
+#include "CatanGame.hpp"
 #include "roadPlace.hpp"
 
 using namespace std;
 using namespace Catan;
 
-Player::Player() : name(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0),myTurn(false) {
+Player::Player() : name(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0), myTurn(false) {
     resourceCards["brick"] = 0;
     resourceCards["lumber"] = 0;
     resourceCards["wool"] = 0;
@@ -19,7 +20,7 @@ Player::Player() : name(""), initialSettlementNumber(1), initialRoadNumber(1), v
     developmentCards["Monopoly"] = 0;
 }
 
-Player::Player(string name) : name(name), playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0),myTurn(false) {
+Player::Player(string name) : name(name), playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0), myTurn(false) {
     this->name = name;
     victoryPoints = 0;
     roads_placed_counter = 0;
@@ -64,10 +65,17 @@ void Player::removeResourceCard(string resource, int amount) {
     resourceCards[resource] -= amount;
 }
 
-// the development cards are victoryPoint, roadBuilding, yearOfPlenty, monopoly
-// wasnt asked to implement the knight card.
+// the development cards are victoryPoint, roadBuilding, yearOfPlenty, monopoly, Knight.
 void Player::addDevelopmentCard(string developmentCard, int amount) {
+    if (developmentCard == "victoryPoint") {
+        addVictoryPoints(1);
+    }
+
     developmentCards[developmentCard] += amount;
+
+    if (developmentCards["Knight"] >= 3) {
+        addVictoryPoints(2);
+    }
 }
 
 void Player::removeDevelopmentCard(string developmentCard, int amount) {
@@ -271,7 +279,7 @@ void Player::getInitResourcesFromTile(Tile* tile) {
         cout << name << " received an ore card" << endl;
     } else if (tile->getResourceType() == "Hills") {
         addResourceCard("brick", 1);
-        cout <<  name << " received a brick card" << endl;
+        cout << name << " received a brick card" << endl;
     } else if (tile->getResourceType() == "Fields") {
         addResourceCard("wheat", 1);
         cout << name << " received a wheat card" << endl;
@@ -316,3 +324,27 @@ int Player::getInitialRoadsCounter() {
     return this->initialRoadNumber;
 }
 
+bool Player::buyDevelopmentCard(string card, CatanGame& game) {
+    if (game.buyDevelopmentCard(card, *this)) {
+        if (strncmp(card.c_str(), "victoryPoint", 12) == 0) {
+            addDevelopmentCard("vicotryPoint", 1);
+        } else if (strncmp(card.c_str(), "roadBuilding", 12) == 0) {
+            addDevelopmentCard("roadBuilding", 1);
+        } else if (strncmp(card.c_str(), "yearOfPlenty", 12) == 0) {
+            addDevelopmentCard("yearOfPlenty", 1);
+        } else if (strncmp(card.c_str(), "Knight", 6) == 0) {
+            addDevelopmentCard("Knight", 1);
+        } else if (strncmp(card.c_str(), "Monopoly", 8) == 0) {
+            addDevelopmentCard("Monopoly", 1);
+        }
+        return true;
+    }
+}
+
+void Player::setTurn(bool turn) {
+    myTurn = turn;
+}
+
+bool Player::isMyTurn() {
+    return myTurn;
+}
