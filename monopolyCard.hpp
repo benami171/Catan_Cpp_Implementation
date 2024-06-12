@@ -9,7 +9,7 @@ using namespace std;
 namespace Catan {
     class monopolyCard : public developmentCard {
     public:
-        monopolyCard();
+        monopolyCard(const string& type, int turnBoughtIn);
         void useCard() const override;
     };
 
