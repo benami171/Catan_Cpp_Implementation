@@ -15,7 +15,8 @@ Player::Player() : name(""), initialSettlementNumber(1), initialRoadNumber(1), v
     developmentCards["victoryPoint"] = 0;
     developmentCards["roadBuilding"] = 0;
     developmentCards["yearOfPlenty"] = 0;
-    developmentCards["monopoly"] = 0;
+    developmentCards["Knight"] = 0;
+    developmentCards["Monopoly"] = 0;
 }
 
 Player::Player(string name) : name(name), playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0),myTurn(false) {
@@ -34,7 +35,8 @@ Player::Player(string name) : name(name), playerColor(""), initialSettlementNumb
     developmentCards["victoryPoint"] = 0;
     developmentCards["roadBuilding"] = 0;
     developmentCards["yearOfPlenty"] = 0;
-    developmentCards["monopoly"] = 0;
+    developmentCards["Knight"] = 0;
+    developmentCards["Monopoly"] = 0;
 }
 
 string Player::getName() {

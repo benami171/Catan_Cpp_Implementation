@@ -28,16 +28,18 @@ class Player;
 
 class CatanGame {
    private:
-    Board board;
     int turnNumber;
     unordered_map<string, int> resourceCardsLeft;
     unordered_map<string, int> developmentCardsLeft;
     vector<Player> players;
+    Board board;
+
+    void initializeBoard();
 
     public:
-
     CatanGame();
-    void initializeBoard();
+
+    bool buyDevelopmentCard(string card, Player& player);
     void startGame();
     void nextPlayer();
 };
