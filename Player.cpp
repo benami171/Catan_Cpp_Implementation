@@ -424,6 +424,44 @@ bool Player::buyDevelopmentCard(string card, CatanGame& game, int turnBoughtIn) 
     }
 }
 
+bool Player::useDevelopmentCard(string card, CatanGame& game) {
+    if (card == "roadBuilding") {
+        if (!roadBuildingCards.empty()) {
+            return useCardIfEligible(roadBuildingCards, game);
+        } else {
+            cout << "Player: " << this->getName() <<" don't have any road building cards." << endl;
+        }
+    } else if (card == "yearOfPlenty") {
+        if (!yearOfPlentyCards.empty()) {
+            return useCardIfEligible(yearOfPlentyCards, game);
+        } else {
+            cout << "Player: " << this->getName() <<" don't have any year of plenty cards." << endl;
+        }
+    } else if (card == "monopoly") {
+        if (!monopolyCards.empty()) {
+            return useCardIfEligible(monopolyCards, game);
+        } else {
+            cout << "Player: " << this->getName() << " don't have any monopoly cards." << endl;
+        }
+    } else {
+        cout << "Invalid card type." << endl;
+    }
+    return false;
+}
+
+template <typename T>
+bool Player::useCardIfEligible(vector<T>& cards, CatanGame& game) {
+    for (auto it = cards.begin(); it != cards.end(); ++it) {
+        if (game.getTurnCounter() > it->getTurnBoughtIn()) {
+            it->useCard();
+            cards.erase(it);
+            return true;
+        }
+    }
+    return false;
+}
+
+
 void Player::setTurn(bool turn) {
     myTurn = turn;
 }

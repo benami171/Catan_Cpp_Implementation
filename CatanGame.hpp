@@ -42,6 +42,7 @@ class CatanGame {
     unordered_map<string, int> developmentCardsLeft;
     Board& getBoard();
     bool buyDevelopmentCard(string card, Player& player);
+    int getTurnCounter();
     void startGame();
     void startTurn(string playerName);
     void endTurn();

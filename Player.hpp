@@ -1,16 +1,17 @@
+#include <array>
 #include <cstdlib>  // for rand() and srand()
 #include <iostream>
 #include <set>
-#include <vector>
-#include <array>
 #include <string>
 #include <unordered_map>
+#include <vector>
+
 #include "developmentCard.hpp"
-#include "victoryPointCard.hpp"
 #include "knightCard.hpp"
-#include "yearOfPlentyCard.hpp"
 #include "monopolyCard.hpp"
 #include "roadBuildingCard.hpp"
+#include "victoryPointCard.hpp"
+#include "yearOfPlentyCard.hpp"
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
@@ -43,12 +44,13 @@ class Player {
     vector<victoryPointCard> victoryPointCards;
     vector<knightCard> knightCards;
     vector<yearOfPlentyCard> yearOfPlentyCards;
+
    public:
-   Player();
+    Player();
 
     Player(string name);
 
-    string getPlayerColor() ;
+    string getPlayerColor();
 
     string getName();
 
@@ -90,15 +92,15 @@ class Player {
 
     void printPlayerInfo();
 
-    void placeRoad(int roadPlace_index,Board& board);
+    void placeRoad(int roadPlace_index, Board& board);
 
-    void placeInitialRoad(int roadPlace_index,Board& board);
+    void placeInitialRoad(int roadPlace_index, Board& board);
 
-    void placeSettlement(int structPlace_index,Board& board);
+    void placeSettlement(int structPlace_index, Board& board);
 
-    void placeInitialSettlement(int structPlace_index,Board& board);
+    void placeInitialSettlement(int structPlace_index, Board& board);
 
-    void placeCity(int structPlace_index,Board& board);
+    void placeCity(int structPlace_index, Board& board);
 
     int rollDice();
 
@@ -106,16 +108,18 @@ class Player {
 
     bool isMyTurn();
 
-    void getResouces(int diceRoll,Board& board);
+    void getResouces(int diceRoll, Board& board);
 
     void getInitResourcesFromTile(Tile* tile);
 
     void getInitResources(Board& board);
 
-    bool buyDevelopmentCard(string card,CatanGame& game, int turnBoughtIn);
+    bool buyDevelopmentCard(string card, CatanGame& game, int turnBoughtIn);
 
-    bool useDevelopmentCard(string card,CatanGame& game);
-
+    bool useDevelopmentCard(string card, CatanGame& game);
+    
+    template <typename T>
+    bool useCardIfEligible(vector<T>& cards, CatanGame& game);
     bool trade(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, Player& otherPlayer);
     bool tradeWithBank(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, CatanGame& game);
 };

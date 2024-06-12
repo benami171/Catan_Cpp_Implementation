@@ -29,6 +29,10 @@ Board& CatanGame::getBoard() {
     return board;
 }
 
+int CatanGame::getTurnCounter() {
+    return turnCounter;
+}
+
 
 void CatanGame::startGame() {
     // You can add code to handle the game start, initial placement, etc.
