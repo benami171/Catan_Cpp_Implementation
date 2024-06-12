@@ -3,9 +3,9 @@
 using namespace std;
 using namespace Catan;
 
-victoryPointCard::victoryPointCard() : developmentCard("Victory Point",turnBoughtIn) {}
+victoryPointCard::victoryPointCard(const string& type, int turnBoughtIn)
+    : developmentCard("Victory Point", turnBoughtIn) {}
 
 void victoryPointCard::useCard() const {
     cout << "Victory Point card used" << endl;
 }
-

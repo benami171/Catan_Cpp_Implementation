@@ -16,8 +16,8 @@ Player::Player() : name(""), initialSettlementNumber(1), initialRoadNumber(1), v
     developmentCards["victoryPoint"] = 0;
     developmentCards["roadBuilding"] = 0;
     developmentCards["yearOfPlenty"] = 0;
-    developmentCards["Knight"] = 0;
-    developmentCards["Monopoly"] = 0;
+    developmentCards["knight"] = 0;
+    developmentCards["monopoly"] = 0;
 }
 
 Player::Player(string name) : name(name), playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0), myTurn(false) {
@@ -334,9 +334,9 @@ bool Player::buyDevelopmentCard(string card, CatanGame& game,int turnBoughtIn) {
         } else if (strncmp(card.c_str(), "yearOfPlenty", 12) == 0) {
             addDevelopmentCard("yearOfPlenty", 1);
         } else if (strncmp(card.c_str(), "Knight", 6) == 0) {
-            addDevelopmentCard("Knight", 1);
+            addDevelopmentCard("knight", 1);
         } else if (strncmp(card.c_str(), "Monopoly", 8) == 0) {
-            addDevelopmentCard("Monopoly", 1);
+            addDevelopmentCard("monopoly", 1);
         }
         return true;
     }

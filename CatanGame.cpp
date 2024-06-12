@@ -17,7 +17,7 @@ CatanGame::CatanGame(Player& player1, Player& player2, Player& player3) {
     resourceCardsLeft = {{"Ore", 19}, {"Wood", 19}, {"Brick", 19}, {"Wheat", 19}, {"Sheep", 19}};
     developmentCardsLeft = {{"Knight", 14}, {"Victory Point", 5}, {"Road Building", 2}, {"Year of Plenty", 2}, {"Monopoly", 2}};
     players = {&player1, &player2, &player3};
-    currentPlayerTurn = "p1";
+    currentPlayerTurn = "P1";
     initializeBoard();
 }
 
@@ -34,7 +34,7 @@ void CatanGame::startGame() {
 void CatanGame::startTurn(string playerName) {
     turnCounter++;
     currentPlayerTurn = playerName;
-    if (playerName == "p1"){
+    if (playerName == "P1"){
         players[0]->setTurn(true);
     }
     cout << "It is now " << playerName << "'s turn." << endl;
@@ -42,12 +42,12 @@ void CatanGame::startTurn(string playerName) {
 }
 
 void CatanGame::endTurn() {
-    if (currentPlayerTurn == "p1") {
-        startTurn("p2");
-    } else if (currentPlayerTurn == "p2") {
-        startTurn("p3");
+    if (currentPlayerTurn == "P1") {
+        startTurn("P2");
+    } else if (currentPlayerTurn == "P2") {
+        startTurn("P3");
     } else {
-        startTurn("p1");
+        startTurn("P1");
     }
 }
 

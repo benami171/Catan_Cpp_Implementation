@@ -3,8 +3,8 @@
 using namespace std;
 using namespace Catan;
 
-yearOfPlentyCard::yearOfPlentyCard(const string& type, int turnBoughtIn) 
-: developmentCard("Year of Plenty",turnBoughtIn) {}
+yearOfPlentyCard::yearOfPlentyCard(const string& type, int turnBoughtIn)
+    : developmentCard("YearOfPlenty", turnBoughtIn) {}
 
 void yearOfPlentyCard::useCard() const {
     cout << "Year of Plenty card used" << endl;
