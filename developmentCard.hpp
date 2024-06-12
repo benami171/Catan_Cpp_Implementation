@@ -7,8 +7,8 @@ namespace Catan {
 
 class developmentCard {
 public:
-    int turnBoughtIn;
     string type;
+    int turnBoughtIn;
 
     developmentCard();
     developmentCard(const string& type, int turnBoughtIn);

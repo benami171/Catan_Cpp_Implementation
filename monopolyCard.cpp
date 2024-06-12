@@ -1,5 +1,5 @@
 #include "monopolyCard.hpp"
-#pragma once
+
 
 using namespace std;
 using namespace Catan;

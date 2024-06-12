@@ -28,7 +28,6 @@ class Player;
 
 class CatanGame {
    private:
-    int turnNumber;
     int turnCounter;
     string currentPlayerTurn;
     unordered_map<string, int> resourceCardsLeft;

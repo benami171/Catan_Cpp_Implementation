@@ -32,10 +32,18 @@ void CatanGame::startGame() {
 }
 
 void CatanGame::startTurn(string playerName) {
+    if (playerName != "P1" && playerName != "P2" && playerName != "P3") {
+        cout << "Invalid player name: " << playerName << endl;
+        return;
+    }
     turnCounter++;
     currentPlayerTurn = playerName;
     if (playerName == "P1"){
         players[0]->setTurn(true);
+    } else if (playerName == "P2") {
+        players[1]->setTurn(true);
+    } else {
+        players[2]->setTurn(true);
     }
     cout << "It is now " << playerName << "'s turn." << endl;
     return;

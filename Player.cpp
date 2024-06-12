@@ -7,7 +7,7 @@
 using namespace std;
 using namespace Catan;
 
-Player::Player() : name(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0), myTurn(false) {
+Player::Player() : name(""), myTurn(false),initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) {
     resourceCards["brick"] = 0;
     resourceCards["lumber"] = 0;
     resourceCards["wool"] = 0;
@@ -20,7 +20,7 @@ Player::Player() : name(""), initialSettlementNumber(1), initialRoadNumber(1), v
     developmentCards["monopoly"] = 0;
 }
 
-Player::Player(string name) : name(name), playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0), myTurn(false) {
+Player::Player(string name) : name(name), myTurn(false),playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) {
     this->name = name;
     victoryPoints = 0;
     roads_placed_counter = 0;
@@ -77,6 +77,7 @@ void Player::addDevelopmentCard(string developmentCard, int amount) {
         addVictoryPoints(2);
     }
 }
+
 
 void Player::removeDevelopmentCard(string developmentCard, int amount) {
     developmentCards[developmentCard] -= amount;
@@ -326,19 +327,30 @@ int Player::getInitialRoadsCounter() {
 
 bool Player::buyDevelopmentCard(string card, CatanGame& game,int turnBoughtIn) {
     if (game.buyDevelopmentCard(card, *this)) {
-        if (strncmp(card.c_str(), "victoryPoint", 12) == 0) {
-            developmentCard* card = victoryPointCard("victoryPoint", turnBoughtIn);
+        if (card == "victoryPoint") {
+            victoryPointCard newCard(card,turnBoughtIn);
+            victoryPointCards.push_back(newCard);
             addDevelopmentCard("vicotryPoint", 1);
-        } else if (strncmp(card.c_str(), "roadBuilding", 12) == 0) {
+        } else if (card == "roadBuilding") {
+            roadBuildingCard newCard(card,turnBoughtIn);
+            roadBuildingCards.push_back(newCard);
             addDevelopmentCard("roadBuilding", 1);
-        } else if (strncmp(card.c_str(), "yearOfPlenty", 12) == 0) {
+        } else if (card == "yearOfPlenty") {
+            yearOfPlentyCard newCard(card,turnBoughtIn);
+            yearOfPlentyCards.push_back(newCard);
             addDevelopmentCard("yearOfPlenty", 1);
-        } else if (strncmp(card.c_str(), "Knight", 6) == 0) {
+        } else if (card == "knight") {
+            knightCard newCard(card,turnBoughtIn);
+            knightCards.push_back(newCard);
             addDevelopmentCard("knight", 1);
-        } else if (strncmp(card.c_str(), "Monopoly", 8) == 0) {
+        } else if (card == "monopoly") {
+            monopolyCard newCard(card,turnBoughtIn);
+            monopolyCards.push_back(newCard);
             addDevelopmentCard("monopoly", 1);
         }
         return true;
+    } else {
+        return false;
     }
 }
 

@@ -8,6 +8,9 @@
 #include "developmentCard.hpp"
 #include "victoryPointCard.hpp"
 #include "knightCard.hpp"
+#include "yearOfPlentyCard.hpp"
+#include "monopolyCard.hpp"
+#include "roadBuildingCard.hpp"
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
@@ -21,8 +24,8 @@ class CatanGame;
 class Player {
    private:
     string name;
-    string playerColor;
     bool myTurn;
+    string playerColor;
     int initialSettlementNumber;
     int initialRoadNumber;
     int victoryPoints;
@@ -35,8 +38,11 @@ class Player {
 
     unordered_map<string, int> resourceCards;
     unordered_map<string, int> developmentCards;
-    unordered_map<developmentCard*, int> developmentCardsInHand;
-
+    vector<monopolyCard> monopolyCards;
+    vector<roadBuildingCard> roadBuildingCards;
+    vector<victoryPointCard> victoryPointCards;
+    vector<knightCard> knightCards;
+    vector<yearOfPlentyCard> yearOfPlentyCards;
    public:
    Player();
 
