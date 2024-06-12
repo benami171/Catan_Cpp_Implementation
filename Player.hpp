@@ -98,6 +98,8 @@ class Player {
 
     void getInitResources(Board& board);
 
+    bool buyDevelopmentCard(string card,CatanGame& game);
+
 };
 
 }  // namespace Catan
