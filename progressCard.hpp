@@ -6,9 +6,9 @@ using namespace std;
 namespace Catan {
 
 class progressCard : public developmentCard {
-    string type;
 public:
-    progressCard(const string& type);
+    string type;
+    progressCard(const string& type, int turnBoughtIn);
     void useCard() const override;
 };
 

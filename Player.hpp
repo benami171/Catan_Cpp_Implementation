@@ -5,6 +5,9 @@
 #include <array>
 #include <string>
 #include <unordered_map>
+#include "developmentCard.hpp"
+#include "victoryPointCard.hpp"
+#include "knightCard.hpp"
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
@@ -32,6 +35,7 @@ class Player {
 
     unordered_map<string, int> resourceCards;
     unordered_map<string, int> developmentCards;
+    unordered_map<developmentCard*, int> developmentCardsInHand;
 
    public:
    Player();
@@ -102,7 +106,7 @@ class Player {
 
     void getInitResources(Board& board);
 
-    bool buyDevelopmentCard(string card,CatanGame& game);
+    bool buyDevelopmentCard(string card,CatanGame& game, int turnBoughtIn);
 
     bool useDevelopmentCard(string card,CatanGame& game);
 

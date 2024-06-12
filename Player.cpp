@@ -324,9 +324,10 @@ int Player::getInitialRoadsCounter() {
     return this->initialRoadNumber;
 }
 
-bool Player::buyDevelopmentCard(string card, CatanGame& game) {
+bool Player::buyDevelopmentCard(string card, CatanGame& game,int turnBoughtIn) {
     if (game.buyDevelopmentCard(card, *this)) {
         if (strncmp(card.c_str(), "victoryPoint", 12) == 0) {
+            developmentCard* card = victoryPointCard("victoryPoint", turnBoughtIn);
             addDevelopmentCard("vicotryPoint", 1);
         } else if (strncmp(card.c_str(), "roadBuilding", 12) == 0) {
             addDevelopmentCard("roadBuilding", 1);

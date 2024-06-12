@@ -3,9 +3,9 @@
 using namespace std;
 using namespace Catan;
 
-developmentCard::developmentCard() : cardCategory("") {}
+developmentCard::developmentCard() : cardCategory("") , turnBoughtIn(0) {}
 
-developmentCard::developmentCard(const string& category) : cardCategory(category) {}
+developmentCard::developmentCard(const string& category, int turnBoughtIn) : cardCategory(category) ,turnBoughtIn(turnBoughtIn){}
 
 developmentCard::~developmentCard() {}
 
