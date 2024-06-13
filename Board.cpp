@@ -69,7 +69,9 @@ void Board::initTiles() {
             // assigning the right structurePlaces and roadPlaces pointers array for each tile.
             // also adding the right resource to the structurePlaces.
             sPlaces[j] = &structurePlaces[tileStructureIndices[i][j]];
-            structurePlaces[tileStructureIndices[i][j]].addResource(landTypes[i]);
+            // structurePlaces[tileStructureIndices[i][j]].addResource(landTypes[i]);
+            // structurePlaces[tileStructureIndices[i][j]].addActivationNumber(activationNumbers[i]);
+            structurePlaces[tileStructureIndices[i][j]].addResourceAndActivationNumber(landTypes[i], activationNumbers[i]);
             // cout << " StructPlace's index: " << tileStructureIndices[i][j] << " adjecent Tile added is Tile number: " << i << endl;
             rPlaces[j] = &roadPlaces[tileRoadIndices[i][j]];
         }

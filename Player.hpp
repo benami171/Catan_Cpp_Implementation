@@ -34,7 +34,7 @@ class Player {
     int settlements_placed_counter;
     int cities_placed_counter;
     vector<int> owned_roads_indices;
-    vector<int> owned_settlements_indices;
+    vector<int> owned_structures_indices;
     vector<int> owned_cities_indices;
 
     unordered_map<string, int> resourceCards;

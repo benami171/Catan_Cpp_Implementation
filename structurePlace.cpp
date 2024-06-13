@@ -7,11 +7,11 @@ using namespace Catan;
 class Player;
 
 structurePlace::structurePlace() 
-    : owner(nullptr), structType(""), structNumber(0), adjStructs{nullptr, nullptr, nullptr}, adjRoads{nullptr, nullptr, nullptr}, adjTiles() {
+    : owner(nullptr), structType(""), structNumber(0), adjStructs{nullptr, nullptr, nullptr}, adjRoads{nullptr, nullptr, nullptr}, adjTiles(), attachedResources(), activationNumbers() {
 }
 
 structurePlace::structurePlace(Player* owner, string structType, int structNumber) 
-    : owner(owner), structType(structType), structNumber(structNumber), adjStructs{nullptr, nullptr, nullptr}, adjRoads{nullptr, nullptr, nullptr}, adjTiles() {
+    : owner(owner), structType(structType), structNumber(structNumber), adjStructs{nullptr, nullptr, nullptr}, adjRoads{nullptr, nullptr, nullptr}, adjTiles(), attachedResources(), activationNumbers(){
 }
 
 // // Deep copy constructor
@@ -158,8 +158,20 @@ void structurePlace::addResource(string resource) {
     attachedResources.insert(resource);
 }
 
+void structurePlace::addActivationNumber(int activationNumber) {
+    activationNumbers.insert(activationNumber);
+}
+
 void structurePlace::addAdjTile(Tile* tile) {
     adjTiles.push_back(tile);
+}
+
+void structurePlace::addResourceAndActivationNumber(const string& resource, int activationNumber) {
+    resource_activationNumber.push_back(make_pair(resource, activationNumber));
+}
+
+const vector<pair<string, int>>& structurePlace::getResourceActivationNumber() const {
+    return resource_activationNumber;
 }
 
 const vector<Tile*>& structurePlace::getAdjTiles() const {

@@ -187,6 +187,7 @@ void Player::placeSettlement(int structurePlace_index, Board& board) {
                 }
             }
 
+            owned_structures_indices.push_back(structurePlace_index);
             cout << name << " Placed a settlement at index " << structurePlace_index << endl;
         } else {
             cout << "Invalid settlement placement" << endl;
@@ -215,6 +216,7 @@ void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
                 }
             }
             initialSettlementNumber++;
+            owned_structures_indices.push_back(structurePlace_index);
             cout << "Player " << name << " placed a settlement at index " << structurePlace_index << endl;
         } else {
             cout << "Invalid settlement placement" << endl;
@@ -237,7 +239,7 @@ void Player::placeCity(int structurePlace_index, Board& board) {
             this->addVictoryPoints(1);
             this->removeResourceCard("wheat", 2);
             this->removeResourceCard("ore", 3);
-            owned_cities_indices.push_back(structurePlace_index);
+            owned_structures_indices.push_back(structurePlace_index);
             cout << "Player " << name << " placed a city at index " << structurePlace_index << endl;
         } else {
             cout << "Invalid city placement" << endl;
@@ -300,36 +302,38 @@ void Player::payToll(){
     }
 }
 
-// After each dice roll, this function gets called for each player.
-// if the player rolled 7 the function calls payToll() to make the player give up half of his cards.
-// otherwise, the function goes through the tiles and checks if the activation number of the tile is equal to the dice roll.
-// if so, the function goes through the structurePlaces of the tile and checks if the owner of the structurePlace is the player.
+
+/**
+ * @brief This function is used to add resource cards to the player's hand based on the dice roll.
+ * 
+ * @param diceRoll The number rolled on the dice.
+ * @param board The game board.
+ * 
+ * If the dice roll is 7, the player pays a toll and the function returns.
+ * 
+ * The function then iterates over the indices of the structures owned by the player. 
+ * For each structure, it retrieves the resource_activationNumber vector, which contains pairs of resource types and their corresponding activation numbers.
+ * 
+ * It then iterates over this vector. If the activation number of a pair matches the dice roll and the structure is a settlement, it adds one resource card of the corresponding type to the player's hand.
+ * If the activation number of a pair matches the dice roll and the structure is a city, it adds two resource cards of the corresponding type to the player's hand.
+ */
 void Player::getResources(int diceRoll, Board& board) {
     if (diceRoll == 7) {
         return payToll();
     }
-    const vector<Tile>& tiles = board.getTiles();
-    for (int i = 0; i < 19; i++) {
-        if (tiles[i].getActivationNumber() == diceRoll) {
-            const vector<structurePlace*>& structurePlaces = tiles[i].getStructurePlaces();
-            for (int j = 0; j < 6; j++) {
-                if (structurePlaces[j]->getOwnerString() == name) {
-                    string resourceType = tiles[i].getResourceType();
-                    if (resourceType != "Desert") {
-                        string structureType = structurePlaces[j]->getStructType();
-                        if (structureType == "SETTLEMENT") {
-                            addResourceCard(resourceType, 1);
-                            cout << "Player " << name << " received a " << resourceType << " card" << endl;
-                        } else if (structureType == "CITY") {
-                            addResourceCard(resourceType, 2);
-                            cout << "Player " << name << " received two " << resourceType << " cards" << endl;
-                        }
-                    }
-                }
+    for (int i = 0 ; i < owned_structures_indices.size(); i++){
+        structurePlace* settlement = board.getStructureAt(owned_structures_indices[i]);
+        const vector<pair<string, int>> resources_activation_numbers = settlement->getResourceActivationNumber();
+        for (int i = 0 ; i < resources_activation_numbers.size(); i++){
+            if (resources_activation_numbers[i].second == diceRoll && settlement->getStructType() == "SETTLEMENT"){
+                addResourceCard(resources_activation_numbers[i].first, 1);
+            } else if (resources_activation_numbers[i].second == diceRoll && settlement->getStructType() == "CITY"){
+                addResourceCard(resources_activation_numbers[i].first, 2);
             }
-        }
+        } 
     }
 }
+
 
 void Player::getInitResourcesFromTile(Tile* tile) {
     // cout << "Player " << name << " is getting resources from tile " << tile->getTileNumber() << endl;
@@ -356,8 +360,8 @@ void Player::getInitResourcesFromTile(Tile* tile) {
 }
 
 void Player::getInitResources(Board& board) {
-    for (size_t i = 0; i < owned_settlements_indices.size(); i++) {
-        structurePlace* settlement = board.getStructureAt(owned_settlements_indices[i]);
+    for (size_t i = 0; i < owned_structures_indices.size(); i++) {
+        structurePlace* settlement = board.getStructureAt(owned_structures_indices[i]);
         vector<Tile*> adjTiles = settlement->getAdjTiles();
         for (int j = 0; j < 3; j++) {
             if (adjTiles[j] != nullptr) {
@@ -479,6 +483,17 @@ void Player::removeVictoryPoints(int points) {
 
 // the resources are brick, lumber, wool, wheat, ore
 void Player::addResourceCard(string resource, int amount) {
+    if (resource == "Mountain") {
+        resource = "ore";
+    } else if (resource == "Hills") {
+        resource = "brick";
+    } else if (resource == "Fields") {
+        resource = "wheat";
+    } else if (resource == "Pasture") {
+        resource = "wool";
+    } else if (resource == "Forrest") {
+        resource = "lumber";
+    }
     resourceCards[resource] += amount;
 }
 
