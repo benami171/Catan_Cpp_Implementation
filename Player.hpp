@@ -104,16 +104,16 @@ class Player {
 
     int rollDice();
 
-    void startTurn(bool turn);
+    void setTurn(bool turn);
 
     bool isMyTurn();
 
-    void getResouces(int diceRoll, Board& board);
+    void getResources(int diceRoll, Board& board);
 
     void getInitResourcesFromTile(Tile* tile);
 
     void getInitResources(Board& board);
-
+    void payToll();
     bool buyDevelopmentCard(string card, CatanGame& game, int turnBoughtIn);
 
     bool useDevelopmentCard(string card, CatanGame& game);

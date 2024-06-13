@@ -24,26 +24,39 @@ int main() {
                   5         6          11
 */
 
+    Player _p1("P1");
+    Player _p2("P2");
+    Player _p3("P3");
+    CatanGame game(_p1,_p2,_p3);
     cout << "Board created" << endl;
-    Player player1("P1");
-    Player player2("P2");
-    Player player3("P3");
-    CatanGame game(player1,player2,player3);
     Board& board = game.getBoard();
 
 
     cout << "Players created" << endl;
-    player1.placeSettlement(2,board);
-    player1.placeRoad(5,board);
+    game.startTurn("P1");
+    _p1.placeSettlement(2,board);
+    _p1.placeRoad(5,board);
+    game.endTurn();
+    _p2.placeSettlement(13,board);
+    _p2.placeRoad(13,board);
+    game.endTurn();
+    _p3.placeSettlement(34,board);
+    _p3.placeRoad(41,board);
+    _p3.placeSettlement(45,board);
+    _p3.placeRoad(59,board);
+    game.endTurn();
+    _p2.placeSettlement(22,board);
+    _p2.placeRoad(24,board);
+    game.endTurn();
+    _p1.placeSettlement(25,board);
+    _p1.placeRoad(31,board);
+    game.endTurn();
+    int dice = _p1.rollDice();
+    _p1.getResources(dice,board);
+    _p2.getResources(dice,board);
+    _p3.getResources(dice,board);
 
     
-
-
-    player1.placeSettlement(12,board);
-    player1.placeRoad(12,board);
-    player1.getInitResources(board);
-    player1.printPlayerInfo();
-
 
     return 0;
 }

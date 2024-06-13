@@ -22,7 +22,7 @@ CatanGame::CatanGame(Player& player1, Player& player2, Player& player3) {
 }
 
 void CatanGame::initializeBoard() {
-    board = Board();
+ //   board = Board();
 }
 
 Board& CatanGame::getBoard() {

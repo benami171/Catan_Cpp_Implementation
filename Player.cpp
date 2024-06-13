@@ -40,44 +40,6 @@ Player::Player(string name) : name(name), myTurn(false), playerColor(""), initia
     developmentCards["Monopoly"] = 0;
 }
 
-string Player::getName() {
-    return name;
-}
-
-int Player::getVictoryPoints() {
-    return victoryPoints;
-}
-
-void Player::addVictoryPoints(int points) {
-    victoryPoints += points;
-}
-
-void Player::removeVictoryPoints(int points) {
-    victoryPoints -= points;
-}
-
-// the resources are brick, lumber, wool, wheat, ore
-void Player::addResourceCard(string resource, int amount) {
-    resourceCards[resource] += amount;
-}
-
-void Player::removeResourceCard(string resource, int amount) {
-    resourceCards[resource] -= amount;
-}
-
-// the development cards are victoryPoint, roadBuilding, yearOfPlenty, monopoly, Knight.
-void Player::addDevelopmentCard(string developmentCard, int amount) {
-    if (developmentCard == "victoryPoint") {
-        addVictoryPoints(1);
-    }
-
-    developmentCards[developmentCard] += amount;
-
-    if (developmentCards["Knight"] >= 3) {
-        addVictoryPoints(2);
-    }
-}
-
 bool Player::trade(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, Player& otherPlayer) {
     if(!myTurn){
         cout << "It is not your turn" << endl;
@@ -157,42 +119,6 @@ bool Player::tradeWithBank(unordered_map<string, int> giveResources, unordered_m
     return true;
 }
 
-void Player::removeDevelopmentCard(string developmentCard, int amount) {
-    developmentCards[developmentCard] -= amount;
-}
-
-int Player::getResourceCardAmount(string resource) {
-    return resourceCards[resource];
-}
-
-int Player::getDevelopmentCardAmount(string developmentCard) {
-    return developmentCards[developmentCard];
-}
-
-// iterator goes through the resource cards and prints the amount of each resource
-void Player::printResources() {
-    cout << "--Resource Cards: " << endl;
-    for (auto it = resourceCards.begin(); it != resourceCards.end(); it++) {
-        cout << it->first << ": " << it->second << endl;
-    }
-}
-
-void Player::printDevelopmentCards() {
-    cout << "--Development Cards: " << endl;
-    for (auto it = developmentCards.begin(); it != developmentCards.end(); it++) {
-        cout << it->first << ": " << it->second << endl;
-    }
-}
-
-void Player::printPlayerInfo() {
-    cout << "Name: " << name << endl;
-    cout << "Victory Points: " << victoryPoints << endl;
-    cout << "Roads placed counter: " << roads_placed_counter << "\n";
-    cout << "Settlements placed counter: " << settlements_placed_counter << endl;
-    cout << "Cities placed counter: " << cities_placed_counter << endl;
-    printDevelopmentCards();
-    printResources();
-}
 
 void Player::placeRoad(int road_index, Board& board) {
     if (!myTurn) {
@@ -321,17 +247,7 @@ void Player::placeCity(int structurePlace_index, Board& board) {
     }
 }
 
-string Player::getPlayerColor() {
-    if (name == "Player 1") {
-        return "\033[1;31m";  // Red
-    } else if (name == "Player 2") {
-        return "\033[1;34m";  // Blue
-    } else if (name == "Player 3") {
-        return "\033[1;32m";  // Green
-    } else {
-        return "\033[1;37m";  // White
-    }
-}
+
 
 int Player::rollDice() {
     if(!myTurn){
@@ -341,7 +257,21 @@ int Player::rollDice() {
     return rand() % 6 + 1 + rand() % 6 + 1;
 }
 
-void Player::getResouces(int diceRoll, Board& board) {
+void Player::payToll(){
+    int totalCards = 0;
+    for (auto& resource : resourceCards) {
+        totalCards += resource.second;
+    }
+    if(totalCards >= 7){ // in this case, the player must give up half of his cards.
+        int halfAmount = totalCards/2;
+        
+    }
+}
+
+void Player::getResources(int diceRoll, Board& board) {
+    if (diceRoll == 7) {
+        return payToll();
+    }
     const vector<Tile>& tiles = board.getTiles();
     for (int i = 0; i < 19; i++) {
         if (tiles[i].getActivationNumber() == diceRoll) {
@@ -493,11 +423,98 @@ bool Player::useCardIfEligible(vector<T>& cards, CatanGame& game) {
     return false;
 }
 
+string Player::getName() {
+    return name;
+}
 
-void Player::startTurn(bool turn) {
+int Player::getVictoryPoints() {
+    return victoryPoints;
+}
+
+void Player::addVictoryPoints(int points) {
+    victoryPoints += points;
+}
+
+void Player::removeVictoryPoints(int points) {
+    victoryPoints -= points;
+}
+
+// the resources are brick, lumber, wool, wheat, ore
+void Player::addResourceCard(string resource, int amount) {
+    resourceCards[resource] += amount;
+}
+
+void Player::removeResourceCard(string resource, int amount) {
+    resourceCards[resource] -= amount;
+}
+
+// the development cards are victoryPoint, roadBuilding, yearOfPlenty, monopoly, Knight.
+void Player::addDevelopmentCard(string developmentCard, int amount) {
+    if (developmentCard == "victoryPoint") {
+        addVictoryPoints(1);
+    }
+
+    developmentCards[developmentCard] += amount;
+
+    if (developmentCards["Knight"] >= 3) {
+        addVictoryPoints(2);
+    }
+}
+
+
+void Player::removeDevelopmentCard(string developmentCard, int amount) {
+    developmentCards[developmentCard] -= amount;
+}
+
+int Player::getResourceCardAmount(string resource) {
+    return resourceCards[resource];
+}
+
+int Player::getDevelopmentCardAmount(string developmentCard) {
+    return developmentCards[developmentCard];
+}
+
+void Player::setTurn(bool turn) {
     myTurn = turn;
 }
 
 bool Player::isMyTurn() {
     return myTurn;
+}
+
+string Player::getPlayerColor() {
+    if (name == "Player 1") {
+        return "\033[1;31m";  // Red
+    } else if (name == "Player 2") {
+        return "\033[1;34m";  // Blue
+    } else if (name == "Player 3") {
+        return "\033[1;32m";  // Green
+    } else {
+        return "\033[1;37m";  // White
+    }
+}
+
+// iterator goes through the resource cards and prints the amount of each resource
+void Player::printResources() {
+    cout << "--Resource Cards: " << endl;
+    for (auto it = resourceCards.begin(); it != resourceCards.end(); it++) {
+        cout << it->first << ": " << it->second << endl;
+    }
+}
+
+void Player::printDevelopmentCards() {
+    cout << "--Development Cards: " << endl;
+    for (auto it = developmentCards.begin(); it != developmentCards.end(); it++) {
+        cout << it->first << ": " << it->second << endl;
+    }
+}
+
+void Player::printPlayerInfo() {
+    cout << "Name: " << name << endl;
+    cout << "Victory Points: " << victoryPoints << endl;
+    cout << "Roads placed counter: " << roads_placed_counter << "\n";
+    cout << "Settlements placed counter: " << settlements_placed_counter << endl;
+    cout << "Cities placed counter: " << cities_placed_counter << endl;
+    printDevelopmentCards();
+    printResources();
 }
