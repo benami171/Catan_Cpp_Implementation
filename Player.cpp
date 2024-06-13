@@ -332,6 +332,8 @@ void Player::getResources(int diceRoll, Board& board) {
 }
 
 void Player::getInitResourcesFromTile(Tile* tile) {
+    // cout << "Player " << name << " is getting resources from tile " << tile->getTileNumber() << endl;
+    // cout << "The tile type is: " << tile->getResourceType() << endl;
     if (tile->getResourceType() == "Desert") {
         return;
     }
@@ -347,7 +349,7 @@ void Player::getInitResourcesFromTile(Tile* tile) {
     } else if (tile->getResourceType() == "Pasture") {
         addResourceCard("wool", 1);
         cout << name << " received a wool card" << endl;
-    } else if (tile->getResourceType() == "Forest") {
+    } else if (tile->getResourceType() == "Forrest") {
         addResourceCard("lumber", 1);
         cout << name << " received a lumber card" << endl;
     }
@@ -519,11 +521,11 @@ bool Player::isMyTurn() {
 }
 
 string Player::getPlayerColor() {
-    if (name == "Player 1") {
+    if (name == "P1") {
         return "\033[1;31m";  // Red
-    } else if (name == "Player 2") {
+    } else if (name == "P2") {
         return "\033[1;34m";  // Blue
-    } else if (name == "Player 3") {
+    } else if (name == "P3") {
         return "\033[1;32m";  // Green
     } else {
         return "\033[1;37m";  // White
@@ -532,7 +534,7 @@ string Player::getPlayerColor() {
 
 // iterator goes through the resource cards and prints the amount of each resource
 void Player::printResources() {
-    cout << "P1 Resource Cards: ";
+    cout << this->getPlayerColor() << name << "\033[0m" << " Resources: ";
     for (auto it = resourceCards.begin(); it != resourceCards.end(); ++it) {
         if (it != resourceCards.begin()) {
             cout << " - ";

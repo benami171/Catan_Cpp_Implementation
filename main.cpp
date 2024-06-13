@@ -34,28 +34,35 @@ int main() {
 
     cout << "Players created" << endl;
     game.startTurn("P1");
-    _p1.placeSettlement(2,board);
+    _p1.placeSettlement(2,board); //  wood,9
     _p1.placeRoad(5,board);
     game.endTurn();
-    _p2.placeSettlement(13,board);
+    _p2.placeSettlement(13,board); // sheep 2, sheep 4, bricks 6
     _p2.placeRoad(13,board);
     game.endTurn();
-    _p3.placeSettlement(34,board);
+    _p3.placeSettlement(34,board); // wood 11, wood 8, ore 3
     _p3.placeRoad(41,board);
-    _p3.placeSettlement(45,board);
+    _p3.placeSettlement(45,board); // wheat 4, wheat 6, sheep 11
     _p3.placeRoad(59,board);
     game.endTurn();
-    _p2.placeSettlement(22,board);
+    _p2.placeSettlement(22,board); // wheat 12, wheat 9, wood 11
     _p2.placeRoad(24,board);
     game.endTurn();
-    _p1.placeSettlement(25,board);
+    _p1.placeSettlement(25,board); // bricks 10, ore 8, wood 3
     _p1.placeRoad(31,board);
     game.endTurn();
-    int dice = _p1.rollDice();
-    _p1.getResources(dice,board);
-    _p2.getResources(dice,board);
-    _p3.getResources(dice,board);
-
+    cout << " " << endl;
+    _p1.printResources(); // should have 1 brick, 1 ore, 1 lumber.
+    _p2.printResources(); // should have 2 wheat, 1 lumber.
+    _p3.printResources(); // should have 2 wheat, 1 wool.
+    int dice = _p1.rollDice(6);
+    _p1.getResources(dice,board); // shouldn't get any resources
+    _p2.getResources(dice,board); // should get 1 brick
+    _p3.getResources(dice,board); // should get 1 wheat
+    cout << " " << endl;
+    _p1.printResources(); // should have 1 brick, 1 ore, 1 lumber.
+    _p2.printResources(); // should have 2 wheat, 1 lumber, 1 brick.
+    _p3.printResources(); // should have 3 wheat, 1 wool.
     
 
     return 0;
