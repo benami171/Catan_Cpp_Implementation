@@ -520,17 +520,25 @@ string Player::getPlayerColor() {
 
 // iterator goes through the resource cards and prints the amount of each resource
 void Player::printResources() {
-    cout << "--Resource Cards: " << endl;
-    for (auto it = resourceCards.begin(); it != resourceCards.end(); it++) {
-        cout << it->first << ": " << it->second << endl;
+    cout << "P1 Resource Cards: ";
+    for (auto it = resourceCards.begin(); it != resourceCards.end(); ++it) {
+        if (it != resourceCards.begin()) {
+            cout << " - ";
+        }
+        cout << "[" << it->first << ", " << it->second << "]";
     }
+    cout << endl;
 }
 
 void Player::printDevelopmentCards() {
-    cout << "--Development Cards: " << endl;
-    for (auto it = developmentCards.begin(); it != developmentCards.end(); it++) {
-        cout << it->first << ": " << it->second << endl;
+    cout << "P1 Development Cards: ";
+    for (auto it = developmentCards.begin(); it != developmentCards.end(); ++it) {
+        if (it != developmentCards.begin()) {
+            cout << " - ";
+        }
+        cout << "[" << it->first << ", " << it->second << "]";
     }
+    cout << endl;
 }
 
 void Player::printPlayerInfo() {
