@@ -79,6 +79,10 @@ void Player::addDevelopmentCard(string developmentCard, int amount) {
 }
 
 bool Player::trade(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, Player& otherPlayer) {
+    if(!myTurn){
+        cout << "It is not your turn" << endl;
+        return false;
+    }
     // Check if current player has enough resources to give
     for (auto& resource : giveResources) {
         // goes over each resource in the giveResources map and checks if the player has enough of that resource
@@ -115,6 +119,10 @@ bool Player::trade(unordered_map<string, int> giveResources, unordered_map<strin
 }
 
 bool Player::tradeWithBank(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, CatanGame& game) {
+    if(!myTurn){
+        cout << "It is not your turn" << endl;
+        return false;
+    }
     // Calculate total resources to give and receive
     int totalGive = 0;
     for (auto& resource : giveResources) {
@@ -187,11 +195,14 @@ void Player::printPlayerInfo() {
 }
 
 void Player::placeRoad(int road_index, Board& board) {
+    if (!myTurn) {
+        cout << "It is not your turn." << endl;
+        return;
+    }
     if (initialRoadNumber < 3) {
         placeInitialRoad(road_index, board);
         return;
     }
-
     if (roads_placed_counter < 15 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1) {
         roadPlace* road = board.getRoadAt(road_index);
         if (road->placedRoad(this)) {
@@ -221,6 +232,11 @@ void Player::placeInitialRoad(int road_index, Board& board) {
 }
 
 void Player::placeSettlement(int structurePlace_index, Board& board) {
+    // first check if its the players turn
+    if (!myTurn) {
+        cout << "It is not your turn." << endl;
+        return;
+    }
     if (initialSettlementNumber < 3) {
         placeInitialSettlement(structurePlace_index, board);
         return;
@@ -283,6 +299,10 @@ void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
 }
 
 void Player::placeCity(int structurePlace_index, Board& board) {
+    if (!myTurn) {
+        cout << "It is not your turn." << endl;
+        return;
+    }
     if (cities_placed_counter < 4 && this->getResourceCardAmount("wheat") >= 2 && this->getResourceCardAmount("ore") >= 3) {
         structurePlace* city = board.getStructureAt(structurePlace_index);
         if (city->placedCity(this)) {
@@ -314,6 +334,10 @@ string Player::getPlayerColor() {
 }
 
 int Player::rollDice() {
+    if(!myTurn){
+        cout << "It is not your turn" << endl;
+        return false;
+    }
     return rand() % 6 + 1 + rand() % 6 + 1;
 }
 
@@ -396,6 +420,10 @@ int Player::getInitialRoadsCounter() {
 }
 
 bool Player::buyDevelopmentCard(string card, CatanGame& game, int turnBoughtIn) {
+    if(!myTurn){
+        cout << "It is not your turn" << endl;
+        return false;
+    }
     if (game.buyDevelopmentCard(card, *this)) {
         if (card == "victoryPoint") {
             victoryPointCard newCard(card, turnBoughtIn);
@@ -425,6 +453,10 @@ bool Player::buyDevelopmentCard(string card, CatanGame& game, int turnBoughtIn) 
 }
 
 bool Player::useDevelopmentCard(string card, CatanGame& game) {
+    if(!myTurn){
+        cout << "It is not your turn" << endl;
+        return false;
+    }
     if (card == "roadBuilding") {
         if (!roadBuildingCards.empty()) {
             return useCardIfEligible(roadBuildingCards, game);
@@ -462,7 +494,7 @@ bool Player::useCardIfEligible(vector<T>& cards, CatanGame& game) {
 }
 
 
-void Player::setTurn(bool turn) {
+void Player::startTurn(bool turn) {
     myTurn = turn;
 }
 

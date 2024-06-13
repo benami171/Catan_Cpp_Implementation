@@ -104,7 +104,7 @@ class Player {
 
     int rollDice();
 
-    void setTurn(bool turn);
+    void startTurn(bool turn);
 
     bool isMyTurn();
 
