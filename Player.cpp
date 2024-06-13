@@ -254,9 +254,13 @@ int Player::rollDice() {
         cout << "It is not your turn" << endl;
         return false;
     }
-    return rand() % 6 + 1 + rand() % 6 + 1;
+    int dice1 = rand() % 6 + 1;
+    int dice2 = rand() % 6 + 1;
+    cout << "Player " << name << " rolled: " << dice1 + dice2 << endl;
+    return dice1 + dice2;
 }
 
+// this function gets called by getRecources() when the player rolls a 7.
 void Player::payToll(){
     int totalCards = 0;
     for (auto& resource : resourceCards) {
@@ -284,6 +288,10 @@ void Player::payToll(){
     }
 }
 
+// After each dice roll, this function gets called for each player.
+// if the player rolled 7 the function calls payToll() to make the player give up half of his cards.
+// otherwise, the function goes through the tiles and checks if the activation number of the tile is equal to the dice roll.
+// if so, the function goes through the structurePlaces of the tile and checks if the owner of the structurePlace is the player.
 void Player::getResources(int diceRoll, Board& board) {
     if (diceRoll == 7) {
         return payToll();
