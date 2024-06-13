@@ -264,6 +264,22 @@ void Player::payToll(){
     }
     if(totalCards >= 7){ // in this case, the player must give up half of his cards.
         int halfAmount = totalCards/2;
+        for (auto& resource : resourceCards) {
+            // as long as the player still has to give up cards, the loop will continue.
+            if(halfAmount == 0){
+                break;
+            }
+            // checks for each type of resource if the player own more or equal amount of cards than the halfAmount.
+            // If so, the player will give up halfAmount of that resource.
+            if(resource.second >= halfAmount){
+                resource.second -= halfAmount;
+                halfAmount = 0;
+            } else {
+                // else, we reduce the amount of cards the player has to give up by the amount of cards he has of that resource.
+                halfAmount -= resource.second;
+                resource.second = 0;
+            }
+        }
         
     }
 }
