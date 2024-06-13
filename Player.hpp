@@ -103,6 +103,7 @@ class Player {
     void placeCity(int structPlace_index, Board& board);
 
     int rollDice();
+    int rollDice(int wantedNumber); // this will be used in tests.
 
     void setTurn(bool turn);
 

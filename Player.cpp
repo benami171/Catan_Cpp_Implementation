@@ -260,6 +260,18 @@ int Player::rollDice() {
     return dice1 + dice2;
 }
 
+int Player::rollDice(int wantedNumber) {
+    if(!myTurn){
+        cout << "It is not your turn" << endl;
+        return false;
+    }
+    if (wantedNumber < 2 || wantedNumber > 12) {
+        cout << "Invalid dice roll" << endl;
+        return -1;
+    }
+    return wantedNumber;
+}
+
 // this function gets called by getRecources() when the player rolls a 7.
 void Player::payToll(){
     int totalCards = 0;
