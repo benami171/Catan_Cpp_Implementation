@@ -8,5 +8,5 @@ knightCard::knightCard(const string& type, int turnBoughtIn)
     : developmentCard("Knight", turnBoughtIn) {}
 
 void knightCard::useCard(Player& owner) const {
-    cout << "Knight card used" << endl;
+    return;
 }
