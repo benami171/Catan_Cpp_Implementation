@@ -29,6 +29,7 @@ class CatanGame {
     bool buyDevelopmentCard(string card, Player& player);
     int getTurnCounter();
     string getCurrentPlayerTurn();
+    int developmentCardsRemaining(string card);
     void printBoard();
     void startGame();
     void startTurn(string playerName);

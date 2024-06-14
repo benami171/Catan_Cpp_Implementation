@@ -92,6 +92,10 @@ bool CatanGame::buyDevelopmentCard(string card, Player& player) {
     }
 }
 
+int CatanGame::developmentCardsRemaining(string card) {
+    return developmentCardsLeft[card];
+}
+
 string CatanGame::getCurrentPlayerTurn() {
     return currentPlayerTurn;
 }

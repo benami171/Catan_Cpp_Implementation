@@ -8,5 +8,5 @@ yearOfPlentyCard::yearOfPlentyCard(const string& type, int turnBoughtIn)
     : developmentCard("YearOfPlenty", turnBoughtIn) {}
 
 void yearOfPlentyCard::useCard(Player& owner) const {
-    cout << "Year of Plenty card used" << endl;
+    owner.removeDevelopmentCard("YearOfPlenty",1);
 }

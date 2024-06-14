@@ -460,11 +460,37 @@ bool Player::useMonopoly(string chosenResource, CatanGame& game) {
 
 bool Player::useYearOfPlenty(string resource1, string resource2, CatanGame& game) {
     vector<yearOfPlentyCard> yCards = this->yearOfPlentyCards;
+    if (yCards.empty()) {
+        cout << "Player " << name << " does not have any year of plenty cards" << endl;
+        return false;
+    }
     for (auto it = yCards.begin(); it != yCards.end(); ++it) {
         if (game.getTurnCounter() > it->getTurnBoughtIn()) {
-            it->useCard(*this);
-            yCards.erase(it);
-            return true;
+            // check if the game has 1 of each resources to give in its resourcCards map.
+            if (resource1 == resource2) {
+                if (game.developmentCardsRemaining(resource1) > 1) {
+                    game.developmentCardsLeft[resource1] -= 2;
+                    it->useCard(*this);
+                    yCards.erase(it);
+                    return true;
+                } else {
+                    cout << "Not enough resources to give" << endl;
+                    return false;
+                }
+            } else {
+                if (game.developmentCardsRemaining(resource1) > 0 && game.developmentCardsRemaining(resource2) > 0) {
+                    game.developmentCardsLeft[resource1]--;
+                    game.developmentCardsLeft[resource2]--;
+
+                    it->useCard(*this);
+                    yCards.erase(it);
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            cout << "Player " << name << " does not have a valid usable year of plenty card" << endl;
+            return false;
         }
     }
     return false;
