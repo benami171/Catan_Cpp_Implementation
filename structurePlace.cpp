@@ -141,18 +141,6 @@ bool structurePlace::placedCity(Player* newOwner) {
 //     return *this;
 // }
 
-string structurePlace::getIdentifierString() {
-    if(owner->getName() == "") {
-        return "N";
-    }
-
-    string playerColor = owner->getPlayerColor();
-    if (structType == "SETTLEMENT") {
-        return playerColor + "S\033[0m"; // after the color code, the color is reset back to default
-    } else {
-        return playerColor + "C\033[0m";
-    }
-}
 
 void structurePlace::addResource(string resource) {
     attachedResources.insert(resource);
@@ -176,4 +164,30 @@ const vector<pair<string, int>>& structurePlace::getResourceActivationNumber() c
 
 const vector<Tile*>& structurePlace::getAdjTiles() const {
     return adjTiles;
+}
+
+string structurePlace::getPrintableString(){
+    if  (owner == nullptr) {
+        return "O";
+    }
+    string playerPrintableString = owner->getPlayerColor();
+    if (structType == "SETTLEMENT") {
+        return playerPrintableString + "S\033[0m";
+    } else {
+        return playerPrintableString + "C\033[0m";
+    }
+}
+
+// TODO - DELETE THIS VERSION OF THE ABOVE FUNCTION.
+string structurePlace::getIdentifierString() {
+    if(owner->getName() == "") {
+        return "N";
+    }
+
+    string playerColor = owner->getPlayerColor();
+    if (structType == "SETTLEMENT") {
+        return playerColor + "S\033[0m"; // after the color code, the color is reset back to default
+    } else {
+        return playerColor + "C\033[0m";
+    }
 }

@@ -35,6 +35,7 @@ class structurePlace {
     
     string getOwnerString();
     string getStructType();
+    string getPrintableString();
     int getStructNumber();
     void addResource(string resource);
     void addAdjTile(Tile* tile);

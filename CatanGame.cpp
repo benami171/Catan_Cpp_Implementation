@@ -18,11 +18,10 @@ CatanGame::CatanGame(Player& player1, Player& player2, Player& player3) {
     developmentCardsLeft = {{"Knight", 14}, {"Victory Point", 5}, {"Road Building", 2}, {"Year of Plenty", 2}, {"Monopoly", 2}};
     players = {&player1, &player2, &player3};
     currentPlayerTurn = "P1";
-    initializeBoard();
 }
 
-void CatanGame::initializeBoard() {
- //   board = Board();
+void CatanGame::printBoard() {
+    board.printBoard();
 }
 
 Board& CatanGame::getBoard() {

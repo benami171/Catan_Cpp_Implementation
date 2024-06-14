@@ -84,3 +84,9 @@ bool roadPlace::placedRoad(Player* newOwner) {
 int roadPlace::getRoadNumber() {
     return roadNumber;
 }
+
+string roadPlace::getPrintableString() {
+    if (owner == nullptr) {
+        return "\033[1;37m";
+    } return owner->getPlayerColor();
+}

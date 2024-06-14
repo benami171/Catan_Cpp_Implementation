@@ -43,6 +43,7 @@ class Board {
     const vector<structurePlace>& getStructurePlaces() const;
     const vector<roadPlace>& getRoadPlaces() const;
     const vector<Tile>& getTiles() const; 
+    void printBoard(); // prints the board
 
 };
 }  // namespace Catan

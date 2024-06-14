@@ -47,15 +47,12 @@ class Player {
 
    public:
     Player();
-
     Player(string name);
+
     bool hasLargestArmy;
     string getPlayerColor();
-
     string getName();
-
     void addVictoryPoints(int points);
-
     void removeVictoryPoints(int points);
 
     // the resources are brick, lumber, wool, wheat, ore

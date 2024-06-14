@@ -20,8 +20,6 @@ class CatanGame {
     vector<Player*> players;
     Board board;
 
-    void initializeBoard();
-
     public:
     CatanGame(Player& player1, Player& player2, Player& player3);
 
@@ -31,6 +29,7 @@ class CatanGame {
     bool buyDevelopmentCard(string card, Player& player);
     int getTurnCounter();
     string getCurrentPlayerTurn();
+    void printBoard();
     void startGame();
     void startTurn(string playerName);
     void printPlayersStats();
