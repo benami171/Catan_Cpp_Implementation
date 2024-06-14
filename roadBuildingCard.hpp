@@ -6,6 +6,6 @@ namespace Catan {
     class roadBuildingCard : public developmentCard {
     public:
         roadBuildingCard(const string& type, int turnBoughtIn);
-        void useCard() const override;
+        void useCard(Player& owner) const override;
     };
 }

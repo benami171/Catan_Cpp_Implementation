@@ -3,9 +3,9 @@
 using namespace std;
 using namespace Catan;
 
-roadBuildingCard::roadBuildingCard(const string& type, int turnBoughtIn) 
+Catan::roadBuildingCard::roadBuildingCard(const string& type, int turnBoughtIn) 
 : developmentCard(type, turnBoughtIn) {}
 
-void roadBuildingCard::useCard() const {
+void Catan::roadBuildingCard::useCard(Player& owner) const {
     cout << "You have used a road building card!" << endl;
 }

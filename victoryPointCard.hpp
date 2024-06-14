@@ -8,7 +8,7 @@ namespace Catan {
 class victoryPointCard : public developmentCard {
    public:
     victoryPointCard(const string& type, int turnBoughtIn);
-    void useCard() const override;
+    void useCard(Player& owner) const override;
 };
 
 }  // namespace Catan

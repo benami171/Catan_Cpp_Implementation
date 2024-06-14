@@ -7,7 +7,7 @@ namespace Catan {
 class yearOfPlentyCard : public developmentCard {
    public:
     yearOfPlentyCard(const string& type, int turnBoughtIn);
-    void useCard() const override;
+    void useCard(Player& owner) const override;
 };
 
 }  // namespace Catan

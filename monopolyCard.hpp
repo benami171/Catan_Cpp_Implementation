@@ -10,7 +10,8 @@ namespace Catan {
     class monopolyCard : public developmentCard {
     public:
         monopolyCard(const string& type, int turnBoughtIn);
-        void useCard() const override;
+        void useCard(Player& owner) const override;
+        void useCard(Player& owner,string chosenResource,CatanGame& game) const;
     };
 
 }

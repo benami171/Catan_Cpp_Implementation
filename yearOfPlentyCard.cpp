@@ -3,9 +3,9 @@
 using namespace std;
 using namespace Catan;
 
-yearOfPlentyCard::yearOfPlentyCard(const string& type, int turnBoughtIn)
+Catan::yearOfPlentyCard::yearOfPlentyCard(const string& type, int turnBoughtIn)
     : developmentCard("YearOfPlenty", turnBoughtIn) {}
 
-void yearOfPlentyCard::useCard() const {
+void Catan::yearOfPlentyCard::useCard(Player& owner) const {
     cout << "Year of Plenty card used" << endl;
 }

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include "Player.hpp"
 using namespace std;
 namespace Catan {
 
@@ -14,7 +15,7 @@ public:
     developmentCard(const string& type, int turnBoughtIn);
     virtual ~developmentCard();
     string getCardCategory() const;
-    virtual void useCard() const = 0; // Pure virtual function to make developmentCard abstract
+    virtual void useCard(Player& owner) const = 0; // Pure virtual function to make developmentCard abstract
 
     int getTurnBoughtIn() const;
 };

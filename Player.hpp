@@ -114,10 +114,11 @@ class Player {
     void payToll();
     bool buyDevelopmentCard(string card, CatanGame& game, int turnBoughtIn);
 
-    bool useDevelopmentCard(string card, CatanGame& game);
+    bool useDevelopmentCard(string card,string chosenResource, CatanGame& game);
     
     template <typename T>
     bool useCardIfEligible(vector<T>& cards, CatanGame& game);
+    bool useMonopolyIfEligible(vector<monopolyCard>& cards,string chosenResource,CatanGame& game); // seperated monopoly because it needs access to be used differentley.
     bool trade(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, Player& otherPlayer);
     bool tradeWithBank(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, CatanGame& game);
 };

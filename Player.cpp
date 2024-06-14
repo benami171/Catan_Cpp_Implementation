@@ -427,7 +427,7 @@ bool Player::buyDevelopmentCard(string card, CatanGame& game, int turnBoughtIn) 
     }
 }
 
-bool Player::useDevelopmentCard(string card, CatanGame& game) {
+bool Player::useDevelopmentCard(string card,string chosenResource, CatanGame& game) {
     if(!myTurn){
         cout << "It is not your turn" << endl;
         return false;
@@ -446,7 +446,7 @@ bool Player::useDevelopmentCard(string card, CatanGame& game) {
         }
     } else if (card == "monopoly") {
         if (!monopolyCards.empty()) {
-            return useCardIfEligible(monopolyCards, game);
+            return useMonopolyIfEligible(monopolyCards,chosenResource, game);
         } else {
             cout << "Player: " << this->getName() << " don't have any monopoly cards." << endl;
         }
@@ -461,6 +461,17 @@ bool Player::useCardIfEligible(vector<T>& cards, CatanGame& game) {
     for (auto it = cards.begin(); it != cards.end(); ++it) {
         if (game.getTurnCounter() > it->getTurnBoughtIn()) {
             it->useCard();
+            cards.erase(it);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Player::useMonopolyIfEligible(vector<monopolyCard>& cards,string chosenResource,CatanGame& game) {
+    for (auto it = cards.begin(); it != cards.end(); ++it) {
+        if (game.getTurnCounter() > it->getTurnBoughtIn()) {
+            it->useCard(*this,chosenResource,game);
             cards.erase(it);
             return true;
         }
