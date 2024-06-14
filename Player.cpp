@@ -7,7 +7,7 @@
 using namespace std;
 using namespace Catan;
 
-Player::Player() : name(""), myTurn(false), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) {
+Player::Player() : name(""), myTurn(false), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0), hasLargestArmy(false) {
     resourceCards["brick"] = 0;
     resourceCards["lumber"] = 0;
     resourceCards["wool"] = 0;
@@ -18,9 +18,10 @@ Player::Player() : name(""), myTurn(false), initialSettlementNumber(1), initialR
     developmentCards["yearOfPlenty"] = 0;
     developmentCards["knight"] = 0;
     developmentCards["monopoly"] = 0;
+    developmentCards["largestArmy"] = 0;
 }
 
-Player::Player(string name) : name(name), myTurn(false), playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0) {
+Player::Player(string name) : name(name), myTurn(false), playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0), hasLargestArmy(false) {
     this->name = name;
     victoryPoints = 0;
     roads_placed_counter = 0;
@@ -36,8 +37,9 @@ Player::Player(string name) : name(name), myTurn(false), playerColor(""), initia
     developmentCards["victoryPoint"] = 0;
     developmentCards["roadBuilding"] = 0;
     developmentCards["yearOfPlenty"] = 0;
-    developmentCards["Knight"] = 0;
-    developmentCards["Monopoly"] = 0;
+    developmentCards["knight"] = 0;
+    developmentCards["monopoly"] = 0;
+    developmentCards["largestArmy"] = 0;
 }
 
 bool Player::trade(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, Player& otherPlayer) {
@@ -413,6 +415,7 @@ bool Player::buyDevelopmentCard(string card, CatanGame& game, int turnBoughtIn) 
             knightCard newCard(card, turnBoughtIn);
             knightCards.push_back(newCard);
             addDevelopmentCard("knight", 1);
+
         } else if (card == "monopoly") {
             monopolyCard newCard(card, turnBoughtIn);
             monopolyCards.push_back(newCard);
@@ -571,11 +574,23 @@ void Player::printDevelopmentCards() {
 }
 
 void Player::printPlayerInfo() {
-    cout << "Name: " << name << endl;
-    cout << "Victory Points: " << victoryPoints << endl;
+    cout << this->getPlayerColor() << name << "\033[0m" << "\nResources: ";
+    for (auto it = resourceCards.begin(); it != resourceCards.end(); ++it) {
+        if (it != resourceCards.begin()) {
+            cout << " - ";
+        }
+        cout << "[" << it->first << ", " << it->second << "]";
+    }
+    cout << endl;
+    cout << "Development Cards: ";
+    for (auto it = developmentCards.begin(); it != developmentCards.end(); ++it) {
+        if (it != developmentCards.begin()) {
+            cout << " - ";
+        }
+        cout << "[" << it->first << ", " << it->second << "]";
+    }
+    cout << "[Victory Points: " << victoryPoints << "]" << endl;
     cout << "Roads placed counter: " << roads_placed_counter << "\n";
     cout << "Settlements placed counter: " << settlements_placed_counter << endl;
     cout << "Cities placed counter: " << cities_placed_counter << endl;
-    printDevelopmentCards();
-    printResources();
 }

@@ -33,7 +33,8 @@ class CatanGame {
     string getCurrentPlayerTurn();
     void startGame();
     void startTurn(string playerName);
-    void printPlayersStats(vector<Player*>& players);
+    void printPlayersStats();
+    void checkLargestArmy();
     void endTurn();
 };
 }  // namespace Catan

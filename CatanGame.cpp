@@ -85,7 +85,7 @@ bool CatanGame::buyDevelopmentCard(string card, Player& player) {
         player.addDevelopmentCard(card, 1);
         player.removeResourceCard("Ore", 1);
         player.removeResourceCard("Wheat", 1);
-        player.removeResourceCard("Sheep", 1);
+        player.removeResourceCard("Sheep", 1);            
         return true;
     } else {
         cout << "No " << card << " cards left." << endl;
@@ -97,9 +97,21 @@ string CatanGame::getCurrentPlayerTurn() {
     return currentPlayerTurn;
 }
 
-void CatanGame::printPlayersStats(vector<Player*>& players) {
+void CatanGame::printPlayersStats() {
     for (size_t i = 0; i < players.size(); i++) {
         players[i]->printPlayerInfo();
+    }
+}
+
+void CatanGame::checkLargestArmy() {
+    for (size_t i = 0; i < players.size(); i++) {
+        if (players[i]->getDevelopmentCardAmount("Knight") >= 3) {
+            if(players[i]->hasLargestArmy == false) {
+                players[i]->addVictoryPoints(2);
+                players[i]->hasLargestArmy = true;
+            }
+            cout << players[i]->getName() << " has the largest army." << endl;
+        }
     }
 }
 

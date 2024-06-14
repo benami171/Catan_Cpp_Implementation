@@ -49,7 +49,7 @@ class Player {
     Player();
 
     Player(string name);
-
+    bool hasLargestArmy;
     string getPlayerColor();
 
     string getName();
