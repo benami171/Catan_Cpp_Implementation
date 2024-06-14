@@ -434,7 +434,7 @@ bool Player::buyDevelopmentCard(string card, CatanGame& game, int turnBoughtIn) 
             knightCard newCard(card, turnBoughtIn);
             knightCards.push_back(newCard);
             addDevelopmentCard("knight", 1);
-
+            game.checkLargestArmy();
         } else if (card == "monopoly") {
             monopolyCard newCard(card, turnBoughtIn);
             monopolyCards.push_back(newCard);

@@ -12,7 +12,7 @@ class developmentCard;
 CatanGame::CatanGame(Player& player1, Player& player2, Player& player3) {
     turnCounter = 0;
     resourceCardsLeft = {{"Ore", 19}, {"Wood", 19}, {"Brick", 19}, {"Wheat", 19}, {"Sheep", 19}};
-    developmentCardsLeft = {{"Knight", 14}, {"Victory Point", 5}, {"Road Building", 2}, {"Year of Plenty", 2}, {"Monopoly", 2}};
+    developmentCardsLeft = {{"knight", 3}, {"victoryPoint", 5}, {"roadBuilding", 2}, {"yearOfPlenty", 2}, {"Monopoly", 2}};
     players = {&player1, &player2, &player3};
     currentPlayerTurn = "P1";
 }
@@ -107,14 +107,32 @@ void CatanGame::printPlayersStats() {
 }
 
 void CatanGame::checkLargestArmy() {
-    for (size_t i = 0; i < players.size(); i++) {
-        if (players[i]->getDevelopmentCardAmount("Knight") >= 3) {
-            if(players[i]->hasLargestArmy == false) {
-                players[i]->addVictoryPoints(2);
-                players[i]->hasLargestArmy = true;
-            }
-            cout << players[i]->getName() << " has the largest army." << endl;
+    Player* playerWithLargestArmy = nullptr;
+    int maxKnights = 0;
+
+    for (auto& player : players) {
+        int knightCount = player->getDevelopmentCardAmount("Knight");
+        if (knightCount > maxKnights) {
+            maxKnights = knightCount;
+            playerWithLargestArmy = player;
         }
+    }
+
+    if (playerWithLargestArmy != nullptr && maxKnights >= 3) {
+        for (auto& player : players) {
+            if (player == playerWithLargestArmy) {
+                if (!player->hasLargestArmy) {
+                    player->addVictoryPoints(2);
+                    player->hasLargestArmy = true;
+                }
+            } else {
+                if (player->hasLargestArmy) {
+                    player->addVictoryPoints(-2);
+                    player->hasLargestArmy = false;
+                }
+            }
+        }
+        cout << playerWithLargestArmy->getName() << " has the largest army." << endl;
     }
 }
 
