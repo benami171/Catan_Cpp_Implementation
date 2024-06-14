@@ -59,10 +59,13 @@ void CatanGame::startTurn(string playerName) {
 
 void CatanGame::endTurn() {
     if (currentPlayerTurn == "P1") {
+        players[0]->setTurn(false);
         startTurn("P2");
     } else if (currentPlayerTurn == "P2") {
+        players[1]->setTurn(false);
         startTurn("P3");
     } else {
+        players[2]->setTurn(false);
         startTurn("P1");
     }
 }
@@ -87,6 +90,16 @@ bool CatanGame::buyDevelopmentCard(string card, Player& player) {
     } else {
         cout << "No " << card << " cards left." << endl;
         return false;
+    }
+}
+
+string CatanGame::getCurrentPlayerTurn() {
+    return currentPlayerTurn;
+}
+
+void CatanGame::printPlayersStats(vector<Player*>& players) {
+    for (size_t i = 0; i < players.size(); i++) {
+        players[i]->printPlayerInfo();
     }
 }
 

@@ -30,8 +30,10 @@ class CatanGame {
     Board& getBoard();
     bool buyDevelopmentCard(string card, Player& player);
     int getTurnCounter();
+    string getCurrentPlayerTurn();
     void startGame();
     void startTurn(string playerName);
+    void printPlayersStats(vector<Player*>& players);
     void endTurn();
 };
 }  // namespace Catan
