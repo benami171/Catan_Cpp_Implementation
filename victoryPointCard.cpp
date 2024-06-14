@@ -8,5 +8,5 @@ victoryPointCard::victoryPointCard(const string& type, int turnBoughtIn)
     : developmentCard("Victory Point", turnBoughtIn) {}
 
 void victoryPointCard::useCard(Player& owner) const {
-    cout << "Victory Point card used" << endl;
+    cout << owner.getName() << " used a Victory Point card!" << endl;
 }
