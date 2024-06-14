@@ -5,6 +5,8 @@
 using namespace std;
 namespace Catan {
 
+class Player;
+
 class victoryPointCard : public developmentCard {
    public:
     victoryPointCard(const string& type, int turnBoughtIn);

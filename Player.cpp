@@ -1,13 +1,18 @@
 #include "Player.hpp"
-
+#include "developmentCard.hpp"
+#include "knightCard.hpp"
+#include "monopolyCard.hpp"
+#include "roadBuildingCard.hpp"
+#include "victoryPointCard.hpp"
+#include "yearOfPlentyCard.hpp"
+#include "Tile.hpp"
 #include "Board.hpp"
 #include "CatanGame.hpp"
-#include "roadPlace.hpp"
 
 using namespace std;
 using namespace Catan;
 
-Player::Player() : name(""), myTurn(false), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0), hasLargestArmy(false) {
+Player::Player() : name(""), myTurn(false), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0), freeRoads(0),hasLargestArmy(false) {
     resourceCards["brick"] = 0;
     resourceCards["lumber"] = 0;
     resourceCards["wool"] = 0;
@@ -21,7 +26,7 @@ Player::Player() : name(""), myTurn(false), initialSettlementNumber(1), initialR
     developmentCards["largestArmy"] = 0;
 }
 
-Player::Player(string name) : name(name), myTurn(false), playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0), hasLargestArmy(false) {
+Player::Player(string name) : name(name), myTurn(false), playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0),freeRoads(0), hasLargestArmy(false) {
     this->name = name;
     victoryPoints = 0;
     roads_placed_counter = 0;
@@ -44,7 +49,7 @@ Player::Player(string name) : name(name), myTurn(false), playerColor(""), initia
 
 bool Player::trade(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, Player& otherPlayer) {
     if(!myTurn){
-        cout << "It is not your turn" << endl;
+        cout << name << " Can't trade, it is not your turn." << endl;
         return false;
     }
     // Check if current player has enough resources to give
@@ -147,6 +152,7 @@ void Player::placeRoad(int road_index, Board& board) {
     }
 }
 
+
 void Player::placeInitialRoad(int road_index, Board& board) {
     roadPlace* road = board.getRoadAt(road_index);
     if (road->placedRoad(this)) {
@@ -156,6 +162,21 @@ void Player::placeInitialRoad(int road_index, Board& board) {
         cout << "Player " << name << " placed a road at index " << road_index << endl;
     } else {
         cout << "Invalid road placement" << endl;
+    }
+}
+
+void Player::placeFreeRoad(int road_index, Board& board) {
+    if (freeRoads > 0) {
+        roadPlace* road = board.getRoadAt(road_index);
+        if (road->placedRoad(this)) {
+            freeRoads--;
+            owned_roads_indices.push_back(road_index);
+            cout << name << " Placed a road at index " << road_index << endl;
+        } else {
+            cout << "Invalid road placement" << endl;
+        }
+    } else {
+        cout << "Player " << name << " does not have any free roads" << endl;
     }
 }
 
@@ -460,7 +481,7 @@ template <typename T>
 bool Player::useCardIfEligible(vector<T>& cards, CatanGame& game) {
     for (auto it = cards.begin(); it != cards.end(); ++it) {
         if (game.getTurnCounter() > it->getTurnBoughtIn()) {
-            it->useCard();
+            it->useCard(*this);
             cards.erase(it);
             return true;
         }
@@ -483,6 +504,13 @@ string Player::getName() {
     return name;
 }
 
+void Player::addFreeRoads(int roads) {
+    freeRoads += roads;
+}
+
+int Player::getFreeRoads() {
+    return freeRoads;
+}
 int Player::getVictoryPoints() {
     return victoryPoints;
 }
@@ -512,7 +540,15 @@ void Player::addResourceCard(string resource, int amount) {
 }
 
 void Player::removeResourceCard(string resource, int amount) {
-    resourceCards[resource] -= amount;
+    if (resourceCards[resource] >= amount) {
+        resourceCards[resource] -= amount;
+    } else {
+        throw runtime_error("Player " + name + " does not have enough " + resource + " to remove " + to_string(amount));
+    }
+}
+
+int Player::getResourceCardAmount(string resource) {
+    return resourceCards[resource];
 }
 
 // the development cards are victoryPoint, roadBuilding, yearOfPlenty, monopoly, Knight.
@@ -528,14 +564,10 @@ void Player::addDevelopmentCard(string developmentCard, int amount) {
     }
 }
 
-
 void Player::removeDevelopmentCard(string developmentCard, int amount) {
     developmentCards[developmentCard] -= amount;
 }
 
-int Player::getResourceCardAmount(string resource) {
-    return resourceCards[resource];
-}
 
 int Player::getDevelopmentCardAmount(string developmentCard) {
     return developmentCards[developmentCard];

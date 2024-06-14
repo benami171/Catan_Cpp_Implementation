@@ -1,13 +1,10 @@
 #include "Board.hpp"
-
-#include <iostream>
-#include <set>
-#include <string>
-#include <unordered_map>
-#include <vector>
-
+#include "Tile.hpp"
 #include "roadPlace.hpp"
 #include "structurePlace.hpp"
+#include "Player.hpp"
+#include <iostream>
+#include <vector>
 
 using namespace std;
 using namespace Catan;

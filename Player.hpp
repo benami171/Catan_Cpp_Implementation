@@ -1,19 +1,18 @@
+#pragma once
+
 #include <array>
-#include <cstdlib>  // for rand() and srand()
+#include <cstdlib>
 #include <iostream>
 #include <set>
 #include <string>
 #include <unordered_map>
 #include <vector>
-
 #include "developmentCard.hpp"
 #include "knightCard.hpp"
 #include "monopolyCard.hpp"
 #include "roadBuildingCard.hpp"
 #include "victoryPointCard.hpp"
 #include "yearOfPlentyCard.hpp"
-#ifndef PLAYER_HPP
-#define PLAYER_HPP
 
 using namespace std;
 
@@ -33,6 +32,7 @@ class Player {
     int roads_placed_counter;
     int settlements_placed_counter;
     int cities_placed_counter;
+    int freeRoads;
     vector<int> owned_roads_indices;
     vector<int> owned_structures_indices;
     vector<int> owned_cities_indices;
@@ -53,6 +53,7 @@ class Player {
     string getPlayerColor();
     string getName();
     void addVictoryPoints(int points);
+    void addFreeRoads(int roads);
     void removeVictoryPoints(int points);
 
     // the resources are brick, lumber, wool, wheat, ore
@@ -72,6 +73,8 @@ class Player {
 
     int getVictoryPoints();
 
+    int getFreeRoads();
+
     int getSettlementsPlacedCounter();
 
     int getCitiesPlacedCounter();
@@ -90,6 +93,8 @@ class Player {
     void printPlayerInfo();
 
     void placeRoad(int roadPlace_index, Board& board);
+
+    void placeFreeRoad(int roadPlace_index, Board& board);
 
     void placeInitialRoad(int roadPlace_index, Board& board);
 
@@ -125,4 +130,3 @@ class Player {
 
 }  // namespace Catan
 
-#endif  // PLAYER_HPP

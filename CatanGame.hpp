@@ -1,11 +1,10 @@
+#pragma once
 
 #include <vector>
 #include <string>
 #include <unordered_map>
 #include "Board.hpp"
-#include "Player.hpp"
-#ifndef CATANGAME_HPP
-#define CATANGAME_HPP
+
 
 using namespace std;
 
@@ -26,6 +25,7 @@ class CatanGame {
     unordered_map<string, int> resourceCardsLeft;
     unordered_map<string, int> developmentCardsLeft;
     Board& getBoard();
+    vector<Player*>& getPlayers();
     bool buyDevelopmentCard(string card, Player& player);
     int getTurnCounter();
     string getCurrentPlayerTurn();
@@ -38,4 +38,3 @@ class CatanGame {
 };
 }  // namespace Catan
 
-#endif  // CATANGAME_HPP

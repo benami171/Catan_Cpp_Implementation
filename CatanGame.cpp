@@ -1,12 +1,9 @@
 #include "CatanGame.hpp"
-
-#include <set>
-#include <string>
-#include <unordered_map>
-
+#include "Board.hpp"
 #include "Player.hpp"
 
 using namespace std;
+using namespace Catan;
 
 namespace Catan {
 
@@ -31,6 +28,9 @@ Board& CatanGame::getBoard() {
 int CatanGame::getTurnCounter() {
     return turnCounter;
 }
+vector<Player*>& CatanGame::getPlayers() {
+    return players;
+}
 
 
 void CatanGame::startGame() {
@@ -52,7 +52,7 @@ void CatanGame::startTurn(string playerName) {
     } else {
         players[2]->setTurn(true);
     }
-    cout << "It is now " << playerName << "'s turn." << endl;
+    cout  << playerName << " is playing now..." << endl;
     return;
 }
 

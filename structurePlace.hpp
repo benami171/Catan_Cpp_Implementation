@@ -1,19 +1,20 @@
-#include <string.h>
-#include <iostream>
+#pragma once
+
 #include <array>
+#include <string>
+#include <iostream>
 #include <set>
 #include <unordered_map>
 #include <vector>
-#include "Player.hpp"
-#include "roadPlace.hpp"
-
-#ifndef STRUCTUREPLACE_HPP
-#define STRUCTUREPLACE_HPP
 
 using namespace std;
 
 namespace Catan {
-class Tile;
+
+class Player; // Forward declaration
+class Tile; // Forward declaration
+class roadPlace; // Forward declaration
+
 class structurePlace {
    private:
     Player* owner;
@@ -55,4 +56,3 @@ class structurePlace {
 
 }  // namespace Catan
 
-#endif  // STRUCTUREPLACE_HPP

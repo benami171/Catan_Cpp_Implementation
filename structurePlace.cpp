@@ -1,5 +1,7 @@
 #include "structurePlace.hpp"
+#include "Player.hpp"
 #include "Tile.hpp"
+#include "roadPlace.hpp"
 
 using namespace std;
 using namespace Catan;

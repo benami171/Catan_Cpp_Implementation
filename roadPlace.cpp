@@ -1,10 +1,9 @@
 #include "roadPlace.hpp"
-
+#include "Player.hpp"
 #include "structurePlace.hpp"
 
 using namespace std;
 using namespace Catan;
-
 
 roadPlace::roadPlace() : owner(nullptr), roadNumber(0) {}
 

@@ -1,4 +1,5 @@
 #include "developmentCard.hpp"
+#include "Player.hpp"
 
 using namespace std;
 using namespace Catan;

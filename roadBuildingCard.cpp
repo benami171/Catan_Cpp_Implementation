@@ -1,11 +1,12 @@
-#include "roadBuildingCard.hpp" 
+#include "roadBuildingCard.hpp"
+#include "Player.hpp"
 
 using namespace std;
 using namespace Catan;
 
-Catan::roadBuildingCard::roadBuildingCard(const string& type, int turnBoughtIn) 
+roadBuildingCard::roadBuildingCard(const string& type, int turnBoughtIn) 
 : developmentCard(type, turnBoughtIn) {}
 
-void Catan::roadBuildingCard::useCard(Player& owner) const {
-    cout << "You have used a road building card!" << endl;
+void roadBuildingCard::useCard(Player& owner) const {
+    owner.addFreeRoads(2);
 }

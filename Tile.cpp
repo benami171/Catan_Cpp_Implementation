@@ -1,19 +1,11 @@
 #include "Tile.hpp"
-
-#include <array>
-#include <string>
+#include "Player.hpp"
+#include "roadPlace.hpp"
+#include "structurePlace.hpp"
 
 using namespace std;
 using namespace Catan;
 
-// enum class ResourceType {
-//     WOOD,
-//     BRICK,
-//     SHEEP,
-//     WHEAT,
-//     ORE,
-//     DESERT
-// };
 
 Tile::Tile(const string& resourceType,int tileNumber, int activationNumber, vector<structurePlace*> structurePlaces, vector<roadPlace*> roadPlaces)
     : structurePlaces(6), roadPlaces(6), resourceType(resourceType), activationNumber(activationNumber) {

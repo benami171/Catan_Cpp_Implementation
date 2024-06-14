@@ -1,18 +1,18 @@
-#include <string.h>
-#include <iostream>
-#include <set>
-#include <unordered_map>
+#pragma once
+
 #include <array>
-
-#include "Player.hpp"
-
-#ifndef ROADPLACE_HPP
-#define ROADPLACE_HPP
+#include <string>
+#include <iostream>
+#include <unordered_map>
+#include <vector>
 
 using namespace std;
 
 namespace Catan {
+
+    class Player; // Forward declaration of Player, used to avoid circular dependencies.
     class structurePlace; // Forward declaration of structurePlace, used to avoid circular dependencies.
+
     class roadPlace {
     private:
         Player* owner;
@@ -35,4 +35,3 @@ namespace Catan {
 
 }
 
-#endif  // ROADPLACE_HPP

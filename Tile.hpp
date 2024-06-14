@@ -1,12 +1,11 @@
+#pragma once
+
 #include <array>
 #include <string>
-
+#include <vector>
 #include "Player.hpp"
 #include "roadPlace.hpp"
 #include "structurePlace.hpp"
-
-#ifndef TILE_HPP
-#define TILE_HPP
 
 using namespace std;
 
@@ -40,4 +39,3 @@ class Tile {
 
 }  // namespace Catan
 
-#endif  // TILE_HPP

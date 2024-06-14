@@ -2,9 +2,12 @@
 
 #include <iostream>
 #include <string>
-#include "Player.hpp"
+
 using namespace std;
+
 namespace Catan {
+
+class Player;
 
 class developmentCard {
 public:
