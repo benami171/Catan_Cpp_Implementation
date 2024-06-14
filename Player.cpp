@@ -1,18 +1,19 @@
 #include "Player.hpp"
+
+#include "Board.hpp"
+#include "CatanGame.hpp"
+#include "Tile.hpp"
 #include "developmentCard.hpp"
 #include "knightCard.hpp"
 #include "monopolyCard.hpp"
 #include "roadBuildingCard.hpp"
 #include "victoryPointCard.hpp"
 #include "yearOfPlentyCard.hpp"
-#include "Tile.hpp"
-#include "Board.hpp"
-#include "CatanGame.hpp"
 
 using namespace std;
 using namespace Catan;
 
-Player::Player() : name(""), myTurn(false), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0), freeRoads(0),hasLargestArmy(false) {
+Player::Player() : name(""), myTurn(false), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0), freeRoads(0), hasLargestArmy(false) {
     resourceCards["brick"] = 0;
     resourceCards["lumber"] = 0;
     resourceCards["wool"] = 0;
@@ -26,7 +27,7 @@ Player::Player() : name(""), myTurn(false), initialSettlementNumber(1), initialR
     developmentCards["largestArmy"] = 0;
 }
 
-Player::Player(string name) : name(name), myTurn(false), playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0),freeRoads(0), hasLargestArmy(false) {
+Player::Player(string name) : name(name), myTurn(false), playerColor(""), initialSettlementNumber(1), initialRoadNumber(1), victoryPoints(0), roads_placed_counter(0), settlements_placed_counter(0), cities_placed_counter(0), freeRoads(0), hasLargestArmy(false) {
     this->name = name;
     victoryPoints = 0;
     roads_placed_counter = 0;
@@ -48,7 +49,7 @@ Player::Player(string name) : name(name), myTurn(false), playerColor(""), initia
 }
 
 bool Player::trade(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, Player& otherPlayer) {
-    if(!myTurn){
+    if (!myTurn) {
         cout << name << " Can't trade, it is not your turn." << endl;
         return false;
     }
@@ -88,7 +89,7 @@ bool Player::trade(unordered_map<string, int> giveResources, unordered_map<strin
 }
 
 bool Player::tradeWithBank(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, CatanGame& game) {
-    if(!myTurn){
+    if (!myTurn) {
         cout << "It is not your turn" << endl;
         return false;
     }
@@ -126,7 +127,6 @@ bool Player::tradeWithBank(unordered_map<string, int> giveResources, unordered_m
     return true;
 }
 
-
 void Player::placeRoad(int road_index, Board& board) {
     if (!myTurn) {
         cout << "It is not your turn." << endl;
@@ -152,7 +152,6 @@ void Player::placeRoad(int road_index, Board& board) {
     }
 }
 
-
 void Player::placeInitialRoad(int road_index, Board& board) {
     roadPlace* road = board.getRoadAt(road_index);
     if (road->placedRoad(this)) {
@@ -165,18 +164,22 @@ void Player::placeInitialRoad(int road_index, Board& board) {
     }
 }
 
-void Player::placeFreeRoad(int road_index, Board& board) {
+bool Player::placeFreeRoad(int road_index, Board& board) {
     if (freeRoads > 0) {
         roadPlace* road = board.getRoadAt(road_index);
         if (road->placedRoad(this)) {
             freeRoads--;
             owned_roads_indices.push_back(road_index);
+            roads_placed_counter++;
             cout << name << " Placed a road at index " << road_index << endl;
+            return true;
         } else {
             cout << "Invalid road placement" << endl;
+            return false;
         }
     } else {
         cout << "Player " << name << " does not have any free roads" << endl;
+        return false;
     }
 }
 
@@ -272,10 +275,8 @@ void Player::placeCity(int structurePlace_index, Board& board) {
     }
 }
 
-
-
 int Player::rollDice() {
-    if(!myTurn){
+    if (!myTurn) {
         cout << "It is not your turn" << endl;
         return false;
     }
@@ -286,7 +287,7 @@ int Player::rollDice() {
 }
 
 int Player::rollDice(int wantedNumber) {
-    if(!myTurn){
+    if (!myTurn) {
         cout << "It is not your turn" << endl;
         return false;
     }
@@ -298,21 +299,21 @@ int Player::rollDice(int wantedNumber) {
 }
 
 // this function gets called by getRecources() when the player rolls a 7.
-void Player::payToll(){
+void Player::payToll() {
     int totalCards = 0;
     for (auto& resource : resourceCards) {
         totalCards += resource.second;
     }
-    if(totalCards >= 7){ // in this case, the player must give up half of his cards.
-        int halfAmount = totalCards/2;
+    if (totalCards >= 7) {  // in this case, the player must give up half of his cards.
+        int halfAmount = totalCards / 2;
         for (auto& resource : resourceCards) {
             // as long as the player still has to give up cards, the loop will continue.
-            if(halfAmount == 0){
+            if (halfAmount == 0) {
                 break;
             }
             // checks for each type of resource if the player own more or equal amount of cards than the halfAmount.
             // If so, the player will give up halfAmount of that resource.
-            if(resource.second >= halfAmount){
+            if (resource.second >= halfAmount) {
                 resource.second -= halfAmount;
                 halfAmount = 0;
             } else {
@@ -321,22 +322,20 @@ void Player::payToll(){
                 resource.second = 0;
             }
         }
-        
     }
 }
 
-
 /**
  * @brief This function is used to add resource cards to the player's hand based on the dice roll.
- * 
+ *
  * @param diceRoll The number rolled on the dice.
  * @param board The game board.
- * 
+ *
  * If the dice roll is 7, the player pays a toll and the function returns.
- * 
- * The function then iterates over the indices of the structures owned by the player. 
+ *
+ * The function then iterates over the indices of the structures owned by the player.
  * For each structure, it retrieves the resource_activationNumber vector, which contains pairs of resource types and their corresponding activation numbers.
- * 
+ *
  * It then iterates over this vector. If the activation number of a pair matches the dice roll and the structure is a settlement, it adds one resource card of the corresponding type to the player's hand.
  * If the activation number of a pair matches the dice roll and the structure is a city, it adds two resource cards of the corresponding type to the player's hand.
  */
@@ -344,19 +343,18 @@ void Player::getResources(int diceRoll, Board& board) {
     if (diceRoll == 7) {
         return payToll();
     }
-    for (int i = 0 ; i < owned_structures_indices.size(); i++){
+    for (int i = 0; i < owned_structures_indices.size(); i++) {
         structurePlace* settlement = board.getStructureAt(owned_structures_indices[i]);
         const vector<pair<string, int>> resources_activation_numbers = settlement->getResourceActivationNumber();
-        for (int i = 0 ; i < resources_activation_numbers.size(); i++){
-            if (resources_activation_numbers[i].second == diceRoll && settlement->getStructType() == "SETTLEMENT"){
+        for (int i = 0; i < resources_activation_numbers.size(); i++) {
+            if (resources_activation_numbers[i].second == diceRoll && settlement->getStructType() == "SETTLEMENT") {
                 addResourceCard(resources_activation_numbers[i].first, 1);
-            } else if (resources_activation_numbers[i].second == diceRoll && settlement->getStructType() == "CITY"){
+            } else if (resources_activation_numbers[i].second == diceRoll && settlement->getStructType() == "CITY") {
                 addResourceCard(resources_activation_numbers[i].first, 2);
             }
-        } 
+        }
     }
 }
-
 
 void Player::getInitResourcesFromTile(Tile* tile) {
     // cout << "Player " << name << " is getting resources from tile " << tile->getTileNumber() << endl;
@@ -415,7 +413,7 @@ int Player::getInitialRoadsCounter() {
 }
 
 bool Player::buyDevelopmentCard(string card, CatanGame& game, int turnBoughtIn) {
-    if(!myTurn){
+    if (!myTurn) {
         cout << "It is not your turn" << endl;
         return false;
     }
@@ -448,53 +446,49 @@ bool Player::buyDevelopmentCard(string card, CatanGame& game, int turnBoughtIn) 
     }
 }
 
-bool Player::useDevelopmentCard(string card,string chosenResource, CatanGame& game) {
-    if(!myTurn){
-        cout << "It is not your turn" << endl;
-        return false;
-    }
-    if (card == "roadBuilding") {
-        if (!roadBuildingCards.empty()) {
-            return useCardIfEligible(roadBuildingCards, game);
-        } else {
-            cout << "Player: " << this->getName() <<" don't have any road building cards." << endl;
+bool Player::useMonopoly(string chosenResource, CatanGame& game) {
+    vector<monopolyCard> mCards = this->monopolyCards;
+    for (auto it = mCards.begin(); it != mCards.end(); ++it) {
+        if (game.getTurnCounter() > it->getTurnBoughtIn()) {
+            it->useCard(*this, chosenResource, game);
+            mCards.erase(it);
+            return true;
         }
-    } else if (card == "yearOfPlenty") {
-        if (!yearOfPlentyCards.empty()) {
-            return useCardIfEligible(yearOfPlentyCards, game);
-        } else {
-            cout << "Player: " << this->getName() <<" don't have any year of plenty cards." << endl;
-        }
-    } else if (card == "monopoly") {
-        if (!monopolyCards.empty()) {
-            return useMonopolyIfEligible(monopolyCards,chosenResource, game);
-        } else {
-            cout << "Player: " << this->getName() << " don't have any monopoly cards." << endl;
-        }
-    } else {
-        cout << "Invalid card type." << endl;
     }
     return false;
 }
 
-template <typename T>
-bool Player::useCardIfEligible(vector<T>& cards, CatanGame& game) {
-    for (auto it = cards.begin(); it != cards.end(); ++it) {
+bool Player::useYearOfPlenty(string resource1, string resource2, CatanGame& game) {
+    vector<yearOfPlentyCard> yCards = this->yearOfPlentyCards;
+    for (auto it = yCards.begin(); it != yCards.end(); ++it) {
         if (game.getTurnCounter() > it->getTurnBoughtIn()) {
             it->useCard(*this);
-            cards.erase(it);
+            yCards.erase(it);
             return true;
         }
     }
     return false;
 }
 
-bool Player::useMonopolyIfEligible(vector<monopolyCard>& cards,string chosenResource,CatanGame& game) {
-    for (auto it = cards.begin(); it != cards.end(); ++it) {
+bool Player::useRoadBuilding(int road1, int road2, CatanGame& game) {
+    vector<roadBuildingCard> rCards = this->roadBuildingCards;
+    roadPlace* road1p = game.getBoard().getRoadAt(road1);
+    roadPlace* road2p = game.getBoard().getRoadAt(road2);
+    bool first_road = false;
+    bool second_road = false;
+    for (auto it = rCards.begin(); it != rCards.end(); ++it) {
         if (game.getTurnCounter() > it->getTurnBoughtIn()) {
-            it->useCard(*this,chosenResource,game);
-            cards.erase(it);
-            return true;
+            it->useCard(*this);
+            if (road1 >= 0 && road2 >= 0) {
+                first_road = road1p->canPlaceRoad(this);
+                second_road = road2p->canPlaceRoad(this);
+                if (first_road && second_road) {
+                    placeFreeRoad(road1, game.getBoard());
+                    placeFreeRoad(road2, game.getBoard());
+                    rCards.erase(it);
+                    return true;
+                }
+            }
         }
     }
     return false;
@@ -567,7 +561,6 @@ void Player::addDevelopmentCard(string developmentCard, int amount) {
 void Player::removeDevelopmentCard(string developmentCard, int amount) {
     developmentCards[developmentCard] -= amount;
 }
-
 
 int Player::getDevelopmentCardAmount(string developmentCard) {
     return developmentCards[developmentCard];

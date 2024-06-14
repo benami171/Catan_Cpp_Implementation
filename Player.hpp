@@ -94,7 +94,7 @@ class Player {
 
     void placeRoad(int roadPlace_index, Board& board);
 
-    void placeFreeRoad(int roadPlace_index, Board& board);
+    bool placeFreeRoad(int roadPlace_index, Board& board);
 
     void placeInitialRoad(int roadPlace_index, Board& board);
 
@@ -123,7 +123,9 @@ class Player {
     
     template <typename T>
     bool useCardIfEligible(vector<T>& cards, CatanGame& game);
-    bool useMonopolyIfEligible(vector<monopolyCard>& cards,string chosenResource,CatanGame& game); // seperated monopoly because it needs access to be used differentley.
+    bool useMonopoly(string chosenResource,CatanGame& game); // seperated monopoly because it needs access to be used differentley.
+    bool useYearOfPlenty(string resource1,string resource2, CatanGame& game);
+    bool useRoadBuilding(int road1, int road2,CatanGame& game);
     bool trade(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, Player& otherPlayer);
     bool tradeWithBank(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, CatanGame& game);
 };

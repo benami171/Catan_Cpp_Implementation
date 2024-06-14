@@ -29,6 +29,7 @@ namespace Catan {
         void setAdjStructs(array<structurePlace*, 2> adjStructs); // Method to set adjacent structures
         void setAdjRoads(array<roadPlace*, 4> adjRoads); // Method to set adjacent roads
         bool placedRoad(Player* newOwner); // checks the validity of the road placement, if valid, sets the owner of the road to newOwner.
+        bool canPlaceRoad(Player* newOwner); // Method to check if a road can be placed will be used in freeRoadPlacement.
         int getRoadNumber(); // Method to get road number
         string getPrintableString();
     };

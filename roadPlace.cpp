@@ -80,6 +80,37 @@ bool roadPlace::placedRoad(Player* newOwner) {
     return false;
 }
 
+bool roadPlace::canPlaceRoad(Player* newOwner){
+    if (this->owner != nullptr) { 
+        return false;
+    }
+
+    if (adjStructs[0]->getOwnerString() == newOwner->getName()) {
+        return true;
+    }
+    if (adjStructs[1]->getOwnerString() == newOwner->getName()) {
+        return true;
+    }
+
+    if (adjStructs[0]->getOwnerString() == "") {
+        if (adjRoads[0] != nullptr && adjRoads[0]->getOwnerString() == newOwner->getName()) {
+            return true;
+        }
+        if (adjRoads[1] != nullptr && adjRoads[1]->getOwnerString() == newOwner->getName()) {
+            return true;
+        }
+    }
+    if (adjStructs[1]->getOwnerString() == "") {
+        if (adjRoads[2] != nullptr && adjRoads[2]->getOwnerString() == newOwner->getName()) {
+            return true;
+        }
+        if (adjRoads[3] != nullptr && adjRoads[3]->getOwnerString() == newOwner->getName()) {
+            return true;
+        }
+    }
+    return false;
+}
+
 int roadPlace::getRoadNumber() {
     return roadNumber;
 }
