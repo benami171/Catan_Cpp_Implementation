@@ -171,26 +171,12 @@ const vector<Tile*>& structurePlace::getAdjTiles() const {
 
 string structurePlace::getPrintableString(){
     if  (owner == nullptr) {
-        return "O";
+        return "O\033[0m";
     }
     string playerPrintableString = owner->getPlayerColor();
     if (structType == "SETTLEMENT") {
         return playerPrintableString + "S\033[0m";
     } else {
         return playerPrintableString + "C\033[0m";
-    }
-}
-
-// TODO - DELETE THIS VERSION OF THE ABOVE FUNCTION.
-string structurePlace::getIdentifierString() {
-    if(owner->getName() == "") {
-        return "N";
-    }
-
-    string playerColor = owner->getPlayerColor();
-    if (structType == "SETTLEMENT") {
-        return playerColor + "S\033[0m"; // after the color code, the color is reset back to default
-    } else {
-        return playerColor + "C\033[0m";
     }
 }
