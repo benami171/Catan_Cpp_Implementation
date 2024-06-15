@@ -68,6 +68,9 @@ void Board::initTiles() {
             // structurePlaces[tileStructureIndices[i][j]].addResource(landTypes[i]);
             // structurePlaces[tileStructureIndices[i][j]].addActivationNumber(activationNumbers[i]);
             structurePlaces[tileStructureIndices[i][j]].addResourceAndActivationNumber(landTypes[i], activationNumbers[i]);
+            if (tileStructureIndices[i][j] == 25){
+                cout << "To structurePlace 25 added resource: " << landTypes[i] << " and activation number: " << activationNumbers[i] << endl;
+            }
             // cout << " StructPlace's index: " << tileStructureIndices[i][j] << " adjecent Tile added is Tile number: " << i << endl;
             rPlaces[j] = &roadPlaces[tileRoadIndices[i][j]];
         }

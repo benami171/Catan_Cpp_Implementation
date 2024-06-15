@@ -344,9 +344,11 @@ void Player::getResources(int diceRoll, Board& board) {
         return payToll();
     }
     for (int i = 0; i < owned_structures_indices.size(); i++) {
+        cout << " CHECKING STRUCTUR INDEX: " << owned_structures_indices[i] << endl;
         structurePlace* settlement = board.getStructureAt(owned_structures_indices[i]);
         const vector<pair<string, int>> resources_activation_numbers = settlement->getResourceActivationNumber();
         for (int i = 0; i < resources_activation_numbers.size(); i++) {
+            cout << "Resource: " << resources_activation_numbers[i].first << " Activation Number: " << resources_activation_numbers[i].second << endl;
             if (resources_activation_numbers[i].second == diceRoll && settlement->getStructType() == "SETTLEMENT") {
                 addResourceCard(resources_activation_numbers[i].first, 1);
             } else if (resources_activation_numbers[i].second == diceRoll && settlement->getStructType() == "CITY") {
