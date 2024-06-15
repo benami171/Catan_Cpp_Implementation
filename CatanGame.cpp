@@ -123,23 +123,18 @@ void CatanGame::checkLargestArmy() {
 
     for (auto& player : players) {
         int knightCount = player->getDevelopmentCardAmount("Knight");
-        if (knightCount > maxKnights) {
-            maxKnights = knightCount;
+        if (knightCount == 3) {
             playerWithLargestArmy = player;
+            break;
         }
     }
 
-    if (playerWithLargestArmy != nullptr && maxKnights >= 3) {
+    if (playerWithLargestArmy != nullptr) {
         for (auto& player : players) {
             if (player == playerWithLargestArmy) {
                 if (!player->hasLargestArmy) {
                     player->addVictoryPoints(2);
                     player->hasLargestArmy = true;
-                }
-            } else {
-                if (player->hasLargestArmy) {
-                    player->addVictoryPoints(-2);
-                    player->hasLargestArmy = false;
                 }
             }
         }
