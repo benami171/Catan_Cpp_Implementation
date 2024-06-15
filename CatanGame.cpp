@@ -119,7 +119,6 @@ void CatanGame::printPlayersResources() {
 
 void CatanGame::checkLargestArmy() {
     Player* playerWithLargestArmy = nullptr;
-    int maxKnights = 0;
 
     for (auto& player : players) {
         int knightCount = player->getDevelopmentCardAmount("Knight");

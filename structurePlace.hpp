@@ -33,7 +33,6 @@ class structurePlace {
     structurePlace(Player* owner,string structType, int structNumber);
     // Deep copy constructor
     // structurePlace(const structurePlace& other);
-    
     string getOwnerString();
     string getStructType();
     string getPrintableString();

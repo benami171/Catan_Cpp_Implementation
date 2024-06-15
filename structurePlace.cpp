@@ -25,7 +25,7 @@ structurePlace::structurePlace(Player* owner, string structType, int structNumbe
 
 string structurePlace::getOwnerString() {
     if (owner == nullptr) {
-        return "No owner";
+        return "initial";
     } else {
         return owner->getName();
     }
@@ -39,6 +39,7 @@ string structurePlace::getStructType() {
 int structurePlace::getStructNumber() {
     return structNumber;
 }
+
 
 void structurePlace::setAdjStructs(array<structurePlace*, 3> adjStructs) {
     this->adjStructs = adjStructs;
@@ -60,7 +61,7 @@ bool structurePlace::placedSettlement(Player* newOwner) {
     }
 
     for (size_t i = 0; i < adjStructs.size(); i++) {
-        if (adjStructs[i] != nullptr && adjStructs[i]->getOwnerString() != "No owner") {
+        if (adjStructs[i] != nullptr && adjStructs[i]->getOwnerString() != "initial") {
             cout << "Adjacent structure is not null and has an owner" << endl;
             cout << "Owner of adjacent structure: " << adjStructs[i]->getOwnerString() << endl;
             return false;
@@ -97,7 +98,7 @@ bool structurePlace::placedInitialSettlement(Player* newOwner){
     }
 
     for (size_t i = 0; i < adjStructs.size(); i++) {
-        if (adjStructs[i] != nullptr && adjStructs[i]->getOwnerString() != "No owner") {
+        if (adjStructs[i] != nullptr && adjStructs[i]->getOwnerString() != "initial") {
             cout << "Could not place initial settlement, adjacent structure has an owner" << endl;
             return false;
         }

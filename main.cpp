@@ -84,9 +84,12 @@ int main() {
     game.printPlayersResources();
     _p1.rollDice(8);
     game.distributeResources(8);
+    _p1.trade({{"lumber",1}},{{"wheat",1}},_p3);
     game.endTurn();
     _p2.rollDice(6);
     game.distributeResources(6);
+    _p2.placeRoad(12, board);
+    _p2.placeSettlement(12, board);
     game.printPlayersResources();
     game.endTurn();
     _p3.rollDice(7);

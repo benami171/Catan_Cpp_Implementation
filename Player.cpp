@@ -143,9 +143,9 @@ void Player::placeRoad(int road_index, Board& board) {
             this->removeResourceCard("brick", 1);
             this->removeResourceCard("lumber", 1);
             owned_roads_indices.push_back(road_index);
-            // cout << name << " Placed a road at index " << road_index << endl;
+            cout << name << " Placed a road at index " << road_index << endl;
         } else {
-            cout << "Invalid road placement" << endl;
+            cout << "Invalid road placement, could not place road at index " << road_index << endl;
         }
     } else {
         cout << "Player " << name << " does not have enough resources to place a road" << endl;
@@ -158,9 +158,9 @@ void Player::placeInitialRoad(int road_index, Board& board) {
         roads_placed_counter++;
         initialRoadNumber++;
         owned_roads_indices.push_back(road_index);
-        // cout << "Player " << name << " placed a road at index " << road_index << endl;
+        cout << name << " placed initial road at index " << road_index << endl;
     } else {
-        cout << "Invalid road placement" << endl;
+        cout << "Invalid Initial road placement, could not place road at index " << road_index << endl;
     }
 }
 
@@ -214,7 +214,7 @@ void Player::placeSettlement(int structurePlace_index, Board& board) {
             }
 
             owned_structures_indices.push_back(structurePlace_index);
-            // cout << name << " Placed a settlement at index " << structurePlace_index << endl;
+             cout << name << " Placed a settlement at index " << structurePlace_index << endl;
         } else {
             cout << "Invalid settlement placement" << endl;
         }
