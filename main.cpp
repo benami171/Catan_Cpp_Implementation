@@ -98,9 +98,15 @@ int main() {
     game.endTurn();
     _p1.rollDice(6);
     game.distributeResources(6);
+    game.printPlayersResources();
     _p1.trade({{"ore",1}},{{"wool",1}},_p3);
     _p1.buyDevelopmentCard("yearOfPlenty",game);
-    _p1.useYearOfPlenty("brick","lumber",game);
+    _p1.useYearOfPlenty("brick","lumber",game); // should be able to use a Development card in the same turn he bought it.
+    game.endTurn();
+    _p2.rollDice(4);
+    game.distributeResources(4);
+    game.printPlayersResources();
+    game.printBoard();
     // game.printBoard();
 
     return 0;

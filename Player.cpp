@@ -266,6 +266,7 @@ void Player::placeCity(int structurePlace_index, Board& board) {
             this->removeResourceCard("wheat", 2);
             this->removeResourceCard("ore", 3);
             owned_structures_indices.push_back(structurePlace_index);
+            
             // cout << "Player " << name << " placed a city at index " << structurePlace_index << endl;
         } else {
             cout << "Invalid city placement" << endl;
