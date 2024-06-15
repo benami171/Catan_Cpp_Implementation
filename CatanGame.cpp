@@ -83,6 +83,7 @@ bool CatanGame::buyDevelopmentCard(string card, Player& player) {
         player.removeResourceCard("ore", 1);
         player.removeResourceCard("wheat", 1);
         player.removeResourceCard("wool", 1);
+        cout << player.getName() << " bought a " << card << " card." << endl;
         return true;
     } else {
         cout << "No " << card << " cards left." << endl;
