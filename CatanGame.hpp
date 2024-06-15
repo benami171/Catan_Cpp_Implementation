@@ -36,6 +36,7 @@ class CatanGame {
     void printPlayersStats();
     void checkLargestArmy();
     void endTurn();
+    void checkEndGame();
 };
 }  // namespace Catan
 

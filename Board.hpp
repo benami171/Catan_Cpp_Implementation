@@ -25,7 +25,7 @@ class Board {
     void initRoadPlaces();
     void setupAdjacencies();
     void initTiles();
-
+    
    public:
     Board();
     roadPlace* getRoadAt(int roadNumber); // returns the ith roadPlace in the roadPlaces array

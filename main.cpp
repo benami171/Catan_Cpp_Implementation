@@ -75,10 +75,12 @@ int main() {
     unordered_map<string, int> receiveResources = {{"wheat", 1}, {"wool", 1}};
     _p2.trade({{"brick", 1}, {"lumber", 1}}, {{"wheat", 1}, {"wool", 1}}, _p3);  // should not be allowed, its P1's turn.
     _p1.printResources(); // should have [ore, 1] - [wheat, 0] - [lumber, 1] - [wool, 0] - [brick, 1]
-    _p2.printResources();
+    _p2.printResources(); // should have [ore, 0] - [wheat, 2] - [lumber, 1] - [wool, 0] - [brick, 3]
     _p1.trade({{"lumber",1},{"brick",1}}, {{"wheat",1},{"wool",1}}, _p3);  
     _p1.printResources(); // should have [ore, 1] - [wheat, 1] - [lumber, 0] - [wool, 1] - [brick, 0]
-    _p2.printResources();
+    _p2.printResources(); // should have [ore, 0] - [wheat, 2] - [lumber, 1] - [wool, 0] - [brick, 3]
+    game.buyDevelopmentCard("victoryPoint", _p1);
+    
     //game.printBoard();
 
     return 0;

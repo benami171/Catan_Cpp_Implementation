@@ -414,31 +414,36 @@ int Player::getInitialRoadsCounter() {
     return this->initialRoadNumber;
 }
 
-bool Player::buyDevelopmentCard(string card, CatanGame& game, int turnBoughtIn) {
+bool Player::buyDevelopmentCard(string card, CatanGame& game) {
     if (!myTurn) {
         cout << "It is not your turn" << endl;
         return false;
     }
     if (game.buyDevelopmentCard(card, *this)) {
         if (card == "victoryPoint") {
-            victoryPointCard newCard(card, turnBoughtIn);
+            victoryPointCard newCard(card, game.getTurnCounter());
             victoryPointCards.push_back(newCard);
             addDevelopmentCard("vicotryPoint", 1);
+            game.checkEndGame();
         } else if (card == "roadBuilding") {
-            roadBuildingCard newCard(card, turnBoughtIn);
+            roadBuildingCard newCard(card, game.getTurnCounter());
             roadBuildingCards.push_back(newCard);
             addDevelopmentCard("roadBuilding", 1);
+            cout << name << " bought a road building card" << endl;
         } else if (card == "yearOfPlenty") {
-            yearOfPlentyCard newCard(card, turnBoughtIn);
+            yearOfPlentyCard newCard(card, game.getTurnCounter());
             yearOfPlentyCards.push_back(newCard);
             addDevelopmentCard("yearOfPlenty", 1);
+            cout << name << " bought a year of plenty card" << endl;
         } else if (card == "knight") {
-            knightCard newCard(card, turnBoughtIn);
+            knightCard newCard(card, game.getTurnCounter());
             knightCards.push_back(newCard);
             addDevelopmentCard("knight", 1);
+            cout << name << " bought a knight card" << endl;
             game.checkLargestArmy();
+            game.checkEndGame();
         } else if (card == "monopoly") {
-            monopolyCard newCard(card, turnBoughtIn);
+            monopolyCard newCard(card, game.getTurnCounter());
             monopolyCards.push_back(newCard);
             addDevelopmentCard("monopoly", 1);
         }
@@ -447,6 +452,7 @@ bool Player::buyDevelopmentCard(string card, CatanGame& game, int turnBoughtIn) 
         return false;
     }
 }
+
 
 bool Player::useMonopoly(string chosenResource, CatanGame& game) {
     vector<monopolyCard> mCards = this->monopolyCards;
@@ -522,6 +528,7 @@ bool Player::useRoadBuilding(int road1, int road2, CatanGame& game) {
     return false;
 }
 
+
 string Player::getName() {
     return name;
 }
@@ -580,10 +587,6 @@ void Player::addDevelopmentCard(string developmentCard, int amount) {
     }
 
     developmentCards[developmentCard] += amount;
-
-    if (developmentCards["Knight"] >= 3) {
-        addVictoryPoints(2);
-    }
 }
 
 void Player::removeDevelopmentCard(string developmentCard, int amount) {

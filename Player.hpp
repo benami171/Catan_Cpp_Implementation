@@ -117,9 +117,8 @@ class Player {
 
     void getInitResources(Board& board);
     void payToll();
-    bool buyDevelopmentCard(string card, CatanGame& game, int turnBoughtIn);
+    bool buyDevelopmentCard(string card, CatanGame& game);
 
-    bool useDevelopmentCard(string card,string chosenResource, CatanGame& game);
     
     template <typename T>
     bool useCardIfEligible(vector<T>& cards, CatanGame& game);

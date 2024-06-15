@@ -48,31 +48,33 @@ void Board::initTiles() {
  cout << "Initializing tiles..." << endl;
     // Define the structure and road place indices for each tile
     const int tileStructureIndices[19][6] = {
-        {0, 4, 8, 12, 7, 3}, {1, 5, 9, 13, 8, 4}, {2, 6, 10, 14, 9, 5}, {7, 12, 17, 22, 16, 11}, {8, 13, 18, 23, 17, 12}, {9, 14, 19, 24, 18, 13}, {10, 15, 20, 25, 19, 14}, {16, 22, 28, 33, 27, 21}, {17, 23, 29, 34, 28, 22}, {18, 24, 30, 35, 29, 23}, {19, 25, 31, 36, 30, 24}, {20, 26, 32, 37, 31, 35}, {28, 34, 39, 43, 38, 33}, {29, 35, 40, 44, 39, 34}, {30, 36, 41, 45, 40, 35}, {31, 37, 42, 46, 41, 36}, {39, 44, 48, 51, 47, 43}, {40, 45, 49, 52, 48, 44}, {41, 46, 50, 53, 49, 45}};
+        {0, 4, 8, 12, 7, 3}, {1, 5, 9, 13, 8, 4}, {2, 6, 10, 14, 9, 5}, {7, 12, 17, 22, 16, 11}, {8, 13, 18, 23, 17, 12}, {9, 14, 19, 24, 18, 13}, {10, 15, 20, 25, 19, 14}, {16, 22, 28, 33, 27, 21}, {17, 23, 29, 34, 28, 22}, {18, 24, 30, 35, 29, 23}, {19, 25, 31, 36, 30, 24}, {20, 26, 32, 37, 31, 25}, {28, 34, 39, 43, 38, 33}, {29, 35, 40, 44, 39, 34}, {30, 36, 41, 45, 40, 35}, {31, 37, 42, 46, 41, 36}, {39, 44, 48, 51, 47, 43}, {40, 45, 49, 52, 48, 44}, {41, 46, 50, 53, 49, 45}};
 
     const int tileRoadIndices[19][6] = {
         {0, 1, 7, 12, 11, 6}, {2, 3, 8, 14, 13, 7}, {4, 5, 9, 16, 15, 8}, {10, 11, 19, 25, 24, 18}, {12, 13, 20, 27, 26, 19}, {14, 15, 21, 29, 28, 20}, {16, 17, 22, 31, 30, 21}, {23, 24, 34, 40, 39, 33}, {25, 26, 35, 42, 41, 34}, {27, 28, 36, 44, 43, 35}, {29, 30, 37, 46, 45, 36}, {31, 32, 38, 48, 47, 37}, {40, 41, 50, 55, 54, 49}, {42, 43, 51, 57, 56, 50}, {44, 45, 52, 59, 58, 51}, {46, 47, 53, 61, 60, 52}, {55, 56, 63, 67, 66, 62}, {57, 58, 64, 69, 68, 63}, {59, 60, 65, 71, 70, 64}};
 
-    for (int i = 0; i < 19; ++i) {
         vector<structurePlace*> sPlaces(6);
         vector<roadPlace*> rPlaces(6);
 
         // hard coding the land types and activation number for each tile.
         vector<string> landTypes = {"Mountains", "Pasture", "Forrest", "Fields", "Hills", "Pasture", "Hills", "Fields", "Forrest", "Desert", "Forrest", "Mountains", "Forrest", "Mountains", "Fields", "Pasture", "Hills", "Fields", "Pasture"};
         vector<int> activationNumbers = {10, 2, 9, 12, 6, 4, 10, 9, 11, 0, 3, 8, 8, 3, 4, 5, 5, 6, 11};
+    for (int i = 0; i < 19; ++i) {
 
         for (int j = 0; j < 6; ++j) {
+            int structIndex = tileStructureIndices[i][j];
+            int roadIndex = tileRoadIndices[i][j];
             // assigning the right structurePlaces and roadPlaces pointers array for each tile.
             // also adding the right resource to the structurePlaces.
-            sPlaces[j] = &structurePlaces[tileStructureIndices[i][j]];
+            sPlaces[j] = &structurePlaces[structIndex];
             // structurePlaces[tileStructureIndices[i][j]].addResource(landTypes[i]);
             // structurePlaces[tileStructureIndices[i][j]].addActivationNumber(activationNumbers[i]);
-            structurePlaces[tileStructureIndices[i][j]].addResourceAndActivationNumber(landTypes[i], activationNumbers[i]);
+            structurePlaces[structIndex].addResourceAndActivationNumber(landTypes[i], activationNumbers[i]);
             if (tileStructureIndices[i][j] == 25){
                 cout << "To structurePlace 25 added resource: " << landTypes[i] << " and activation number: " << activationNumbers[i] << endl;
             }
             // cout << " StructPlace's index: " << tileStructureIndices[i][j] << " adjecent Tile added is Tile number: " << i << endl;
-            rPlaces[j] = &roadPlaces[tileRoadIndices[i][j]];
+            rPlaces[j] = &roadPlaces[roadIndex];
         }
 
         // the arrays sPlaces and rPlaces are passed to the Tile constructor by value
