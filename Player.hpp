@@ -92,17 +92,17 @@ class Player {
 
     void printPlayerInfo();
 
-    void placeRoad(int roadPlace_index, Board& board);
+    void placeRoad(int roadPlace_index,CatanGame& game);
 
-    bool placeFreeRoad(int roadPlace_index, Board& board);
+    bool placeFreeRoad(int roadPlace_index, CatanGame& game);
 
-    void placeInitialRoad(int roadPlace_index, Board& board);
+    void placeInitialRoad(int roadPlace_index,CatanGame& game);
 
-    void placeSettlement(int structPlace_index, Board& board);
+    void placeSettlement(int structPlace_index,CatanGame& game);
 
-    void placeInitialSettlement(int structPlace_index, Board& board);
+    void placeInitialSettlement(int structPlace_index,CatanGame& game);
 
-    void placeCity(int structPlace_index, Board& board);
+    void placeCity(int structPlace_index,CatanGame& game);
 
     int rollDice();
     int rollDice(int wantedNumber); // this will be used in tests.
@@ -118,10 +118,6 @@ class Player {
     void getInitResources(Board& board);
     void payToll();
     bool buyDevelopmentCard(string card, CatanGame& game);
-
-    
-    template <typename T>
-    bool useCardIfEligible(vector<T>& cards, CatanGame& game);
     bool useMonopoly(string chosenResource,CatanGame& game); // seperated monopoly because it needs access to be used differentley.
     bool useYearOfPlenty(string resource1,string resource2, CatanGame& game);
     bool useRoadBuilding(int road1, int road2,CatanGame& game);

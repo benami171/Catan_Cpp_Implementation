@@ -28,27 +28,25 @@ int main() {
     Player _p3("P3");
     CatanGame game(_p1, _p2, _p3);
     cout << "Board created" << endl;
-    Board& board = game.getBoard();
-
     cout << "Players created" << endl;
     game.startTurn("P1");
-    _p1.placeSettlement(2, board);  //  wood,9
-    _p1.placeRoad(5, board);
+    _p1.placeSettlement(2, game);  //  wood,9
+    _p1.placeRoad(5, game);
     game.endTurn();
-    _p2.placeSettlement(13, board);  // sheep 2, sheep 4, bricks 6
-    _p2.placeRoad(13, board);
+    _p2.placeSettlement(13, game);  // sheep 2, sheep 4, bricks 6
+    _p2.placeRoad(13, game);
     game.endTurn();
-    _p3.placeSettlement(34, board);  // wood 11, wood 8, ore 3
-    _p3.placeRoad(41, board);
+    _p3.placeSettlement(34, game);  // wood 11, wood 8, ore 3
+    _p3.placeRoad(41, game);
     game.endTurn();
-    _p1.placeSettlement(25, board);  // bricks 10, ore 8, wood 3
-    _p1.placeRoad(31, board);
+    _p1.placeSettlement(25, game);  // bricks 10, ore 8, wood 3
+    _p1.placeRoad(31, game);
     game.endTurn();
-    _p2.placeSettlement(22, board);  // wheat 12, wheat 9, wood 11
-    _p2.placeRoad(24, board);
+    _p2.placeSettlement(22, game);  // wheat 12, wheat 9, wood 11
+    _p2.placeRoad(24, game);
     game.endTurn();
-    _p3.placeSettlement(45, board);  // wheat 4, wheat 6, sheep 11
-    _p3.placeRoad(59, board);
+    _p3.placeSettlement(45, game);  // wheat 4, wheat 6, sheep 11
+    _p3.placeRoad(59, game);
     game.endTurn();
     cout << " INITIAL RESOURCES:" << endl;
     _p1.printResources();
@@ -88,8 +86,8 @@ int main() {
     game.endTurn();
     _p2.rollDice(6);
     game.distributeResources(6);
-    _p2.placeRoad(12, board);
-    _p2.placeSettlement(12, board);
+    _p2.placeRoad(12, game);
+    _p2.placeSettlement(12, game);
     game.printPlayersResources();
     game.endTurn();
     _p3.rollDice(7);

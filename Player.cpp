@@ -1,5 +1,7 @@
 #include "Player.hpp"
-#include <iomanip> 
+
+#include <iomanip>
+
 #include "Board.hpp"
 #include "CatanGame.hpp"
 #include "Tile.hpp"
@@ -127,17 +129,17 @@ bool Player::tradeWithBank(unordered_map<string, int> giveResources, unordered_m
     return true;
 }
 
-void Player::placeRoad(int road_index, Board& board) {
+void Player::placeRoad(int road_index, CatanGame& game) {
     if (!myTurn) {
         cout << "It is not your turn." << endl;
         return;
     }
     if (initialRoadNumber < 3) {
-        placeInitialRoad(road_index, board);
+        placeInitialRoad(road_index, game);
         return;
     }
     if (roads_placed_counter < 15 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1) {
-        roadPlace* road = board.getRoadAt(road_index);
+        roadPlace* road = game.getBoard().getRoadAt(road_index);
         if (road->placedRoad(this)) {
             roads_placed_counter++;
             this->removeResourceCard("brick", 1);
@@ -152,8 +154,8 @@ void Player::placeRoad(int road_index, Board& board) {
     }
 }
 
-void Player::placeInitialRoad(int road_index, Board& board) {
-    roadPlace* road = board.getRoadAt(road_index);
+void Player::placeInitialRoad(int road_index, CatanGame& game) {
+    roadPlace* road = game.getBoard().getRoadAt(road_index);
     if (road->placedRoad(this)) {
         roads_placed_counter++;
         initialRoadNumber++;
@@ -164,9 +166,9 @@ void Player::placeInitialRoad(int road_index, Board& board) {
     }
 }
 
-bool Player::placeFreeRoad(int road_index, Board& board) {
+bool Player::placeFreeRoad(int road_index, CatanGame& game) {
     if (freeRoads > 0) {
-        roadPlace* road = board.getRoadAt(road_index);
+        roadPlace* road = game.getBoard().getRoadAt(road_index);
         if (road->placedRoad(this)) {
             freeRoads--;
             owned_roads_indices.push_back(road_index);
@@ -183,18 +185,18 @@ bool Player::placeFreeRoad(int road_index, Board& board) {
     }
 }
 
-void Player::placeSettlement(int structurePlace_index, Board& board) {
+void Player::placeSettlement(int structurePlace_index, CatanGame& game) {
     // first check if its the players turn
     if (!myTurn) {
         cout << "It is not your turn." << endl;
         return;
     }
     if (initialSettlementNumber < 3) {
-        placeInitialSettlement(structurePlace_index, board);
+        placeInitialSettlement(structurePlace_index, game);
         return;
     }
     if (settlements_placed_counter < 5 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1 && this->getResourceCardAmount("wool") >= 1 && this->getResourceCardAmount("wheat") >= 1) {
-        structurePlace* settlement = board.getStructureAt(structurePlace_index);
+        structurePlace* settlement = game.getBoard().getStructureAt(structurePlace_index);
         if (settlement == nullptr) {
             cout << "Invalid structurePlace_index" << endl;
             return;
@@ -214,7 +216,8 @@ void Player::placeSettlement(int structurePlace_index, Board& board) {
             }
 
             owned_structures_indices.push_back(structurePlace_index);
-             cout << name << " Placed a settlement at index " << structurePlace_index << endl;
+            cout << name << " Placed a settlement at index " << structurePlace_index << endl;
+            game.checkEndGame();
         } else {
             cout << "Invalid settlement placement" << endl;
         }
@@ -223,8 +226,8 @@ void Player::placeSettlement(int structurePlace_index, Board& board) {
     }
 }
 
-void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
-    structurePlace* settlement = board.getStructureAt(structurePlace_index);
+void Player::placeInitialSettlement(int structurePlace_index, CatanGame& game) {
+    structurePlace* settlement = game.getBoard().getStructureAt(structurePlace_index);
     if (settlement == nullptr) {
         throw invalid_argument("Invalid structure index");
     }
@@ -244,6 +247,7 @@ void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
             initialSettlementNumber++;
             owned_structures_indices.push_back(structurePlace_index);
             // cout << "Player " << name << " placed a settlement at index " << structurePlace_index << endl;
+            game.checkEndGame();
         } else {
             cout << "Invalid settlement placement" << endl;
         }
@@ -252,13 +256,13 @@ void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
     }
 }
 
-void Player::placeCity(int structurePlace_index, Board& board) {
+void Player::placeCity(int structurePlace_index, CatanGame& game) {
     if (!myTurn) {
         cout << "It is not your turn." << endl;
         return;
     }
     if (cities_placed_counter < 4 && this->getResourceCardAmount("wheat") >= 2 && this->getResourceCardAmount("ore") >= 3) {
-        structurePlace* city = board.getStructureAt(structurePlace_index);
+        structurePlace* city = game.getBoard().getStructureAt(structurePlace_index);
         if (city->placedCity(this)) {
             cities_placed_counter++;
             settlements_placed_counter--;
@@ -266,7 +270,7 @@ void Player::placeCity(int structurePlace_index, Board& board) {
             this->removeResourceCard("wheat", 2);
             this->removeResourceCard("ore", 3);
             owned_structures_indices.push_back(structurePlace_index);
-            
+            game.checkEndGame();
             // cout << "Player " << name << " placed a city at index " << structurePlace_index << endl;
         } else {
             cout << "Invalid city placement" << endl;
@@ -460,7 +464,6 @@ bool Player::buyDevelopmentCard(string card, CatanGame& game) {
     }
 }
 
-
 bool Player::useMonopoly(string chosenResource, CatanGame& game) {
     vector<monopolyCard> mCards = this->monopolyCards;
     for (auto it = mCards.begin(); it != mCards.end(); ++it) {
@@ -524,8 +527,8 @@ bool Player::useRoadBuilding(int road1, int road2, CatanGame& game) {
                 first_road = road1p->canPlaceRoad(this);
                 second_road = road2p->canPlaceRoad(this);
                 if (first_road && second_road) {
-                    placeFreeRoad(road1, game.getBoard());
-                    placeFreeRoad(road2, game.getBoard());
+                    placeFreeRoad(road1, game);
+                    placeFreeRoad(road2, game);
                     rCards.erase(it);
                     return true;
                 }
@@ -534,7 +537,6 @@ bool Player::useRoadBuilding(int road1, int road2, CatanGame& game) {
     }
     return false;
 }
-
 
 string Player::getName() {
     return name;
@@ -662,7 +664,8 @@ void Player::printPlayerInfo() {
             cout << " - ";
         }
         cout << "[" << it->first << ", " << it->second << "]";
-    } cout << endl;
+    }
+    cout << endl;
     cout << "Victory Points: " << victoryPoints << endl;
     cout << "Roads placed counter: " << roads_placed_counter << "\n";
     cout << "Settlements placed counter: " << settlements_placed_counter << endl;
