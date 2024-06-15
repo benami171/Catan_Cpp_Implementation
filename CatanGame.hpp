@@ -31,9 +31,11 @@ class CatanGame {
     string getCurrentPlayerTurn();
     int developmentCardsRemaining(string card);
     void printBoard();
+    void printPlayersStats();
+    void printPlayersResources();
+    void distributeResources(int dice);
     void startGame();
     void startTurn(string playerName);
-    void printPlayersStats();
     void checkLargestArmy();
     void endTurn();
     void checkEndGame();

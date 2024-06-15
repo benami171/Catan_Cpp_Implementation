@@ -99,9 +99,21 @@ string CatanGame::getCurrentPlayerTurn() {
     return currentPlayerTurn;
 }
 
+void CatanGame::distributeResources(int dice) {
+    for (auto& player : players) {
+        player->getResources(dice, board);
+    }
+}
+
 void CatanGame::printPlayersStats() {
     for (size_t i = 0; i < players.size(); i++) {
         players[i]->printPlayerInfo();
+    }
+}
+
+void CatanGame::printPlayersResources() {
+    for (size_t i = 0; i < players.size(); i++) {
+        players[i]->printResources();
     }
 }
 

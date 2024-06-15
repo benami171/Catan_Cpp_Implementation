@@ -56,46 +56,42 @@ int main() {
     _p3.printResources();
     cout << " " << endl;
     int dice = _p1.rollDice(6);
-    _p1.getResources(dice, board);  // shouldn't get any resources
-    _p2.getResources(dice, board);  // should get 1 brick
-    _p3.getResources(dice, board);  // should get 1 wheat
+    game.distributeResources(dice);
     game.endTurn();
-    _p1.printResources();  // should have 1 brick, 1 ore, 1 lumber.
-    _p2.printResources();  // should have 2 wheat, 1 lumber, 1 brick.
-    _p3.printResources();  // should have 3 wheat, 1 wool.
     _p2.rollDice(8);
-    _p1.getResources(8, board);
-    _p2.getResources(8, board);
-    _p3.getResources(8, board);
+    game.distributeResources(8);
     game.endTurn();
-    _p1.printResources();
-    _p2.printResources();
-    _p3.printResources();
     _p3.rollDice(9);
-    _p1.getResources(9, board);
-    _p2.getResources(9, board);
-    _p3.getResources(9, board);
+    game.distributeResources(9);
     game.endTurn();
     cout << " " << endl;
-    cout << "resources before invalid trade: " << endl;
-    _p1.printResources();
-    _p2.printResources();
-    _p3.printResources();
     _p2.trade({{"brick", 1}, {"lumber", 1}}, {{"wheat", 1}, {"wool", 1}}, _p3);  // should not be allowed, its P1's turn.
-    cout << "resources after invalid trade: " << endl;
-    _p1.printResources();  // should have [ore, 2] - [wheat, 0] - [lumber, 2] - [wool, 0] - [brick, 1]
-    _p2.printResources();  // should have [ore, 0] - [wheat, 3] - [lumber, 1] - [wool, 0] - [brick, 1]
-    _p3.printResources();  // should have [ore, 0] - [wheat, 3] - [lumber, 1] - [wool, 1] - [brick, 0]
     cout << "resourced before valid trade: " << endl;
-    _p1.printResources();
-    _p2.printResources();
-    _p3.printResources();
+    _p3.printResources();  // should have [ore, 2] - [wheat, 0] - [lumber, 2] - [wool, 0] - [brick, 1]
+    _p1.printResources();  // should have [ore, 0] - [wheat, 3] - [lumber, 1] - [wool, 1] - [brick, 0]
     _p1.trade({{"lumber", 1}, {"brick", 1}}, {{"wheat", 1}, {"wool", 1}}, _p3);
     cout << "resources after valid trade: " << endl;
-    _p1.printResources();  // should have [ore, 1] - [wheat, 1] - [lumber, 0] - [wool, 1] - [brick, 0]
-    _p2.printResources();  // should have [ore, 0] - [wheat, 2] - [lumber, 1] - [wool, 0] - [brick, 3]
-    _p3.printResources();  //
+    _p1.printResources();  // should have [ore, 2] - [wheat, 1] - [lumber, 1] - [wool, 1] - [brick, 0]
+    _p3.printResources();  // should have [ore, 0] - [wheat, 2] - [lumber, 2] - [wool, 0] - [brick, 1]
     game.buyDevelopmentCard("victoryPoint", _p1);
+    game.endTurn();
+    _p2.rollDice(11);
+    game.distributeResources(11);
+    game.endTurn();
+    _p3.rollDice(4);
+    game.distributeResources(4);
+    game.endTurn();
+    game.printPlayersResources();
+    _p1.rollDice(8);
+    game.distributeResources(8);
+    game.endTurn();
+    _p2.rollDice(6);
+    game.distributeResources(6);
+    game.printPlayersResources();
+    game.endTurn();
+    _p3.rollDice(7);
+    game.distributeResources(7);
+    game.printPlayersResources();
 
     // game.printBoard();
 

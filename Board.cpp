@@ -31,21 +31,21 @@ Board::Board() : structurePlaces(54), roadPlaces(72), tiles(19) {
 
 void Board::initStructurePlaces() {
     // Initialize structurePlaces and roadPlaces
-    cout << "Initializing structure places..." << endl;
+    // cout << "Initializing structure places..." << endl;
     for (size_t i = 0; i < structurePlaces.size(); i++) {
         structurePlaces[i] = structurePlace(nullptr, "initial", i);
     }
 }
 
 void Board::initRoadPlaces() {
-    cout << "Initializing road places..." << endl;
+    // cout << "Initializing road places..." << endl;
     for (size_t i = 0; i < roadPlaces.size(); i++) {
         roadPlaces[i] = roadPlace(nullptr, i);
     }
 }
 
 void Board::initTiles() {
- cout << "Initializing tiles..." << endl;
+//  cout << "Initializing tiles..." << endl;
     // Define the structure and road place indices for each tile
     const int tileStructureIndices[19][6] = {
         {0, 4, 8, 12, 7, 3}, {1, 5, 9, 13, 8, 4}, {2, 6, 10, 14, 9, 5}, {7, 12, 17, 22, 16, 11}, {8, 13, 18, 23, 17, 12}, {9, 14, 19, 24, 18, 13}, {10, 15, 20, 25, 19, 14}, {16, 22, 28, 33, 27, 21}, {17, 23, 29, 34, 28, 22}, {18, 24, 30, 35, 29, 23}, {19, 25, 31, 36, 30, 24}, {20, 26, 32, 37, 31, 25}, {28, 34, 39, 43, 38, 33}, {29, 35, 40, 44, 39, 34}, {30, 36, 41, 45, 40, 35}, {31, 37, 42, 46, 41, 36}, {39, 44, 48, 51, 47, 43}, {40, 45, 49, 52, 48, 44}, {41, 46, 50, 53, 49, 45}};
@@ -70,9 +70,6 @@ void Board::initTiles() {
             // structurePlaces[tileStructureIndices[i][j]].addResource(landTypes[i]);
             // structurePlaces[tileStructureIndices[i][j]].addActivationNumber(activationNumbers[i]);
             structurePlaces[structIndex].addResourceAndActivationNumber(landTypes[i], activationNumbers[i]);
-            if (tileStructureIndices[i][j] == 25){
-                cout << "To structurePlace 25 added resource: " << landTypes[i] << " and activation number: " << activationNumbers[i] << endl;
-            }
             // cout << " StructPlace's index: " << tileStructureIndices[i][j] << " adjecent Tile added is Tile number: " << i << endl;
             rPlaces[j] = &roadPlaces[roadIndex];
         }
@@ -89,7 +86,7 @@ this method sets up the adjacent structurePlaces, roadPlaces and tiles for each 
 and adjacent structurePlaces and roadPlaces for each roadPlace.
 */
 void Board::setupAdjacencies() {
-    cout << "Setting up adjacencies..." << endl;
+    // cout << "Setting up adjacencies..." << endl;
     structurePlaces[0].setAdjStructs({&structurePlaces[2], &structurePlaces[3], nullptr});
     structurePlaces[0].setAdjRoads({&roadPlaces[0], &roadPlaces[1]});
     structurePlaces[0].addAdjTile(&tiles[0]);

@@ -143,7 +143,7 @@ void Player::placeRoad(int road_index, Board& board) {
             this->removeResourceCard("brick", 1);
             this->removeResourceCard("lumber", 1);
             owned_roads_indices.push_back(road_index);
-            cout << name << " Placed a road at index " << road_index << endl;
+            // cout << name << " Placed a road at index " << road_index << endl;
         } else {
             cout << "Invalid road placement" << endl;
         }
@@ -158,7 +158,7 @@ void Player::placeInitialRoad(int road_index, Board& board) {
         roads_placed_counter++;
         initialRoadNumber++;
         owned_roads_indices.push_back(road_index);
-        cout << "Player " << name << " placed a road at index " << road_index << endl;
+        // cout << "Player " << name << " placed a road at index " << road_index << endl;
     } else {
         cout << "Invalid road placement" << endl;
     }
@@ -171,7 +171,7 @@ bool Player::placeFreeRoad(int road_index, Board& board) {
             freeRoads--;
             owned_roads_indices.push_back(road_index);
             roads_placed_counter++;
-            cout << name << " Placed a road at index " << road_index << endl;
+            // cout << name << " Placed a road at index " << road_index << endl;
             return true;
         } else {
             cout << "Invalid road placement" << endl;
@@ -214,7 +214,7 @@ void Player::placeSettlement(int structurePlace_index, Board& board) {
             }
 
             owned_structures_indices.push_back(structurePlace_index);
-            cout << name << " Placed a settlement at index " << structurePlace_index << endl;
+            // cout << name << " Placed a settlement at index " << structurePlace_index << endl;
         } else {
             cout << "Invalid settlement placement" << endl;
         }
@@ -243,7 +243,7 @@ void Player::placeInitialSettlement(int structurePlace_index, Board& board) {
             }
             initialSettlementNumber++;
             owned_structures_indices.push_back(structurePlace_index);
-            cout << "Player " << name << " placed a settlement at index " << structurePlace_index << endl;
+            // cout << "Player " << name << " placed a settlement at index " << structurePlace_index << endl;
         } else {
             cout << "Invalid settlement placement" << endl;
         }
@@ -266,7 +266,7 @@ void Player::placeCity(int structurePlace_index, Board& board) {
             this->removeResourceCard("wheat", 2);
             this->removeResourceCard("ore", 3);
             owned_structures_indices.push_back(structurePlace_index);
-            cout << "Player " << name << " placed a city at index " << structurePlace_index << endl;
+            // cout << "Player " << name << " placed a city at index " << structurePlace_index << endl;
         } else {
             cout << "Invalid city placement" << endl;
         }
@@ -295,6 +295,7 @@ int Player::rollDice(int wantedNumber) {
         cout << "Invalid dice roll" << endl;
         return -1;
     }
+    cout << "Player " << name << " rolled: " << wantedNumber << endl;
     return wantedNumber;
 }
 
@@ -306,6 +307,7 @@ void Player::payToll() {
     }
     if (totalCards >= 7) {  // in this case, the player must give up half of his cards.
         int halfAmount = totalCards / 2;
+        cout << "Player " << name << " has " << totalCards << " cards and must give up " << halfAmount << " cards" << endl;
         for (auto& resource : resourceCards) {
             // as long as the player still has to give up cards, the loop will continue.
             if (halfAmount == 0) {
@@ -365,15 +367,15 @@ void Player::getResources(int diceRoll, Board& board) {
         return payToll();
     }
     for (int i = 0; i < owned_structures_indices.size(); i++) {
-        cout << " CHECKING STRUCTUR INDEX: " << owned_structures_indices[i] << endl;
+        // cout << " CHECKING STRUCTUR INDEX: " << owned_structures_indices[i] << endl;
         structurePlace* settlement = board.getStructureAt(owned_structures_indices[i]);
         const vector<pair<string, int>> resources_activation_numbers = settlement->getResourceActivationNumber();
-        cout << "the number of elements in the vector is: " << resources_activation_numbers.size() << endl;
+        // cout << "the number of elements in the vector is: " << resources_activation_numbers.size() << endl;
         for (int j = 0; j < resources_activation_numbers.size(); j++) {
-            cout << "Element " << j << ": Resource - " << resources_activation_numbers[j].first << ", Activation Number - " << resources_activation_numbers[j].second << endl;
+            // cout << "Element " << j << ": Resource - " << resources_activation_numbers[j].first << ", Activation Number - " << resources_activation_numbers[j].second << endl;
             if (resources_activation_numbers[j].second == diceRoll && settlement->getStructType() == "SETTLEMENT") {
                 addResourceCard(resources_activation_numbers[j].first, 1);
-                cout << "added 1 resource card of type: " << resources_activation_numbers[j].first << " to player " << name << "with activation number: " << resources_activation_numbers[j].second << endl;
+                // cout << "added 1 resource card of type: " << resources_activation_numbers[j].first << " to player " << name << "with activation number: " << resources_activation_numbers[j].second << endl;
             } else if (resources_activation_numbers[j].second == diceRoll && settlement->getStructType() == "CITY") {
                 addResourceCard(resources_activation_numbers[j].first, 2);
             }
