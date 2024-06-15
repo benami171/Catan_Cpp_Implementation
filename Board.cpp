@@ -489,6 +489,6 @@ const vector<Tile>& Board::getTiles() const {
 void Board::printBoard() { 
     cout <<"             "<< "     " << structurePlaces[0].getPrintableString() << "         " << structurePlaces[1].getPrintableString() << "         " << structurePlaces[2].getPrintableString() << endl;
     cout <<"             "<< " " << roadPlaces[0].getPrintableString() << " /    " << roadPlaces[1].getPrintableString() << " \\  " << roadPlaces[2].getPrintableString() << " /    " << roadPlaces[3].getPrintableString() << " \\  " << roadPlaces[4].getPrintableString() << " /    " << roadPlaces[5].getPrintableString() << " \\\033[0m" << endl;
-    cout <<"             "<< " " << structurePlaces[3].getPrintableString() << "   10   " << structurePlaces[4].getPrintableString() << "         " << structurePlaces[5].getPrintableString() << "        " << structurePlaces[6].getPrintableString() << endl;
-    cout <<"             "<< " " << roadPlaces[6].getPrintableString() << "|   " << "🪨   " << roadPlaces[7].getPrintableString() << " |" << endl;
+    cout <<"             "<< " " << structurePlaces[3].getPrintableString() << "   10   " << structurePlaces[4].getPrintableString() << "    2    " << structurePlaces[5].getPrintableString() << "        " << structurePlaces[6].getPrintableString() << endl;
+    cout <<"             "<< " " << roadPlaces[6].getPrintableString() << "|   " << "🪨    " << roadPlaces[7].getPrintableString() << "|   " << "🐑    " << roadPlaces[8].getPrintableString() << "|   " << "🌲    " << roadPlaces[9].getPrintableString() << "|" << endl;
 }
