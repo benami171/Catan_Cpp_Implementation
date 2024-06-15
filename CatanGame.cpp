@@ -106,7 +106,10 @@ void CatanGame::distributeResources(int dice) {
 }
 
 void CatanGame::printPlayersStats() {
-    for (size_t i = 0; i < players.size(); i++) {
+    cout << endl;
+    // print a headline in a nice color that says "~~~~~Players Stats~~~~~~"
+cout << "\033[38;5;214mPrinting Players stats: \033[0m\n" << endl;    
+for (size_t i = 0; i < players.size(); i++) {
         players[i]->printPlayerInfo();
     }
 }

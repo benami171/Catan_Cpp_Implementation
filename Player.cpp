@@ -1,5 +1,5 @@
 #include "Player.hpp"
-
+#include <iomanip> 
 #include "Board.hpp"
 #include "CatanGame.hpp"
 #include "Tile.hpp"
@@ -341,27 +341,6 @@ void Player::payToll() {
  * It then iterates over this vector. If the activation number of a pair matches the dice roll and the structure is a settlement, it adds one resource card of the corresponding type to the player's hand.
  * If the activation number of a pair matches the dice roll and the structure is a city, it adds two resource cards of the corresponding type to the player's hand.
  */
-// void Player::getResources(int diceRoll, Board& board) {
-//     if (diceRoll == 7) {
-//         return payToll();
-//     }
-//     for (int i = 0; i < owned_structures_indices.size(); i++) {
-//         cout << " CHECKING STRUCTUR INDEX: " << owned_structures_indices[i] << endl;
-//         structurePlace* settlement = board.getStructureAt(owned_structures_indices[i]);
-//         const vector<pair<string, int>> resources_activation_numbers = settlement->getResourceActivationNumber();
-//             cout << "the number of elements in the vector is: " << resources_activation_numbers.size() << endl;
-//         for (int i = 0; i < resources_activation_numbers.size(); i++) {
-//             cout << "Resource: " << resources_activation_numbers[i].first << " Activation Number: " << resources_activation_numbers[i].second << endl;
-//             if (resources_activation_numbers[i].second == diceRoll && settlement->getStructType() == "SETTLEMENT") {
-//                 addResourceCard(resources_activation_numbers[i].first, 1);
-//                 cout << "added 1 resource card of type: " << resources_activation_numbers[i].first << " to player " << name << "with activation number: " << resources_activation_numbers[i].second << endl;
-//             } else if (resources_activation_numbers[i].second == diceRoll && settlement->getStructType() == "CITY") {
-//                 addResourceCard(resources_activation_numbers[i].first, 2);
-//             }
-//         }
-//     }
-// }
-
 void Player::getResources(int diceRoll, Board& board) {
     if (diceRoll == 7) {
         return payToll();
