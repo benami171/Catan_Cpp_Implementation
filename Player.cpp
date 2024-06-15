@@ -680,8 +680,8 @@ void Player::printPlayerInfo() {
             cout << " - ";
         }
         cout << "[" << it->first << ", " << it->second << "]";
-    }
-    cout << "[Victory Points: " << victoryPoints << "]" << endl;
+    } cout << endl;
+    cout << "Victory Points: " << victoryPoints << endl;
     cout << "Roads placed counter: " << roads_placed_counter << "\n";
     cout << "Settlements placed counter: " << settlements_placed_counter << endl;
     cout << "Cities placed counter: " << cities_placed_counter << endl;

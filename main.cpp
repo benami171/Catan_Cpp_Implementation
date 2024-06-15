@@ -95,6 +95,7 @@ int main() {
     _p3.rollDice(7);
     game.distributeResources(7);
     game.printPlayersResources();
+    game.printPlayersStats();
 
     // game.printBoard();
 
