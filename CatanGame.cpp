@@ -12,7 +12,7 @@ class developmentCard;
 
 CatanGame::CatanGame(Player& player1, Player& player2, Player& player3) {
     turnCounter = 0;
-    resourceCardsLeft = {{"ore", 19}, {"lumber", 19}, {"brick", 19}, {"wheat", 19}, {"wool", 19}};
+    resourceCardsLeft = {{"ore", 40}, {"lumber", 40}, {"brick", 40}, {"wheat", 40}, {"wool", 40}};
     developmentCardsLeft = {{"knight", 3}, {"victoryPoint", 5}, {"roadBuilding", 2}, {"yearOfPlenty", 2}, {"monopoly", 2}};
     players = {&player1, &player2, &player3};
     currentPlayerTurn = "P1";

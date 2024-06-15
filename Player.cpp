@@ -483,8 +483,8 @@ bool Player::useYearOfPlenty(string resource1, string resource2, CatanGame& game
         if (game.getTurnCounter() > it->getTurnBoughtIn()) {
             // check if the game has 1 of each resources to give in its resourcCards map.
             if (resource1 == resource2) {
-                if (game.developmentCardsRemaining(resource1) > 1) {
-                    game.developmentCardsLeft[resource1] -= 2;
+                if (game.resourceCardsLeft[resource1] > 1) {
+                    game.resourceCardsLeft[resource1] -= 2;
                     it->useCard(*this);
                     yCards.erase(it);
                     return true;
@@ -493,9 +493,9 @@ bool Player::useYearOfPlenty(string resource1, string resource2, CatanGame& game
                     return false;
                 }
             } else {
-                if (game.developmentCardsRemaining(resource1) > 0 && game.developmentCardsRemaining(resource2) > 0) {
-                    game.developmentCardsLeft[resource1]--;
-                    game.developmentCardsLeft[resource2]--;
+                if (game.resourceCardsLeft[resource1] > 0 && game.resourceCardsLeft[resource2] > 0) {
+                    game.resourceCardsLeft[resource1]--;
+                    game.resourceCardsLeft[resource2]--;
 
                     it->useCard(*this);
                     yCards.erase(it);

@@ -105,7 +105,11 @@ int main() {
     game.endTurn();
     _p2.rollDice(4);
     game.distributeResources(4);
-    game.printPlayersResources();
+    game.endTurn();
+    _p3.rollDice(8);
+    game.distributeResources(8);
+    game.endTurn();
+    _p1.useYearOfPlenty("ore","ore",game); // should be able to use it now.
     game.printBoard();
     // game.printBoard();
 
