@@ -67,13 +67,13 @@ int main() {
     cout << " " << endl;
     _p2.trade({{"brick", 1}, {"lumber", 1}}, {{"wheat", 1}, {"wool", 1}}, _p3);  // should not be allowed, its P1's turn.
     cout << "resourced before valid trade: " << endl;
-    _p3.printResources();  // should have [ore, 2] - [wheat, 0] - [lumber, 2] - [wool, 0] - [brick, 1]
     _p1.printResources();  // should have [ore, 0] - [wheat, 3] - [lumber, 1] - [wool, 1] - [brick, 0]
+    _p3.printResources();  // should have [ore, 2] - [wheat, 0] - [lumber, 2] - [wool, 0] - [brick, 1]
     _p1.trade({{"lumber", 1}, {"brick", 1}}, {{"wheat", 1}, {"wool", 1}}, _p3);
     cout << "resources after valid trade: " << endl;
     _p1.printResources();  // should have [ore, 2] - [wheat, 1] - [lumber, 1] - [wool, 1] - [brick, 0]
     _p3.printResources();  // should have [ore, 0] - [wheat, 2] - [lumber, 2] - [wool, 0] - [brick, 1]
-    game.buyDevelopmentCard("victoryPoint", _p1);
+    _p1.buyDevelopmentCard("victoryPoint", game);
     game.endTurn();
     _p2.rollDice(11);
     game.distributeResources(11);
@@ -95,8 +95,12 @@ int main() {
     _p3.rollDice(7);
     game.distributeResources(7);
     game.printPlayersResources();
-    game.printPlayersStats();
-
+    game.endTurn();
+    _p1.rollDice(6);
+    game.distributeResources(6);
+    _p1.trade({{"ore",1}},{{"wool",1}},_p3);
+    _p1.buyDevelopmentCard("yearOfPlenty",game);
+    _p1.useYearOfPlenty("brick","lumber",game);
     // game.printBoard();
 
     return 0;

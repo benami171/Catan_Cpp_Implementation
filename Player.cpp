@@ -428,6 +428,7 @@ bool Player::buyDevelopmentCard(string card, CatanGame& game) {
             victoryPointCard newCard(card, game.getTurnCounter());
             victoryPointCards.push_back(newCard);
             addDevelopmentCard("vicotryPoint", 1);
+            cout << name << " bought a victory point card" << endl;
             game.checkEndGame();
         } else if (card == "roadBuilding") {
             roadBuildingCard newCard(card, game.getTurnCounter());
@@ -450,6 +451,7 @@ bool Player::buyDevelopmentCard(string card, CatanGame& game) {
             monopolyCard newCard(card, game.getTurnCounter());
             monopolyCards.push_back(newCard);
             addDevelopmentCard("monopoly", 1);
+            cout << name << " bought a monopoly card" << endl;
         }
         return true;
     } else {

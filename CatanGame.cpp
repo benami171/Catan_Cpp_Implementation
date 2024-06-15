@@ -79,11 +79,10 @@ bool CatanGame::buyDevelopmentCard(string card, Player& player) {
     // check if there are any development cards of the preffered type left.
     if (developmentCardsLeft[card] > 0) {
         developmentCardsLeft[card]--;
-        player.addDevelopmentCard(card, 1);
         player.removeResourceCard("ore", 1);
         player.removeResourceCard("wheat", 1);
         player.removeResourceCard("wool", 1);
-        cout << player.getName() << " bought a " << card << " card." << endl;
+        // cout << player.getName() << " bought a " << card << " card." << endl;
         return true;
     } else {
         cout << "No " << card << " cards left." << endl;
