@@ -16,7 +16,7 @@ void monopolyCard::useCard(Player& owner, string chosenResource, CatanGame& game
     cout << "You have used a monopoly card!" << endl;
     int total = 0;
     vector<Player*> players = game.getPlayers();
-    for (auto player : players) {
+    for (auto *player : players) {
         if (player->getName() != owner.getName()) {
             int resourceAmount = player->getResourceCardAmount(chosenResource);
             total += resourceAmount;

@@ -4,7 +4,7 @@
 using namespace std;
 using namespace Catan;
 
-developmentCard::developmentCard() : type("") , turnBoughtIn(0) {}
+developmentCard::developmentCard() : turnBoughtIn(0) {}
 
 developmentCard::developmentCard(const string& type, int turnBoughtIn) : type(type) ,turnBoughtIn(turnBoughtIn){}
 

@@ -98,11 +98,11 @@ class Player {
 
     void placeInitialRoad(int roadPlace_index,CatanGame& game);
 
-    void placeSettlement(int structPlace_index,CatanGame& game);
+    void placeSettlement(int structurePlace_index,CatanGame& game);
 
-    void placeInitialSettlement(int structPlace_index,CatanGame& game);
+    void placeInitialSettlement(int structurePlace_index,CatanGame& game);
 
-    void placeCity(int structPlace_index,CatanGame& game);
+    void placeCity(int structurePlace_index,CatanGame& game);
 
     int rollDice();
     int rollDice(int wantedNumber); // this will be used in tests.

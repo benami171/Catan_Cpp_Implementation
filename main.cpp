@@ -22,7 +22,7 @@ int main() {
                     hills  -  fields  -  pasture
                       5         6          11
     */
-
+    //NOLINTBEGIN
     Player _p1("P1");
     Player _p2("P2");
     Player _p3("P3");
@@ -108,7 +108,8 @@ int main() {
     game.endTurn();
     _p1.useYearOfPlenty("ore","ore",game); // should be able to use it now.
     game.printBoard();
-    // game.printBoard();
+    game.printBoard();
 
+//NOLINTEND
     return 0;
 }

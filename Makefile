@@ -4,7 +4,8 @@
 CXX = clang++
 
 # Compiler flags
-CXXFLAGS = -std=c++2a -gdwarf-4 -Wall -MMD -MP -Werror
+CXXFLAGS = -std=c++2a -gdwarf-4 -Wall -MMD -MP -Werror -Wunused-function -ffunction-sections
+LDFLAGS = -Wl,--gc-sections
 VALGRIND_FLAGS = --tool=memcheck -v --leak-check=full --show-leak-kinds=all --error-exitcode=99
 
 # List of source files
@@ -30,7 +31,7 @@ catan: $(EXEC)
 
 # Rule to link the main executable
 $(EXEC): $(MAIN_OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^
 
 # Rule to link the test executable
 $(TEST_EXEC): $(TEST_OBJS)
@@ -55,6 +56,9 @@ clean:
 valgrind: $(EXEC) $(TEST_EXEC)
 	valgrind $(VALGRIND_FLAGS) ./$(EXEC) 2>&1
 	valgrind $(VALGRIND_FLAGS) ./$(TEST_EXEC) 2>&1
+
+tidy:
+	clang-tidy -checks=-*,readability-*,readability-magic-numbers $(MAIN_SRCS) -- $(CXXFLAGS)
 
 # Phony targets
 .PHONY: catan test_catan clean valgrind

@@ -31,21 +31,18 @@ Board::Board() : structurePlaces(54), roadPlaces(72), tiles(19) {
 
 void Board::initStructurePlaces() {
     // Initialize structurePlaces and roadPlaces
-    // cout << "Initializing structure places..." << endl;
-    for (size_t i = 0; i < structurePlaces.size(); i++) {
-        structurePlaces[i] = structurePlace(nullptr, "initial", i);
+    for (size_t index = 0; index < structurePlaces.size(); index++) {
+        structurePlaces[index] = structurePlace(nullptr, "initial", index);
     }
 }
 
 void Board::initRoadPlaces() {
-    // cout << "Initializing road places..." << endl;
-    for (size_t i = 0; i < roadPlaces.size(); i++) {
-        roadPlaces[i] = roadPlace(nullptr, i);
+    for (size_t index = 0; index < roadPlaces.size(); index++) {
+        roadPlaces[index] = roadPlace(nullptr, index);
     }
 }
-
+// NOLINTBEGIN)
 void Board::initTiles() {
-//  cout << "Initializing tiles..." << endl;
     // Define the structure and road place indices for each tile
     const int tileStructureIndices[19][6] = {
         {0, 4, 8, 12, 7, 3}, {1, 5, 9, 13, 8, 4}, {2, 6, 10, 14, 9, 5}, {7, 12, 17, 22, 16, 11}, {8, 13, 18, 23, 17, 12}, {9, 14, 19, 24, 18, 13}, {10, 15, 20, 25, 19, 14}, {16, 22, 28, 33, 27, 21}, {17, 23, 29, 34, 28, 22}, {18, 24, 30, 35, 29, 23}, {19, 25, 31, 36, 30, 24}, {20, 26, 32, 37, 31, 25}, {28, 34, 39, 43, 38, 33}, {29, 35, 40, 44, 39, 34}, {30, 36, 41, 45, 40, 35}, {31, 37, 42, 46, 41, 36}, {39, 44, 48, 51, 47, 43}, {40, 45, 49, 52, 48, 44}, {41, 46, 50, 53, 49, 45}};
@@ -59,24 +56,21 @@ void Board::initTiles() {
         // hard coding the land types and activation number for each tile.
         vector<string> landTypes = {"Mountains", "Pasture", "Forrest", "Fields", "Hills", "Pasture", "Hills", "Fields", "Forrest", "Desert", "Forrest", "Mountains", "Forrest", "Mountains", "Fields", "Pasture", "Hills", "Fields", "Pasture"};
         vector<int> activationNumbers = {10, 2, 9, 12, 6, 4, 10, 9, 11, 0, 3, 8, 8, 3, 4, 5, 5, 6, 11};
-    for (int i = 0; i < 19; ++i) {
+    for (int index = 0; index < 19; ++index) {
 
         for (int j = 0; j < 6; ++j) {
-            int structIndex = tileStructureIndices[i][j];
-            int roadIndex = tileRoadIndices[i][j];
+            int structIndex = tileStructureIndices[index][j];
+            int roadIndex = tileRoadIndices[index][j];
             // assigning the right structurePlaces and roadPlaces pointers array for each tile.
             // also adding the right resource to the structurePlaces.
             sPlaces[j] = &structurePlaces[structIndex];
-            // structurePlaces[tileStructureIndices[i][j]].addResource(landTypes[i]);
-            // structurePlaces[tileStructureIndices[i][j]].addActivationNumber(activationNumbers[i]);
-            structurePlaces[structIndex].addResourceAndActivationNumber(landTypes[i], activationNumbers[i]);
-            // cout << " StructPlace's index: " << tileStructureIndices[i][j] << " adjecent Tile added is Tile number: " << i << endl;
+            structurePlaces[structIndex].addResourceAndActivationNumber(landTypes[index], activationNumbers[index]);
             rPlaces[j] = &roadPlaces[roadIndex];
         }
 
         // the arrays sPlaces and rPlaces are passed to the Tile constructor by value
         // and thats ok because these are pointers and the pointers are copied, not the objects they point to.
-        tiles[i] = Tile(landTypes[i], i, activationNumbers[i], sPlaces, rPlaces);
+        tiles[index] = Tile(landTypes[index], index, activationNumbers[index], sPlaces, rPlaces);
     }
 }
 
@@ -86,7 +80,6 @@ this method sets up the adjacent structurePlaces, roadPlaces and tiles for each 
 and adjacent structurePlaces and roadPlaces for each roadPlace.
 */
 void Board::setupAdjacencies() {
-    // cout << "Setting up adjacencies..." << endl;
     structurePlaces[0].setAdjStructs({&structurePlaces[2], &structurePlaces[3], nullptr});
     structurePlaces[0].setAdjRoads({&roadPlaces[0], &roadPlaces[1]});
     structurePlaces[0].addAdjTile(&tiles[0]);
@@ -500,31 +493,5 @@ void Board::printBoard() {
     cout <<"      "<< roadPlaces[23].getPrintableString() << "  /  " << roadPlaces[24].getPrintableString() << " \\ " << roadPlaces[25].getPrintableString() << "  /  " << roadPlaces[26].getPrintableString() << " \\ " << roadPlaces[27].getPrintableString() << "    /  " << roadPlaces[28].getPrintableString() << " \\   " << roadPlaces[29].getPrintableString() << "  /  " << roadPlaces[30].getPrintableString() << " \\  " << roadPlaces[31].getPrintableString() << "  /  " << roadPlaces[32].getPrintableString() << " \\\033[0m" << endl;
     cout <<"       " << structurePlaces[21].getPrintableString() << "  9   " << structurePlaces[22].getPrintableString() << "   11   " << structurePlaces[23].getPrintableString() << "         " << structurePlaces[24].getPrintableString() << "    3   " << structurePlaces[25].getPrintableString() <<"    8   "<< structurePlaces[26].getPrintableString() << "\033[0m" << endl;
     cout <<"      " << roadPlaces[33].getPrintableString() << "|\033[0m  " << "🌾   " << roadPlaces[34].getPrintableString() << "|\033[0m   " << "🌲   " << roadPlaces[35].getPrintableString() << "|\033[0m   " << "🏜️     " << roadPlaces[36].getPrintableString() << "|\033[0m   " << "🌲   " << roadPlaces[37].getPrintableString() << "|\033[0m   " << "🪨     " << roadPlaces[38].getPrintableString() << "|\033[0m" << endl;
+// NOLINTEND
 }
-
-// void Board::printBoard() { 
-//     cout << "             " << structurePlaces[0].getPrintableString() << "         " << structurePlaces[1].getPrintableString() << "         " << structurePlaces[2].getPrintableString() << endl;
-//     cout << "          " << roadPlaces[0].getPrintableString() << " /   " << roadPlaces[1].getPrintableString() << " \\   " << roadPlaces[2].getPrintableString() << " /   " << roadPlaces[3].getPrintableString() << " \\   " << roadPlaces[4].getPrintableString() << " /   " << roadPlaces[5].getPrintableString() << " \\" << endl;
-//     cout << "         " << structurePlaces[3].getPrintableString() << "   10   " << structurePlaces[4].getPrintableString() << "    2    " << structurePlaces[5].getPrintableString() << "    9    " << structurePlaces[6].getPrintableString() << endl;
-//     cout << "       " << roadPlaces[6].getPrintableString() << "|   " << "🪨    " << roadPlaces[7].getPrintableString() << "|   " << "🐑    " << roadPlaces[8].getPrintableString() << "|   " << "🌲    " << roadPlaces[9].getPrintableString() << "|" << endl;
-//     cout << "      " << structurePlaces[7].getPrintableString() << "        " << structurePlaces[8].getPrintableString() << "         " << structurePlaces[9].getPrintableString() << "         " << structurePlaces[10].getPrintableString() << endl;
-//     cout << "   " << roadPlaces[10].getPrintableString() << " /  " << roadPlaces[11].getPrintableString() << " \\  " << roadPlaces[12].getPrintableString() << " /  " << roadPlaces[13].getPrintableString() << " \\   " << roadPlaces[14].getPrintableString() << " /  " << roadPlaces[15].getPrintableString() << " \\" << endl;  
-//     cout << "  " << structurePlaces[11].getPrintableString() << "  12   " << structurePlaces[12].getPrintableString() << "    6    " << structurePlaces[13].getPrintableString() << "    4    " << structurePlaces[14].getPrintableString() << "   10   " << structurePlaces[15].getPrintableString() << endl;
-//     cout << " " << roadPlaces[18].getPrintableString() << "|  " << "🌾   " << roadPlaces[19].getPrintableString() << "|   " << "🧱    " << roadPlaces[20].getPrintableString() << "|   " << "🐑    " << roadPlaces[21].getPrintableString() << "|   " << "🧱   " << roadPlaces[22].getPrintableString() << "|" << endl;
-//     cout << " " << structurePlaces[16].getPrintableString() << "       " << structurePlaces[17].getPrintableString() << "         " << structurePlaces[18].getPrintableString() << "         " << structurePlaces[19].getPrintableString() << "        " << structurePlaces[20].getPrintableString() << endl;
-//     cout << " " << roadPlaces[23].getPrintableString() << " /  " << roadPlaces[24].getPrintableString() << " \\ " << roadPlaces[25].getPrintableString() << " /  " << roadPlaces[26].getPrintableString() << " \\ " << roadPlaces[27].getPrintableString() << " /  " << roadPlaces[28].getPrintableString() << " \\ " << roadPlaces[29].getPrintableString() << " /  " << roadPlaces[30].getPrintableString() << " \\" << endl;
-//     cout << " " << structurePlaces[21].getPrintableString() << "  11   " << structurePlaces[22].getPrintableString() << "    5    " << structurePlaces[23].getPrintableString() << "    9    " << structurePlaces[24].getPrintableString() << "   3   " << structurePlaces[25].getPrintableString() << endl;
-//     cout << roadPlaces[31].getPrintableString() << "|   " << "🌾   " << roadPlaces[32].getPrintableString() << "|   " << "🪨   " << roadPlaces[33].getPrintableString() << "|   " << "🌾   " << roadPlaces[34].getPrintableString() << "|" << endl;
-//     cout << structurePlaces[26].getPrintableString() << "       " << structurePlaces[27].getPrintableString() << "         " << structurePlaces[28].getPrintableString() << "         " << structurePlaces[29].getPrintableString() << "        " << structurePlaces[30].getPrintableString() << endl;
-//     cout << roadPlaces[35].getPrintableString() << " /  " << roadPlaces[36].getPrintableString() << " \\ " << roadPlaces[37].getPrintableString() << " /  " << roadPlaces[38].getPrintableString() << " \\ " << roadPlaces[39].getPrintableString() << " /  " << roadPlaces[40].getPrintableString() << " \\ " << roadPlaces[41].getPrintableString() << " /  " << roadPlaces[42].getPrintableString() << " \\" << endl;
-//     cout << structurePlaces[31].getPrintableString() << "  8   " << structurePlaces[32].getPrintableString() << "   4    " << structurePlaces[33].getPrintableString() << "   3    " << structurePlaces[34].getPrintableString() << "   10  " << structurePlaces[35].getPrintableString() << endl;
-//     cout << roadPlaces[43].getPrintableString() << "|   " << "🪨   " << roadPlaces[44].getPrintableString() << "|   " << "🌲   " << roadPlaces[45].getPrintableString() << "|   " << "🌾   " << roadPlaces[46].getPrintableString() << "|" << endl;
-//     cout << structurePlaces[36].getPrintableString() << "       " << structurePlaces[37].getPrintableString() << "         " << structurePlaces[38].getPrintableString() << "         " << structurePlaces[39].getPrintableString() << "        " << structurePlaces[40].getPrintableString() << endl;
-//     cout << roadPlaces[47].getPrintableString() << " /  " << roadPlaces[48].getPrintableString() << " \\ " << roadPlaces[49].getPrintableString() << " /  " << roadPlaces[50].getPrintableString() << " \\ " << roadPlaces[51].getPrintableString() << " /  " << roadPlaces[52].getPrintableString() << " \\ " << roadPlaces[53].getPrintableString() << " /  " << roadPlaces[54].getPrintableString() << " \\" << endl;
-//     cout << structurePlaces[41].getPrintableString() << "  6   " << structurePlaces[42].getPrintableString() << "   11   " << structurePlaces[43].getPrintableString() << "   5    " << structurePlaces[44].getPrintableString() << "   8   " << structurePlaces[45].getPrintableString() << endl;
-//     cout << roadPlaces[55].getPrintableString() << "|   " << "🌾   " << roadPlaces[56].getPrintableString() << "|   " << "🪨   " << roadPlaces[57].getPrintableString() << "|   " << "🌲   " << roadPlaces[58].getPrintableString() << "|" << endl;
-//     cout << structurePlaces[46].getPrintableString() << "       " << structurePlaces[47].getPrintableString() << "         " << structurePlaces[48].getPrintableString() << "         " << structurePlaces[49].getPrintableString() << "        " << structurePlaces[50].getPrintableString() << endl;
-//     cout << roadPlaces[59].getPrintableString() << " /  " << roadPlaces[60].getPrintableString() << " \\ " << roadPlaces[61].getPrintableString() << " /  " << roadPlaces[62].getPrintableString() << " \\ " << roadPlaces[63].getPrintableString() << " /  " << roadPlaces[64].getPrintableString() << " \\ " << roadPlaces[65].getPrintableString() << " /  " << roadPlaces[66].getPrintableString() << " \\" << endl;
-//     cout << structurePlaces[51].getPrintableString() << "  3   " << structurePlaces[52].getPrintableString() << "   9    " << structurePlaces[53].getPrintableString() << "   12   " << structurePlaces[54].getPrintableString() << endl;
-//     cout << roadPlaces[67].getPrintableString() << "|   " << "🪨   " << roadPlaces[68].getPrintableString() << "|   " << "🌲   " << roadPlaces[69].getPrintableString() << "|   " << "🌾   " << roadPlaces[70].getPrintableString() << "|" << endl;
-// }

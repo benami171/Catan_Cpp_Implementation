@@ -33,10 +33,7 @@ vector<Player*>& CatanGame::getPlayers() {
     return players;
 }
 
-void CatanGame::startGame() {
-    // You can add code to handle the game start, initial placement, etc.
-    cout << "Game started" << endl;
-}
+
 
 void CatanGame::startTurn(string playerName) {
     if (playerName != "P1" && playerName != "P2" && playerName != "P3") {
@@ -53,7 +50,6 @@ void CatanGame::startTurn(string playerName) {
         players[2]->setTurn(true);
     }
     cout << playerName << " is playing now..." << endl;
-    return;
 }
 
 void CatanGame::endTurn() {
@@ -82,7 +78,6 @@ bool CatanGame::buyDevelopmentCard(string card, Player& player) {
         player.removeResourceCard("ore", 1);
         player.removeResourceCard("wheat", 1);
         player.removeResourceCard("wool", 1);
-        // cout << player.getName() << " bought a " << card << " card." << endl;
         return true;
     } else {
         cout << "No " << card << " cards left." << endl;
@@ -108,14 +103,14 @@ void CatanGame::printPlayersStats() {
     cout << endl;
     // print a headline in a nice color that says "~~~~~Players Stats~~~~~~"
 cout << "\033[38;5;214mPrinting Players stats: \033[0m\n" << endl;    
-for (size_t i = 0; i < players.size(); i++) {
-        players[i]->printPlayerInfo();
+for (size_t index = 0; index < players.size(); index++) {
+        players[index]->printPlayerInfo();
     }
 }
 
 void CatanGame::printPlayersResources() {
-    for (size_t i = 0; i < players.size(); i++) {
-        players[i]->printResources();
+    for (size_t index = 0; index < players.size(); index++) {
+        players[index]->printResources();
     }
 }
 

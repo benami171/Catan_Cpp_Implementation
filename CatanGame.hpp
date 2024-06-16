@@ -34,7 +34,6 @@ class CatanGame {
     void printPlayersStats();
     void printPlayersResources();
     void distributeResources(int dice);
-    void startGame();
     void startTurn(string playerName);
     void checkLargestArmy();
     void endTurn();

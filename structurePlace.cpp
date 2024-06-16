@@ -9,26 +9,19 @@ using namespace Catan;
 class Player;
 
 structurePlace::structurePlace() 
-    : owner(nullptr), structType(""), structNumber(0), adjStructs{nullptr, nullptr, nullptr}, adjRoads{nullptr, nullptr, nullptr}, adjTiles(), attachedResources(), activationNumbers() {
+    : owner(nullptr), structNumber(0), adjStructs{nullptr, nullptr, nullptr}, adjRoads{nullptr, nullptr, nullptr}  {
 }
 
 structurePlace::structurePlace(Player* owner, string structType, int structNumber) 
-    : owner(owner), structType(structType), structNumber(structNumber), adjStructs{nullptr, nullptr, nullptr}, adjRoads{nullptr, nullptr, nullptr}, adjTiles(), attachedResources(), activationNumbers(){
+    : owner(owner), structType(structType), structNumber(structNumber), adjStructs{nullptr, nullptr, nullptr}, adjRoads{nullptr, nullptr, nullptr}{
 }
 
-// // Deep copy constructor
-// structurePlace::structurePlace(const structurePlace& other)
-//     : owner(other.owner), structType(other.structType), structNumber(other.structNumber) {
-//     adjStructs = other.adjStructs;
-//     adjRoads = other.adjRoads;
-// }
 
 string structurePlace::getOwnerString() {
     if (owner == nullptr) {
         return "initial";
-    } else {
-        return owner->getName();
     }
+    return owner->getName();
 }
 
 
@@ -60,19 +53,16 @@ bool structurePlace::placedSettlement(Player* newOwner) {
         return false;
     }
 
-    for (size_t i = 0; i < adjStructs.size(); i++) {
-        if (adjStructs[i] != nullptr && adjStructs[i]->getOwnerString() != "initial") {
-            cout << "Adjacent structure is not null and has an owner" << endl;
-            cout << "Owner of adjacent structure: " << adjStructs[i]->getOwnerString() << endl;
+    for (size_t index = 0; index < adjStructs.size(); index++) {
+        if (adjStructs[index] != nullptr && adjStructs[index]->getOwnerString() != "initial") {
             return false;
         }
     }
 
     // the adjecent settLments are not owned by anyone.
     // check if at least one of the adjacent roads is owned by the player.
-    for (size_t i = 0; i < adjRoads.size(); i++) {
-        if (adjRoads[i] != nullptr && adjRoads[i]->getOwnerString() == newOwner->getName()) {
-            cout << "Owner of adjacent road: " << adjRoads[i]->getOwnerString() << endl;
+    for (size_t index = 0; index < adjRoads.size(); index++) {
+        if (adjRoads[index] != nullptr && adjRoads[index]->getOwnerString() == newOwner->getName()) {
             this->owner = newOwner;
             this->structType = "SETTLEMENT";
             for ( size_t j = 0 ; j < adjTiles.size() ; j++) {
@@ -99,8 +89,8 @@ bool structurePlace::placedInitialSettlement(Player* newOwner){
         return false;
     }
 
-    for (size_t i = 0; i < adjStructs.size(); i++) {
-        if (adjStructs[i] != nullptr && adjStructs[i]->getOwnerString() != "initial") {
+    for (size_t index = 0; index < adjStructs.size(); index++) {
+        if (adjStructs[index] != nullptr && adjStructs[index]->getOwnerString() != "initial") {
             cout << "Could not place initial settlement, adjacent structure has an owner" << endl;
             return false;
         }
@@ -108,7 +98,7 @@ bool structurePlace::placedInitialSettlement(Player* newOwner){
 
     // the adjecent settLments are not owned by anyone.
     // check if at least one of the adjacent roads is owned by the player.
-    for (size_t i = 0; i < adjRoads.size(); i++) {
+    for (size_t index = 0; index < adjRoads.size(); index++) {
             this->owner = newOwner;
             this->structType = "SETTLEMENT";
             for ( size_t j = 0 ; j < adjTiles.size() ; j++) {
@@ -168,7 +158,6 @@ string structurePlace::getPrintableString(){
     string playerPrintableString = owner->getPlayerColor();
     if (structType == "SETTLEMENT") {
         return playerPrintableString + "S\033[0m";
-    } else {
-        return playerPrintableString + "C\033[0m";
     }
+    return playerPrintableString + "C\033[0m";
 }
