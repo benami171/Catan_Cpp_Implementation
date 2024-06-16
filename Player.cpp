@@ -219,7 +219,7 @@ void Player::placeSettlement(int structurePlace_index, CatanGame& game) {
             this->removeResourceCard("lumber", 1);
             this->removeResourceCard("wool", 1);
             this->removeResourceCard("wheat", 1);
-            for (int i = 0; i < 3; i++) {
+            for (size_t i = 0; i < adjTiles.size() ; i++) {
                 if (adjTiles[i] != nullptr) {
                     adjTiles[i]->addAttachedPlayer(this);
                 }

@@ -93,8 +93,10 @@ TEST_CASE("Invalid settlement/city/road placements"){
     SUBCASE("trying to build without resources") {
         _p1.placeRoad(32, game);
         _p1.placeSettlement(26, game);
-        // _p1.placeRoad(38,game);
-        // CHECK_THROWS(_p1.placeCity(26, game));
+        _p1.placeRoad(38,game);
+        _p1.placeCity(26, game);
+        _p1.placeCity(2, game);
+        CHECK_THROWS(_p1.placeCity(25, game));
     }
 }
 
