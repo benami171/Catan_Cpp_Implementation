@@ -147,10 +147,10 @@ void Player::placeRoad(int road_index, CatanGame& game) {
             owned_roads_indices.push_back(road_index);
             cout << name << " Placed a road at index " << road_index << endl;
         } else {
-            cout << "Invalid road placement, could not place road at index " << road_index << endl;
+           throw runtime_error("Invalid road placement, could not place road at index " + to_string(road_index));
         }
     } else {
-        cout << "Player " << name << " does not have enough resources to place a road" << endl;
+        throw runtime_error("Player " + name + " does not have enough resources to place a road");
     }
 }
 
@@ -195,16 +195,19 @@ bool Player::placeFreeRoad(int road_index, CatanGame& game) {
 void Player::placeSettlement(int structurePlace_index, CatanGame& game) {
     // first check if its the players turn
     if (!myTurn) {
+        cout << "It is not your turn" << endl;
         throw runtime_error("It is not your turn");
         return;
     }
     if (initialSettlementNumber < 3) {
+        cout << "Placing initial settlement" << endl;
         placeInitialSettlement(structurePlace_index, game);
         return;
     }
     if (settlements_placed_counter < 5 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1 && this->getResourceCardAmount("wool") >= 1 && this->getResourceCardAmount("wheat") >= 1) {
         structurePlace* settlement = game.getBoard().getStructureAt(structurePlace_index);
         if (settlement == nullptr) {
+           cout << "Invalid structurePlace_index" << endl;
            throw runtime_error("Invalid structurePlace_index");
             return;
         }
@@ -226,9 +229,11 @@ void Player::placeSettlement(int structurePlace_index, CatanGame& game) {
             cout << name << " Placed a settlement at index " << structurePlace_index << endl;
             game.checkEndGame();
         } else {
+            cout << "Invalid settlement placement" << endl;
             throw runtime_error("Invalid settlement placement");
         }
     } else {
+        cout << "Player " << name << " does not have enough resources to place a settlement" << endl;
         throw runtime_error("Player " + name + " does not have enough resources to place a settlement");
     }
 }
@@ -268,6 +273,7 @@ void Player::placeInitialSettlement(int structurePlace_index, CatanGame& game) {
 
 void Player::placeCity(int structurePlace_index, CatanGame& game) {
     if (!myTurn) {
+        cout << "It is not your turn" << endl;
         throw runtime_error("It is not your turn");
         return;
     }
@@ -281,11 +287,13 @@ void Player::placeCity(int structurePlace_index, CatanGame& game) {
             this->removeResourceCard("ore", 3);
             owned_structures_indices.push_back(structurePlace_index);
             game.checkEndGame();
-            // cout << "Player " << name << " placed a city at index " << structurePlace_index << endl;
+            cout << "Player " << name << " placed a city at index " << structurePlace_index << endl;
         } else {
+            cout << "Invalid city placement" << endl;
             throw runtime_error("Invalid city placement");
         }
     } else {
+        cout << "Player " << name << " does not have enough resources to place a city" << endl;
         throw runtime_error("Player "+ name + " does not have enough resources to place a city");
     }
 }

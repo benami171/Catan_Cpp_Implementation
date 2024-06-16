@@ -42,6 +42,7 @@ bool roadPlace::placedRoad(Player* newOwner) {
     // road already taken.
     if (this->owner != nullptr) {
         cout << "Road in index " << roadNumber << " already has an owner\n";
+        throw invalid_argument("Road already taken");   
         return false;
     }
 
@@ -88,6 +89,7 @@ bool roadPlace::placedRoad(Player* newOwner) {
             return true;
         }
     }
+    
     return false;
 }
 

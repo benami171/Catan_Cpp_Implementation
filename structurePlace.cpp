@@ -72,16 +72,19 @@ bool structurePlace::placedSettlement(Player* newOwner) {
     // check if at least one of the adjacent roads is owned by the player.
     for (size_t i = 0; i < adjRoads.size(); i++) {
         if (adjRoads[i] != nullptr && adjRoads[i]->getOwnerString() == newOwner->getName()) {
+            cout << "Owner of adjacent road: " << adjRoads[i]->getOwnerString() << endl;
             this->owner = newOwner;
             this->structType = "SETTLEMENT";
-            for ( int j = 0 ; j < 3 ; j++) {
+            for ( size_t j = 0 ; j < adjTiles.size() ; j++) {
                 if (adjTiles.at(j) != nullptr) {
                     adjTiles.at(j)->addAttachedPlayer(newOwner);
                 }
             }
+            cout << "can place settlement" << endl;
             return true;
         }
     }
+    cout << "Could not place settlement" << endl;
     return false;
 }
 
@@ -122,6 +125,7 @@ bool structurePlace::placedInitialSettlement(Player* newOwner){
 
 bool structurePlace::placedCity(Player* newOwner) {
     if (this->owner == nullptr || this->owner->getName() != newOwner->getName()) {
+        cout << "Owner is null or owner is not the same as new owner" << endl;
         return false;
     }
 
@@ -129,20 +133,9 @@ bool structurePlace::placedCity(Player* newOwner) {
         this->structType = "CITY";
         return true;
     }
+    cout << "Could not place city" << endl;
     return false;
 }
-
-// structurePlace& structurePlace::operator=(const structurePlace& other) {
-//     if (this != &other) {
-//         owner = other.owner;
-//         structType = other.structType;
-//         structNumber = other.structNumber;
-//         adjStructs = other.adjStructs;
-//         adjRoads = other.adjRoads;
-//     }
-//     return *this;
-// }
-
 
 void structurePlace::addResource(string resource) {
     attachedResources.insert(resource);
