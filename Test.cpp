@@ -16,30 +16,33 @@ void before_each() {
     _p2 = Player("P2");
     _p3 = Player("P3");
     game = CatanGame(_p1, _p2, _p3);
-}
-
-TEST_CASE("Playing out of turn") {
-    before_each();
-    game.startTurn("P1");
-    CHECK_THROWS(_p2.placeInitialSettlement(13, game));
-    CHECK_THROWS(_p3.placeSettlement(12, game));
-    CHECK_THROWS(_p2.placeRoad(11, game));
-    CHECK_THROWS(_p2.tradeWithBank({{"wheat", 1}}, {{"ore", 1}}, game));
-    CHECK_THROWS(_p2.trade({{"brick", 1}, {"lumber", 1}}, {{"wheat", 1}, {"wool", 1}}, _p3));
-    CHECK_THROWS(_p3.buyDevelopmentCard("knight", game));
-    CHECK_THROWS(_p3.rollDice(6));
-}
-
-TEST_CASE("Invalid INITIAL settlement/road placement") {
-    before_each();
     game.startTurn("P1");
     _p1.placeInitialSettlement(2, game);
     _p1.placeInitialRoad(5, game);
     game.endTurn();
     _p2.placeInitialSettlement(10, game);
     _p2.placeInitialRoad(17, game);
+    game.endTurn();
+    _p3.placeInitialSettlement(34, game);
+    _p3.placeInitialRoad(41, game);
+    game.endTurn();
+    _p1.placeInitialSettlement(25, game);
+    _p1.placeInitialRoad(31, game);
+    game.endTurn();
     _p2.placeInitialSettlement(13, game);
     _p2.placeInitialRoad(13, game);
+    game.endTurn();
+    _p3.placeInitialSettlement(45, game);
+    _p3.placeInitialRoad(59, game);
+    game.endTurn();
+    game.giveResources(); // ONLY USED FOR TESTING.
+    game.printBoard();
+}
+
+
+TEST_CASE("Invalid INITIAL settlement/road placement") {
+    before_each();
+    
 
     SUBCASE("placing road too far from settlement") {
         CHECK_THROWS(_p1.placeInitialRoad(8, game));  // too far from settlement
@@ -54,4 +57,29 @@ TEST_CASE("Invalid INITIAL settlement/road placement") {
     }
 
     CHECK_THROWS(_p2.placeInitialSettlement(54, game));  // OUT OF BOUNDS
+}
+
+TEST_CASE("Invalid settlement/city/road placements"){
+    before_each();
+    SUBCASE("placing settlement on top of another settlement") {
+        CHECK_THROWS(_p1.placeSettlement(25, game));
+    }
+    SUBCASE("placing settlement too close to another settlement") {
+        CHECK_THROWS(_p1.placeSettlement(20, game));
+    }
+    SUBCASE("placing settlement too far from road") {
+        CHECK_THROWS(_p1.placeSettlement(26, game));
+    }
+    
+}
+
+TEST_CASE("Playing out of turn") {
+    before_each();
+    CHECK_THROWS(_p2.placeInitialSettlement(13, game));
+    CHECK_THROWS(_p3.placeSettlement(12, game));
+    CHECK_THROWS(_p2.placeRoad(11, game));
+    CHECK_THROWS(_p2.tradeWithBank({{"wheat", 1}}, {{"ore", 1}}, game));
+    CHECK_THROWS(_p2.trade({{"brick", 1}, {"lumber", 1}}, {{"wheat", 1}, {"wool", 1}}, _p3));
+    CHECK_THROWS(_p3.buyDevelopmentCard("knight", game));
+    CHECK_THROWS(_p3.rollDice(6));
 }

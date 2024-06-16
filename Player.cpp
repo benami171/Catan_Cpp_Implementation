@@ -205,7 +205,7 @@ void Player::placeSettlement(int structurePlace_index, CatanGame& game) {
     if (settlements_placed_counter < 5 && this->getResourceCardAmount("brick") >= 1 && this->getResourceCardAmount("lumber") >= 1 && this->getResourceCardAmount("wool") >= 1 && this->getResourceCardAmount("wheat") >= 1) {
         structurePlace* settlement = game.getBoard().getStructureAt(structurePlace_index);
         if (settlement == nullptr) {
-            cout << "Invalid structurePlace_index" << endl;
+           throw runtime_error("Invalid structurePlace_index");
             return;
         }
         vector<Tile*> adjTiles = settlement->getAdjTiles();
@@ -226,10 +226,10 @@ void Player::placeSettlement(int structurePlace_index, CatanGame& game) {
             cout << name << " Placed a settlement at index " << structurePlace_index << endl;
             game.checkEndGame();
         } else {
-            cout << "Invalid settlement placement" << endl;
+            throw runtime_error("Invalid settlement placement");
         }
     } else {
-        cout << "Player " << name << " does not have enough resources to place a settlement" << endl;
+        throw runtime_error("Player " + name + " does not have enough resources to place a settlement");
     }
 }
 
@@ -256,7 +256,7 @@ void Player::placeInitialSettlement(int structurePlace_index, CatanGame& game) {
             }
             initialSettlementNumber++;
             owned_structures_indices.push_back(structurePlace_index);
-            // cout << "Player " << name << " placed a settlement at index " << structurePlace_index << endl;
+            cout << "Player " << name << " placed a settlement at index " << structurePlace_index << endl;
             game.checkEndGame();
         } else {
             throw runtime_error("Invalid settlement placement");
@@ -470,6 +470,7 @@ bool Player::buyDevelopmentCard(string card, CatanGame& game) {
         }
         return true;
     } else {
+        throw runtime_error("Player " + name + " does not have enough resources to buy a development card");
         return false;
     }
 }

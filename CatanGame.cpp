@@ -155,4 +155,16 @@ void CatanGame::checkEndGame() {
         }
     }
 }
+
+// ONLY USED FOR TESTING.
+void CatanGame::giveResources(){
+    for (auto& player : players) {
+        player->addResourceCard("ore", 5);
+        player->addResourceCard("lumber", 5);
+        player->addResourceCard("brick", 5);
+        player->addResourceCard("wheat", 5);
+        player->addResourceCard("wool", 5);
+    }
+}
+
 }  // namespace Catan

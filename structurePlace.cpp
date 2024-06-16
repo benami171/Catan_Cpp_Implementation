@@ -71,7 +71,6 @@ bool structurePlace::placedSettlement(Player* newOwner) {
     // the adjecent settLments are not owned by anyone.
     // check if at least one of the adjacent roads is owned by the player.
     for (size_t i = 0; i < adjRoads.size(); i++) {
-        cout << "adjRoads[i] Owner: " << adjRoads[i]->getOwnerString() << endl; // FOR DEBUGGING
         if (adjRoads[i] != nullptr && adjRoads[i]->getOwnerString() == newOwner->getName()) {
             this->owner = newOwner;
             this->structType = "SETTLEMENT";

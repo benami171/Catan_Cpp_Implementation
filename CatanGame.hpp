@@ -39,6 +39,7 @@ class CatanGame {
     void checkLargestArmy();
     void endTurn();
     void checkEndGame();
+    void giveResources(); // ONLY USED FOR TESTING.
 };
 }  // namespace Catan
 
