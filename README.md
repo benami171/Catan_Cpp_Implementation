@@ -241,3 +241,7 @@ inherits from `developmentCard` and represents a year of plenty card.
 - `trade`: The current player selects the resources they want to give and receive and the player they want to trade with. If both players have the required resources, the trade is executed.
 - `knight`: According to the assignment guidelines, the knight is only used to gather knights for the largest army card.
 - `knight cards amount`: based on the task readme, we have 3 knight cards in the game deck.
+
+## Usage Guidance
+- To compile and run the program use `make catan`
+- To compile and run the tests use `make test`
