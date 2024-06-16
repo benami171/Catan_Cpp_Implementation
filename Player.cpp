@@ -227,6 +227,9 @@ void Player::placeSettlement(int structurePlace_index, CatanGame& game) {
 }
 
 void Player::placeInitialSettlement(int structurePlace_index, CatanGame& game) {
+    if(!myTurn){
+        throw runtime_error("It is not your turn");
+    }
     structurePlace* settlement = game.getBoard().getStructureAt(structurePlace_index);
     if (settlement == nullptr) {
         throw invalid_argument("Invalid structure index");
