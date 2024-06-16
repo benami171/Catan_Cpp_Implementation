@@ -5,6 +5,7 @@
 My catan board is represented by two vectors.
 The first one is a vector of structurePlace objects of size 54 and vector roadPlaces of size 72. the structurePlaces vector represents the nodes and the roadPlaces vector represents the edges of the board.
 Each node and edge on the board were assigned a number, and the road/structure that represents them will be accessed through the vector in their matching number in the vectors, for example if i want to access node number 12 i will go to structurePlaces[12].
+The board is hard-coded, theres no randomization.
 
 this is how the board is referred to:
 - each `Yellow` number represents the number of the node in the structurePlace vector.
@@ -136,8 +137,51 @@ represents a player in the game, holds all the functionality needed to play the 
 represents each node on the board.
 
 ### structurePlace fields:
+- `Player* owner`: a pointer to the Player who build a settlment/city on the node.
+- `string identifierString`: N FOR NONE, S FOR SETTLEMENT, C FOR CITY, also adds the player color to the string so we could use it in the board printing method.
+- `string structType`: either a settlment or a city.
+- `int structNumber`: each struct has his own number as we said.
+- `array<structurePlace*, 3> adjStructs`: pointers to the adjacent nodes to check when player wants to build a settlement.
+- `array<roadPlace*, 3> adjRoads`: pointers to adjacent edges, used as above.
+- `vector<Tile*> adjTiles`: pointers to the adjacent Tiles.
+- `vector<pair<string, int>> resource_activationNumber`: each node is attached to hard-coded resource type and matching activation number. 
+### structurePlace methods:
+- `structurePlace()`: Default constructor initializing the structure with no owner and default settings.
+- `structurePlace(Player* owner, string structType, int structNumber)`: Constructor initializing the structure with a specific owner, type, and number.
+- `string getOwnerString()`: Returns the name of the player who owns the structure or "initial" if it has no owner.
+- `string getStructType()`: Returns the type of the structure (e.g., "SETTLEMENT", "CITY").
+- `string getPrintableString()`: Returns a string representation of the structure for display purposes.
+- `int getStructNumber()`: Returns the unique number assigned to the structure.
+- `void addAdjTile(Tile* tile)`: Adds a tile to the list of adjacent tiles.
+- `void addResourceAndActivationNumber(const string& resource, int activationNumber)`: Adds a resource and its corresponding activation number to the structure.
+- `const vector<pair<string,int>>& getResourceActivationNumber() const`: Returns the list of resources and their activation numbers associated with the structure.
+- `const vector<Tile*>& getAdjTiles() const`: Returns the list of adjacent tiles.
+- `void setAdjStructs(array<structurePlace*, 3> adjStructs)`: Sets the adjacent structures.
+- `void setAdjRoads(array<roadPlace*, 3> adjRoads)`: Sets the adjacent roads.
+- `bool placedCity(Player* newOwner)`: Places a city on the structure if the conditions are met.
+- `bool placedSettlement(Player* newOwner)`: Places a settlement on the structure if the conditions are met.
+- `bool placedInitialSettlement(Player* newOwner)`: Places an initial settlement on the structure if the conditions are met.
 
+## roadPlace class:
+represents an edge on the catan board.
 
+### roadPlace fields:
+- `Player* owner`:
+- `int roadNumber`:
+- `array<structurePlace*, 2> adjStructs`: 
+- `array<roadPlace*, 4> adjRoads`:
+### roadPlace methods:
+- `roadPlace()`: // Default constructor
+- `roadPlace(Player* owner, int roadNumber)`
+- `Player* getRoadOwner()` // Method to get owner
+- `void setOwner(Player* newOwner)` // Method to set owner
+- `string getOwnerString()` // gets the name of the Player who owns the road (using Player* owner)
+- `void setAdjStructs(array<structurePlace*, 2> adjStructs)` // Method to set adjacent structures
+- `void setAdjRoads(array<roadPlace*, 4> adjRoads)` // Method to set adjacent roads
+- `bool placedRoad(Player* newOwner)` // checks the validity of the road placement, if valid, sets the owner of the road to newOwner.
+- `bool canPlaceRoad(Player* newOwner)` // Method to check if a road can be placed will be used in freeRoadPlacement.
+- `int getRoadNumber()` // Method to get road number
+- `string getPrintableString()`
 
 ## Explanation of Rule Adaptations for My Implementation
 - `trade`: The current player selects the resources they want to give and receive and the player they want to trade with. If both players have the required resources, the trade is executed.

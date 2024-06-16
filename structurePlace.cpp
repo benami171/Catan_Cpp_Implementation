@@ -127,13 +127,6 @@ bool structurePlace::placedCity(Player* newOwner) {
     return false;
 }
 
-void structurePlace::addResource(string resource) {
-    attachedResources.insert(resource);
-}
-
-void structurePlace::addActivationNumber(int activationNumber) {
-    activationNumbers.insert(activationNumber);
-}
 
 void structurePlace::addAdjTile(Tile* tile) {
     adjTiles.push_back(tile);
