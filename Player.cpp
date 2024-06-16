@@ -52,7 +52,9 @@ Player::Player(string name) : name(name), myTurn(false), playerColor(""), initia
 
 bool Player::trade(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, Player& otherPlayer) {
     if (!myTurn) {
-        throw runtime_error("It is not your turn");
+        return false;
+    }
+    if (otherPlayer.getName() == name) {
         return false;
     }
     // Check if current player has enough resources to give

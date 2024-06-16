@@ -3,6 +3,7 @@
 #include "Player.hpp"
 #include "doctest.h"
 
+using namespace doctest;
 using namespace std;
 using namespace Catan;
 
@@ -34,7 +35,7 @@ void before_each() {
     game.endTurn();
     _p3.placeInitialSettlement(45, game);
     _p3.placeInitialRoad(59, game);
-    game.endTurn();
+    game.endTurn(); // sets the turn to P1
     game.giveResources(); // ONLY USED FOR TESTING.
     game.printBoard();
 }
@@ -89,8 +90,7 @@ TEST_CASE("Invalid settlement/city/road placements"){
     SUBCASE("placing road too far from settlement") {
         CHECK_THROWS(_p1.placeRoad(47, game));
     }
-   // game.printPlayersStats();
-    SUBCASE("trying to build without resources") {
+    SUBCASE("trying to build without required resources") {
         _p1.placeRoad(32, game);
         _p1.placeSettlement(26, game);
         _p1.placeRoad(38,game);
@@ -98,15 +98,72 @@ TEST_CASE("Invalid settlement/city/road placements"){
         _p1.placeCity(2, game);
         CHECK_THROWS(_p1.placeCity(25, game));
     }
+    SUBCASE("trying to build on top of a road") {
+        _p1.placeRoad(32, game);
+        CHECK_THROWS(_p1.placeSettlement(32, game));
+        CHECK_THROWS(_p1.placeCity(32, game));
+    }
 }
 
-// TEST_CASE("Playing out of turn") {
-//     before_each();
-//     CHECK_THROWS(_p2.placeInitialSettlement(13, game));
-//     CHECK_THROWS(_p3.placeSettlement(12, game));
-//     CHECK_THROWS(_p2.placeRoad(11, game));
-//     CHECK_THROWS(_p2.tradeWithBank({{"wheat", 1}}, {{"ore", 1}}, game));
-//     CHECK_THROWS(_p2.trade({{"brick", 1}, {"lumber", 1}}, {{"wheat", 1}, {"wool", 1}}, _p3));
-//     CHECK_THROWS(_p3.buyDevelopmentCard("knight", game));
-//     CHECK_THROWS(_p3.rollDice(6));
-// }
+TEST_CASE("Invalid development card usage"){
+    before_each();
+    SUBCASE("trying to play a development card without having one") {
+        CHECK(_p1.useYearOfPlenty("wool","lumber" ,game) == false);
+    }
+    SUBCASE("trying to play a development card in the same turn it was bought") {
+        _p1.buyDevelopmentCard("yearOfPlenty", game);
+        CHECK(_p1.useYearOfPlenty("wool","lumber", game) == false);
+    }
+    SUBCASE("trying to play a development card that has already been played") {
+        _p1.buyDevelopmentCard("roadBuilding", game);
+        _p1.useRoadBuilding(3,4, game);
+        CHECK(_p1.useRoadBuilding(3,4, game) == false);
+    }
+}
+
+TEST_CASE("Invalid trades"){
+    before_each();
+    SUBCASE("trying to trade with the bank without having enough resources") {
+        CHECK(_p1.tradeWithBank({{"wheat", 1}}, {{"ore", 1}}, game) == false);
+    }
+    SUBCASE("trying to trade with another player without having enough resources") {
+        CHECK(_p1.trade({{"brick", 9}}, {{"wheat", 1}, {"wool", 1}}, _p2) == false);
+    }
+    SUBCASE("trying to trade with another player without him having enough resources") {
+        CHECK(_p1.trade({{"brick", 1}}, {{"wheat", 9}, {"wool", 9}}, _p2) == false);
+    }
+    SUBCASE("trying to trade with myself") {
+        CHECK(_p1.trade({{"brick", 1}}, {{"wheat", 1}, {"wool", 1}}, _p1) == false);
+    }
+}
+
+TEST_CASE("Playing out of turn") {
+    before_each();
+    SUBCASE("trying to place initial settlement out of turn") {
+        CHECK_THROWS(_p1.placeInitialSettlement(13, game));
+    }
+    SUBCASE("trying to place settlement out of turn") {
+        game.endTurn();
+        CHECK_THROWS(_p1.placeSettlement(12, game));
+    }
+    SUBCASE("trying to place road out of turn") {
+        game.endTurn();
+        CHECK_THROWS(_p1.placeRoad(11, game));
+    }
+    SUBCASE("trying to trade with bank out of turn") {
+        game.endTurn();
+        CHECK_THROWS(_p1.tradeWithBank({{"wheat", 1}}, {{"ore", 1}}, game));
+    }
+    SUBCASE("trying to trade with another player out of turn") {
+        game.endTurn();
+        CHECK(_p1.trade({{"brick", 1}, {"lumber", 1}}, {{"wheat", 1}, {"wool", 1}}, _p3) == false);
+    }
+    SUBCASE("trying to buy a development card out of turn") {
+        game.endTurn();
+        CHECK_THROWS(_p3.buyDevelopmentCard("knight", game));
+    }
+    SUBCASE("trying to roll the dice out of turn") {
+        game.endTurn();
+        CHECK_THROWS(_p3.rollDice(6));
+    }
+}
