@@ -90,50 +90,50 @@ represents a player in the game, holds all the functionality needed to play the 
 
 ### Player methods:
 - `Player()`: Default constructor.
-- `Player(string name)`: Constructor with player name.
-- `string getPlayerColor()`: Returns the player's color, each player have different color based on his name.
+- `Player(string name)`: Constructor initializing the player with a given name.
+- `string getPlayerColor()`: Returns the player's color, determined by their name.
 - `string getName()`: Returns the player's name.
-- `void addVictoryPoints(int points)`: Adds victory points to the player.
-- `void addFreeRoads(int roads)`: Adds free roads to the player.
-- `void removeVictoryPoints(int points)`: Removes victory points from the player.
-- `void addResourceCard(string resource, int amount)`: Adds resource cards to the player.
-- `void removeResourceCard(string resource, int amount)`: Removes resource cards from the player.
-- `void addDevelopmentCard(string developmentCard, int amount)`: Adds development cards to the player.
-- `void removeDevelopmentCard(string developmentCard, int amount)`: Removes development cards from the player.
-- `int getResourceCardAmount(string resource)`: Gets the amount of a specific resource card.
-- `int getDevelopmentCardAmount(string developmentCard)`: Gets the amount of a specific development card.
-- `int getVictoryPoints()`: Returns the player's victory points.
+- `void addVictoryPoints(int points)`: Adds a specified number of victory points to the player.
+- `void addFreeRoads(int roads)`: Adds a specified number of free roads to the player.
+- `void removeVictoryPoints(int points)`: Removes a specified number of victory points from the player.
+- `void addResourceCard(string resource, int amount)`: Adds a specified amount of a resource card to the player's inventory.
+- `void removeResourceCard(string resource, int amount)`: Removes a specified amount of a resource card from the player's inventory.
+- `void addDevelopmentCard(string developmentCard, int amount)`: Adds a specified amount of a development card to the player's inventory.
+- `void removeDevelopmentCard(string developmentCard, int amount)`: Removes a specified amount of a development card from the player's inventory.
+- `int getResourceCardAmount(string resource)`: Returns the amount of a specific resource card the player possesses.
+- `int getDevelopmentCardAmount(string developmentCard)`: Returns the amount of a specific development card the player possesses.
+- `int getVictoryPoints()`: Returns the player's current victory points.
 - `int getFreeRoads()`: Returns the number of free roads the player can place.
-- `int getSettlementsPlacedCounter()`: Returns the number of settlements placed by the player.
-- `int getCitiesPlacedCounter()`: Returns the number of cities placed by the player.
-- `int getRoadsPlacedCounter()`: Returns the number of roads placed by the player.
+- `int getSettlementsPlacedCounter()`: Returns the number of settlements the player has placed.
+- `int getCitiesPlacedCounter()`: Returns the number of cities the player has placed.
+- `int getRoadsPlacedCounter()`: Returns the number of roads the player has placed.
 - `int getInitialSettlementsCounter()`: Returns the number of initial settlements placed by the player.
 - `int getInitialRoadsCounter()`: Returns the number of initial roads placed by the player.
-- `void printResources()`: Prints the amount of each resource the player holds.
-- `void printDevelopmentCards()`: Prints the development cards the player holds.
-- `void printPlayerInfo()`: Prints all the player's information.
-- `void placeRoad(int roadPlace_index, CatanGame& game)`: Places a road at the specified index.
-- `bool placeFreeRoad(int roadPlace_index, CatanGame& game)`: Places a free road at the specified index.
-- `void placeInitialRoad(int roadPlace_index, CatanGame& game)`: Places an initial road at the specified index.
-- `void placeSettlement(int structurePlace_index, CatanGame& game)`: Places a settlement at the specified index.
-- `void placeInitialSettlement(int structurePlace_index, CatanGame& game)`: Places an initial settlement at the specified index.
-- `void placeCity(int structurePlace_index, CatanGame& game)`: Places a city at the specified index.
-- `int rollDice()`: Rolls the dice.
-- `int rollDice(int wantedNumber)`: Rolls the dice to get a specific number (used in tests).
-- `void setTurn(bool turn)`: Sets the player's turn.
-- `bool isMyTurn()`: Checks if it's the player's turn.
-- `void getResources(int diceRoll, Board& board)`: Distributes resources to the player based on the dice roll.
-- `void getInitResourcesFromTile(Tile* tile)`: Gets initial resources from the specified tile.
-- `void getInitResources(Board& board)`: Gets initial resources from the board.
-- `void payToll()`: Pays a toll.
-- `bool buyDevelopmentCard(string card, CatanGame& game)`: Buys a development card.
-- `bool useMonopoly(string chosenResource, CatanGame& game)`: Uses a monopoly card.
-- `bool useYearOfPlenty(string resource1, string resource2, CatanGame& game)`: Uses a year of plenty card.
-- `bool useRoadBuilding(int road1, int road2, CatanGame& game)`: Uses a road building card.
+- `void printResources()`: Prints the player's current resource inventory.
+- `void printDevelopmentCards()`: Prints the player's current development card inventory.
+- `void printPlayerInfo()`: Prints all relevant information about the player.
+- `void placeRoad(int roadPlace_index, CatanGame& game)`: Places a road at the specified index within the game.
+- `bool placeFreeRoad(int roadPlace_index, CatanGame& game)`: Places a free road at the specified index within the game.
+- `void placeInitialRoad(int roadPlace_index, CatanGame& game)`: Places an initial road at the specified index within the game.
+- `void placeSettlement(int structurePlace_index, CatanGame& game)`: Places a settlement at the specified index within the game.
+- `void placeInitialSettlement(int structurePlace_index, CatanGame& game)`: Places an initial settlement at the specified index within the game.
+- `void placeCity(int structurePlace_index, CatanGame& game)`: Places a city at the specified index within the game.
+- `int rollDice()`: Simulates rolling two dice and returns the result.
+- `int rollDice(int wantedNumber)`: Simulates rolling dice to get a specific number (used for testing).
+- `void setTurn(bool turn)`: Sets the player's turn status.
+- `bool isMyTurn()`: Checks if it's currently the player's turn.
+- `void getResources(int diceRoll, Board& board)`: Distributes resources to the player based on the dice roll and the current state of the board.
+- `void getInitResourcesFromTile(Tile* tile)`: Acquires initial resources from a specific tile.
+- `void getInitResources(Board& board)`: Acquires initial resources from the board.
+- `void payToll()`: Enforces resource card penalties if a 7 is rolled.
+- `bool buyDevelopmentCard(string card, CatanGame& game)`: Purchases a development card from the game.
+- `bool useMonopoly(string chosenResource, CatanGame& game)`: Uses a monopoly card to collect all of a chosen resource from other players.
+- `bool useYearOfPlenty(string resource1, string resource2, CatanGame& game)`: Uses a year of plenty card to gain two specified resources.
+- `bool useRoadBuilding(int road1, int road2, CatanGame& game)`: Uses a road building card to place two roads.
 - `bool trade(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, Player& otherPlayer)`: Trades resources with another player.
-- `bool tradeWithBank(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, CatanGame& game)`: Trades resources with the bank.
+- `bool tradeWithBank(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, CatanGame& game)`: Trades resources with the bank based on a fixed ratio.
 
-## structurePlace class:
+## 
 represents each node on the board.
 
 ### structurePlace fields:
