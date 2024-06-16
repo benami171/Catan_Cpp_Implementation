@@ -52,7 +52,7 @@ Player::Player(string name) : name(name), myTurn(false), playerColor(""), initia
 
 bool Player::trade(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, Player& otherPlayer) {
     if (!myTurn) {
-        cout << name << " Can't trade, it is not your turn." << endl;
+        throw runtime_error("It is not your turn");
         return false;
     }
     // Check if current player has enough resources to give
@@ -92,7 +92,7 @@ bool Player::trade(unordered_map<string, int> giveResources, unordered_map<strin
 
 bool Player::tradeWithBank(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, CatanGame& game) {
     if (!myTurn) {
-        cout << "It is not your turn" << endl;
+        throw runtime_error("It is not your turn");
         return false;
     }
     // Calculate total resources to give and receive
@@ -131,7 +131,7 @@ bool Player::tradeWithBank(unordered_map<string, int> giveResources, unordered_m
 
 void Player::placeRoad(int road_index, CatanGame& game) {
     if (!myTurn) {
-        cout << "It is not your turn." << endl;
+       throw runtime_error("It is not your turn");
         return;
     }
     if (initialRoadNumber < 3) {
@@ -155,6 +155,9 @@ void Player::placeRoad(int road_index, CatanGame& game) {
 }
 
 void Player::placeInitialRoad(int road_index, CatanGame& game) {
+    if (!myTurn) {
+        throw runtime_error("It is not your turn");
+    }
     roadPlace* road = game.getBoard().getRoadAt(road_index);
     if (road->placedRoad(this)) {
         roads_placed_counter++;
@@ -162,11 +165,15 @@ void Player::placeInitialRoad(int road_index, CatanGame& game) {
         owned_roads_indices.push_back(road_index);
         cout << name << " placed initial road at index " << road_index << endl;
     } else {
-        cout << "Invalid Initial road placement, could not place road at index " << road_index << endl;
+       throw runtime_error("Invalid Initial road placement, could not place road at index "+ to_string(road_index));
     }
 }
 
 bool Player::placeFreeRoad(int road_index, CatanGame& game) {
+    if (!myTurn) {
+        throw runtime_error("It is not your turn");
+        return false;
+    }
     if (freeRoads > 0) {
         roadPlace* road = game.getBoard().getRoadAt(road_index);
         if (road->placedRoad(this)) {
@@ -188,7 +195,7 @@ bool Player::placeFreeRoad(int road_index, CatanGame& game) {
 void Player::placeSettlement(int structurePlace_index, CatanGame& game) {
     // first check if its the players turn
     if (!myTurn) {
-        cout << "It is not your turn." << endl;
+        throw runtime_error("It is not your turn");
         return;
     }
     if (initialSettlementNumber < 3) {
@@ -227,7 +234,7 @@ void Player::placeSettlement(int structurePlace_index, CatanGame& game) {
 }
 
 void Player::placeInitialSettlement(int structurePlace_index, CatanGame& game) {
-    if(!myTurn){
+    if (!myTurn) {
         throw runtime_error("It is not your turn");
     }
     structurePlace* settlement = game.getBoard().getStructureAt(structurePlace_index);
@@ -252,16 +259,16 @@ void Player::placeInitialSettlement(int structurePlace_index, CatanGame& game) {
             // cout << "Player " << name << " placed a settlement at index " << structurePlace_index << endl;
             game.checkEndGame();
         } else {
-            cout << "Invalid settlement placement" << endl;
+            throw runtime_error("Invalid settlement placement");
         }
     } else {
-        cout << "Player " << name << " has already placed 2 settlements" << endl;
+        throw runtime_error("Player " +name + " has already placed 2 settlements");
     }
 }
 
 void Player::placeCity(int structurePlace_index, CatanGame& game) {
     if (!myTurn) {
-        cout << "It is not your turn." << endl;
+        throw runtime_error("It is not your turn");
         return;
     }
     if (cities_placed_counter < 4 && this->getResourceCardAmount("wheat") >= 2 && this->getResourceCardAmount("ore") >= 3) {
@@ -276,16 +283,16 @@ void Player::placeCity(int structurePlace_index, CatanGame& game) {
             game.checkEndGame();
             // cout << "Player " << name << " placed a city at index " << structurePlace_index << endl;
         } else {
-            cout << "Invalid city placement" << endl;
+            throw runtime_error("Invalid city placement");
         }
     } else {
-        cout << "Player " << name << " does not have enough resources to place a city" << endl;
+        throw runtime_error("Player "+ name + " does not have enough resources to place a city");
     }
 }
 
 int Player::rollDice() {
     if (!myTurn) {
-        cout << "It is not your turn" << endl;
+        throw runtime_error("It is not your turn");
         return false;
     }
     int dice1 = rand() % 6 + 1;
@@ -296,7 +303,7 @@ int Player::rollDice() {
 
 int Player::rollDice(int wantedNumber) {
     if (!myTurn) {
-        cout << "It is not your turn" << endl;
+        throw runtime_error("It is not your turn");
         return false;
     }
     if (wantedNumber < 2 || wantedNumber > 12) {
@@ -428,7 +435,7 @@ int Player::getInitialRoadsCounter() {
 
 bool Player::buyDevelopmentCard(string card, CatanGame& game) {
     if (!myTurn) {
-        cout << "It is not your turn" << endl;
+        throw runtime_error("It is not your turn");
         return false;
     }
     if (game.buyDevelopmentCard(card, *this)) {
