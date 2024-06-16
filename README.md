@@ -1,6 +1,6 @@
 # Catan implementation in C++
 
-## Board class:
+## Board Class:
 
 My catan board is represented by two vectors.
 The first one is a vector of structurePlace objects of size 54 and vector roadPlaces of size 72. the structurePlaces vector represents the nodes and the roadPlaces vector represents the edges of the board.
@@ -35,7 +35,7 @@ this is how the board is referred to:
  - `const vector<Tile>& getTiles() const`: returns a reference to the Tiles vector.
  - `void printBoard()`: prints the board.
 
-## CatanGame class:
+## CatanGame Class:
 this class meant to manage the proccess of the game, look for a winner after certain moves, distribute resources after dice rolls, etc.
 
 ### CatanGame fields:
@@ -64,7 +64,7 @@ this class meant to manage the proccess of the game, look for a winner after cer
 - `void giveResources()`:ONLY USED FOR TESTING. distribute 5 of each resource to the players.
 - `bool buyDevelopmentCard(string card, Player& player)`: If the player has enough resources to buy a development card and if there are any development cards of the preffered type left return true, false otherwise.
 
-## Player class:
+## Player Class:
 represents a player in the game, holds all the functionality needed to play the game.
 ### Player fields:
 - `string name`: The player's name.
@@ -133,7 +133,7 @@ represents a player in the game, holds all the functionality needed to play the 
 - `bool trade(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, Player& otherPlayer)`: Trades resources with another player.
 - `bool tradeWithBank(unordered_map<string, int> giveResources, unordered_map<string, int> receiveResources, CatanGame& game)`: Trades resources with the bank based on a fixed ratio.
 
-## 
+## structurePlace Class:
 represents each node on the board.
 
 ### structurePlace fields:
@@ -162,7 +162,7 @@ represents each node on the board.
 - `bool placedSettlement(Player* newOwner)`: Places a settlement on the structure if the conditions are met.
 - `bool placedInitialSettlement(Player* newOwner)`: Places an initial settlement on the structure if the conditions are met.
 
-## roadPlace class:
+## roadPlace Class:
 represents an edge on the catan board.
 
 ### roadPlace fields:
@@ -182,6 +182,60 @@ represents an edge on the catan board.
 - `bool canPlaceRoad(Player* newOwner)`: Checks if the road can be placed by the specified player.
 - `int getRoadNumber()`: Returns the unique number of the road.
 - `string getPrintableString()`: Returns a string representation of the road for display purposes, including the owner's color if it has an owner.
+
+## Inheritance and development cards:
+In this assignment,I have implemented a hierarchy of development cards in the Catan game using inheritance. The base class developmentCard provides a common interface and shared functionality for all specific types of development cards. The derived classes, such as knightCard, monopolyCard, roadBuildingCard, victoryPointCard, and yearOfPlentyCard, each extend the base class to provide specific behavior for each card type.
+
+## developmentCard Class:
+This is the abstract base class for all development cards in the game.
+
+### developmentCard fields:
+- `string type`: The type of the development card.
+- `int turnBoughtIn`: The turn in which the card was bought.
+### developmentCard methods:
+- `developmentCard()`: Default constructor initializing the development card.
+- `developmentCard(const string& type, int turnBoughtIn)`: Constructor initializing the development card with a specific type and turn.
+- `virtual ~developmentCard()`: Virtual destructor to allow proper cleanup of derived classes.
+- `string getCardCategory() const`: Returns the category of the card.
+- `virtual void useCard(Player& owner) const = 0`: Pure virtual function to be implemented by derived classes, defining how the card is used.
+- `int getTurnBoughtIn() const`: Returns the turn the card was bought in.
+
+
+## knightCard Class:
+Inherits from developmentCard and represents a knight card.
+
+### knightCard methods:
+- `knightCard(const string& type, int turnBoughtIn)`: Constructor initializing the knight card with a specific type and turn.
+- `void useCard(Player& owner) const override`: Overrides the useCard method to define how the knight card is used by a player.
+
+## monopolyCard Class:
+Inherits from developmentCard and represents a monopoly card.
+
+### monopolyCard methods:
+- `monopolyCard(const string& type, int turnBoughtIn)`: Constructor initializing the monopoly card with a specific type and turn.
+- `void useCard(Player& owner) const override`: Overrides the useCard method to define how the monopoly card is used by a player.
+- `void useCard(Player& owner, string chosenResource, CatanGame& game) const`: Overloaded method to use the monopoly card with additional parameters for chosen resource and game context.
+
+## roadBuildingCard Class:
+Inherits from developmentCard and represents a road building card.
+
+### roadBuildingCard methods:
+- `roadBuildingCard(const string& type, int turnBoughtIn)`: Constructor initializing the road building card with a specific type and turn.
+- `void useCard(Player& owner) const override`: Overrides the useCard method to define how the road building card is used by a player.
+
+## victoryPointCard Class:
+Inherits from developmentCard and represents a victory point card.
+
+### victoryPointCard methods:
+- `victoryPointCard(const string& type, int turnBoughtIn)`: Constructor initializing the victory point card with a specific type and turn.
+- `void useCard(Player& owner) const override`: Overrides the useCard method to define how the victory point card is used by a player.
+
+## yearOfPlentyCard Class:
+inherits from `developmentCard` and represents a year of plenty card.
+
+### yearOfPlentyCard methods:
+- `yearOfPlentyCard(const string& type, int turnBoughtIn)`: Constructor initializing the year of plenty card with a specific type and turn.
+- `void useCard(Player& owner) const override`: Overrides the useCard method to define how the year of plenty card is used by a player.
 
 ## Explanation of Rule Adaptations for My Implementation
 - `trade`: The current player selects the resources they want to give and receive and the player they want to trade with. If both players have the required resources, the trade is executed.
