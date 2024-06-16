@@ -63,7 +63,6 @@ int main() {
     game.distributeResources(9);
     game.endTurn();
     cout << " " << endl;
-    _p2.trade({{"brick", 1}, {"lumber", 1}}, {{"wheat", 1}, {"wool", 1}}, _p3);  // should not be allowed, its P1's turn.
     cout << "resourced before valid trade: " << endl;
     _p1.printResources();  // should have [ore, 0] - [wheat, 3] - [lumber, 1] - [wool, 1] - [brick, 0]
     _p3.printResources();  // should have [ore, 2] - [wheat, 0] - [lumber, 2] - [wool, 0] - [brick, 1]

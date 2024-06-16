@@ -28,7 +28,6 @@ TEST_EXEC = test_catan
 catan: $(EXEC)
 	./$(EXEC)
 
-
 # Rule to link the main executable
 $(EXEC): $(MAIN_OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
@@ -46,6 +45,7 @@ test: $(TEST_EXEC)
 
 # Include dependency files
 -include $(MAIN_DEPS) $(TEST_DEPS)
+
 
 # Clean up object files, dependency files, and executables
 clean:
