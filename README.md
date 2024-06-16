@@ -171,17 +171,17 @@ represents an edge on the catan board.
 - `array<structurePlace*, 2> adjStructs`: 
 - `array<roadPlace*, 4> adjRoads`:
 ### roadPlace methods:
-- `roadPlace()`: // Default constructor
-- `roadPlace(Player* owner, int roadNumber)`
-- `Player* getRoadOwner()` // Method to get owner
-- `void setOwner(Player* newOwner)` // Method to set owner
-- `string getOwnerString()` // gets the name of the Player who owns the road (using Player* owner)
-- `void setAdjStructs(array<structurePlace*, 2> adjStructs)` // Method to set adjacent structures
-- `void setAdjRoads(array<roadPlace*, 4> adjRoads)` // Method to set adjacent roads
-- `bool placedRoad(Player* newOwner)` // checks the validity of the road placement, if valid, sets the owner of the road to newOwner.
-- `bool canPlaceRoad(Player* newOwner)` // Method to check if a road can be placed will be used in freeRoadPlacement.
-- `int getRoadNumber()` // Method to get road number
-- `string getPrintableString()`
+- `roadPlace()`: Default constructor initializing the road with no owner and default settings.
+- `roadPlace(Player* owner, int roadNumber)`: Constructor initializing the road with a specific owner and number.
+- `Player* getRoadOwner()`: Returns a pointer to the player who owns the road.
+- `void setOwner(Player* newOwner)`: Sets the owner of the road to the specified player.
+- `string getOwnerString()`: Returns the name of the player who owns the road or "initial" if it has no owner.
+- `void setAdjStructs(array<structurePlace*, 2> adjStructs)`: Sets the adjacent structures for the road.
+- `void setAdjRoads(array<roadPlace*, 4> adjRoads)`: Sets the adjacent roads for the road.
+- `bool placedRoad(Player* newOwner)`: Checks if the road can be placed by the specified player, and if so, sets the owner to the player.
+- `bool canPlaceRoad(Player* newOwner)`: Checks if the road can be placed by the specified player.
+- `int getRoadNumber()`: Returns the unique number of the road.
+- `string getPrintableString()`: Returns a string representation of the road for display purposes, including the owner's color if it has an owner.
 
 ## Explanation of Rule Adaptations for My Implementation
 - `trade`: The current player selects the resources they want to give and receive and the player they want to trade with. If both players have the required resources, the trade is executed.
