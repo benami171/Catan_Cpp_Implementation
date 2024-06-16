@@ -108,7 +108,7 @@ int main() {
     game.endTurn();
     _p1.useYearOfPlenty("ore","ore",game); // should be able to use it now.
     game.printBoard();
-    game.printBoard();
+
 
 //NOLINTEND
     return 0;

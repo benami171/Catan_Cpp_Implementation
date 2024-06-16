@@ -36,7 +36,6 @@ class Player {
     vector<int> owned_roads_indices;
     vector<int> owned_structures_indices;
     vector<int> owned_cities_indices;
-
     unordered_map<string, int> resourceCards;
     unordered_map<string, int> developmentCards;
     vector<monopolyCard> monopolyCards;

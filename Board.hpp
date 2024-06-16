@@ -20,7 +20,6 @@ class Board {
     vector<structurePlace> structurePlaces;
     vector<roadPlace> roadPlaces;
     vector<Tile> tiles;
-    vector<string> landTypes;
     void initStructurePlaces();
     void initRoadPlaces();
     void setupAdjacencies();
