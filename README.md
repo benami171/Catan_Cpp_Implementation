@@ -12,4 +12,7 @@ The first one is a vector of structurePlace objects of size 54 and vector roadPl
 Each node and edge on the board were assigned a number, and the road/structure that represents them will be accessed through the vector in their matching number in the vectors, for example if i want to access node number 12 i will go to structurePlaces[12].
 
 this is how the board is referred to:
+-each `Yellow` number represents the number of the node in the structurePlace vector.
+-each `Blue` number represents the number of the edge in the roadPlace vector.
 ![image](https://github.com/benami171/System_Programming2_Exe3/assets/102553622/fca93a22-6bbf-4340-90fd-3be06fadc4de)
+
