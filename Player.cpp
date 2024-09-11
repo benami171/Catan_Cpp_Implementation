@@ -1,7 +1,5 @@
 #include "Player.hpp"
-
 #include <iomanip>
-
 #include "Board.hpp"
 #include "CatanGame.hpp"
 #include "Tile.hpp"
@@ -508,9 +506,9 @@ bool Player::useYearOfPlenty(string resource1, string resource2, CatanGame& game
                 return false;
             }
             if (game.resourceCardsLeft[resource1] > 0 && game.resourceCardsLeft[resource2] > 0) {
+                // has sufficient amount 
                 game.resourceCardsLeft[resource1]--;
                 game.resourceCardsLeft[resource2]--;
-
                 it->useCard(*this);
                 yCards.erase(it);
                 return true;
