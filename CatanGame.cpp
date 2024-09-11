@@ -1,5 +1,4 @@
 #include "CatanGame.hpp"
-
 #include "Board.hpp"
 #include "Player.hpp"
 
@@ -7,7 +6,6 @@ using namespace std;
 using namespace Catan;
 
 namespace Catan {
-
 class developmentCard;
 
 CatanGame::CatanGame(Player& player1, Player& player2, Player& player3) {
@@ -94,6 +92,7 @@ string CatanGame::getCurrentPlayerTurn() {
 }
 
 void CatanGame::distributeResources(int dice) {
+    // distribute to each player in the game the resources using the get resources method.
     for (auto& player : players) {
         player->getResources(dice, board);
     }
